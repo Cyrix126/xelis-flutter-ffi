@@ -1,0 +1,1 @@
+- migrate from flutter_rust_bridge to naked FFI, to allow for more structural control when integrating this codebase into a different project
