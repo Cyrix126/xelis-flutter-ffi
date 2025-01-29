@@ -192,6 +192,16 @@ impl XelisWallet {
         Ok(format_xelis(balance))
     }
 
+    // get the wallet Xelis balance, unformatted
+    pub async fn get_xelis_balance_raw(&self) -> Result<u64> {
+        let storage = self.wallet.get_storage().read().await;
+        let balance = storage
+            .get_balance_for(&XELIS_ASSET)
+            .await
+            .unwrap_or(0);
+        Ok(balance.amount)
+    }
+
     // get all the assets balances (atomic units) in a HashMap
     pub async fn get_asset_balances(&self) -> Result<HashMap<String, String>> {
         let storage = self.wallet.get_storage().read().await;
@@ -202,6 +212,22 @@ impl XelisWallet {
             balances.insert(
                 asset.to_string(),
                 format_coin(balance.amount, data.get_decimals()),
+            );
+        }
+
+        Ok(balances)
+    }
+
+    // get all the assets balances (atomic units) in a HashMap, unformatted
+    pub async fn get_asset_balances_raw(&self) -> Result<HashMap<String, u64>> {
+        let storage = self.wallet.get_storage().read().await;
+        let mut balances = HashMap::new();
+
+        for (asset, data) in storage.get_assets_with_data().await? {
+            let balance = storage.get_balance_for(&asset).await?;
+            balances.insert(
+                asset.to_string(),
+                balance.amount,
             );
         }
 

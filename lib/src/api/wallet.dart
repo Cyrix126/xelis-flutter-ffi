@@ -82,6 +82,8 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   Future<Map<String, String>> getAssetBalances();
 
+  Future<Map<String, BigInt>> getAssetBalancesRaw();
+
   Future<int> getAssetDecimals({required String asset});
 
   Future<String> getDaemonInfo();
@@ -93,6 +95,8 @@ abstract class XelisWallet implements RustOpaqueInterface {
   Future<String> getSeed({BigInt? languageIndex});
 
   Future<String> getXelisBalance();
+
+  Future<BigInt> getXelisBalanceRaw();
 
   Future<bool> hasXelisBalance();
 

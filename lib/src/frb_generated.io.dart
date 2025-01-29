@@ -107,6 +107,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Map<String, String> dco_decode_Map_String_String(dynamic raw);
 
   @protected
+  Map<String, BigInt> dco_decode_Map_String_u_64(dynamic raw);
+
+  @protected
   LevelFilter
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
           dynamic raw);
@@ -176,6 +179,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
 
   @protected
+  List<(String, BigInt)> dco_decode_list_record_string_u_64(dynamic raw);
+
+  @protected
   List<Transfer> dco_decode_list_transfer(dynamic raw);
 
   @protected
@@ -199,6 +205,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
+  (String, BigInt) dco_decode_record_string_u_64(dynamic raw);
 
   @protected
   Report dco_decode_report(dynamic raw);
@@ -276,6 +285,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       SseDeserializer deserializer);
 
   @protected
+  Map<String, BigInt> sse_decode_Map_String_u_64(SseDeserializer deserializer);
+
+  @protected
   LevelFilter
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
           SseDeserializer deserializer);
@@ -349,6 +361,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       SseDeserializer deserializer);
 
   @protected
+  List<(String, BigInt)> sse_decode_list_record_string_u_64(
+      SseDeserializer deserializer);
+
+  @protected
   List<Transfer> sse_decode_list_transfer(SseDeserializer deserializer);
 
   @protected
@@ -373,6 +389,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   (String, String) sse_decode_record_string_string(
       SseDeserializer deserializer);
+
+  @protected
+  (String, BigInt) sse_decode_record_string_u_64(SseDeserializer deserializer);
 
   @protected
   Report sse_decode_report(SseDeserializer deserializer);
@@ -451,6 +470,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       Map<String, String> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_Map_String_u_64(
+      Map<String, BigInt> self, SseSerializer serializer);
+
+  @protected
   void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
           LevelFilter self, SseSerializer serializer);
@@ -525,6 +548,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       List<(String, String)> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_record_string_u_64(
+      List<(String, BigInt)> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_transfer(List<Transfer> self, SseSerializer serializer);
 
   @protected
@@ -548,6 +575,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_string_string(
       (String, String) self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_string_u_64(
+      (String, BigInt) self, SseSerializer serializer);
 
   @protected
   void sse_encode_report(Report self, SseSerializer serializer);

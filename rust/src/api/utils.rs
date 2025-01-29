@@ -4,6 +4,12 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 use xelis_common::{api::DataElement, crypto::Address};
 
+use crate::{
+    config::{
+        COIN_DECIMALS,
+    },
+}
+
 // Check if the given address is valid
 #[frb(sync)]
 pub fn is_address_valid(str_address: String) -> bool {
@@ -25,4 +31,19 @@ pub fn split_integrated_address_json(integrated_address: String) -> Result<Strin
     let address = Address::from_string(&integrated_address).context("Invalid address")?;
     let (data, address) = address.extract_data();
     Ok(json!(IntegratedAddress { address, data }).to_string())
+}
+
+// Format any coin value using the requested decimals count
+pub fn format_coin(value: u64, decimals: u8) -> String {
+  format!("{:.1$}", value as f64 / 10usize.pow(decimals as u32) as f64, decimals as usize)
+}
+
+// Format value using XELIS decimals
+pub fn format_xelis(value: u64) -> String {
+  format_coin(value, COIN_DECIMALS)
+}
+
+// Convert a XELIS amount from string to a u64
+pub fn from_xelis(value: impl Into<String>) -> Option<u64> {
+  from_coin(value, COIN_DECIMALS)
 }
