@@ -4,7 +4,7 @@ sudo apt install clang -y
 
 rustup target add x86_64-pc-windows-gnu
 
-mkdir build
+mkdir -p build
 echo ''$(git log -1 --pretty=format:"%H")' '$(date) >> build/git_commit_version.txt
 VERSIONS_FILE=../../lib/git_versions.dart
 EXAMPLE_VERSIONS_FILE=../../lib/git_versions_example.dart

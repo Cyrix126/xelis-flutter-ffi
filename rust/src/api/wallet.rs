@@ -3,6 +3,7 @@ use std::fmt::Debug;
 use std::fs::File;
 use std::path::Path;
 use std::sync::Arc;
+use std::str::FromStr;
 
 use anyhow::{anyhow, bail, Context, Result};
 use flutter_rust_bridge::frb;
@@ -196,10 +197,11 @@ impl XelisWallet {
     pub async fn get_xelis_balance_raw(&self) -> Result<u64> {
         let storage = self.wallet.get_storage().read().await;
         let balance = storage
-            .get_balance_for(&XELIS_ASSET)
+            .get_plaintext_balance_for(&XELIS_ASSET)
             .await
             .unwrap_or(0);
-        Ok(balance.amount)
+
+        Ok(balance)
     }
 
     // get all the assets balances (atomic units) in a HashMap

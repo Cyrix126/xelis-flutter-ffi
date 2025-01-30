@@ -3,12 +3,13 @@ use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use xelis_common::{api::DataElement, crypto::Address};
+use xelis_common::utils::from_coin;
 
-use crate::{
+use xelis_common::{
     config::{
         COIN_DECIMALS,
     },
-}
+};
 
 // Check if the given address is valid
 #[frb(sync)]
