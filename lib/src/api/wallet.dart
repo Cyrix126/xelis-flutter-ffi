@@ -11,6 +11,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // These types are ignored because they are not used by any `pub` functions: `SummaryTransaction`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `fmt`, `fmt`
 
+PrecomputedTablesShared? getCachedTable() =>
+    RustLib.instance.api.crateApiWalletGetCachedTable();
+
 Future<XelisWallet> createXelisWallet(
         {required String name,
         required String password,
@@ -36,6 +39,9 @@ Future<XelisWallet> openXelisWallet(
         password: password,
         network: network,
         precomputedTablesPath: precomputedTablesPath);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
+abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Transaction>>
 abstract class Transaction implements RustOpaqueInterface {}

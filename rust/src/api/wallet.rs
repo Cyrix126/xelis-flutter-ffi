@@ -21,8 +21,9 @@ use xelis_common::transaction::BurnPayload;
 pub use xelis_common::transaction::Transaction;
 use xelis_common::utils::{format_coin, format_xelis};
 use xelis_wallet::precomputed_tables;
-pub use xelis_wallet::transaction_builder::TransactionBuilderState;
 use xelis_wallet::wallet::{RecoverOption, Wallet};
+pub use precomputed_tables::PrecomputedTablesShared;
+pub use xelis_wallet::transaction_builder::TransactionBuilderState;
 
 use crate::api::table_generation::LogProgressTableGenerationReportFunction;
 use crate::frb_generated::StreamSink;
@@ -48,7 +49,13 @@ pub struct XelisWallet {
 }
 
 // Precomputed tables for the wallet
-static CACHED_TABLES: Mutex<Option<precomputed_tables::PrecomputedTablesShared>> = Mutex::new(None);
+static CACHED_TABLES: Mutex<Option<PrecomputedTablesShared>> = Mutex::new(None);
+
+#[frb(sync)]
+pub fn get_cached_table() -> Option<PrecomputedTablesShared> {
+    let guard = CACHED_TABLES.lock();
+    guard.clone()
+}
 
 pub async fn create_xelis_wallet(
     name: String,
