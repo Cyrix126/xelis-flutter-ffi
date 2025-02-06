@@ -31,9 +31,9 @@ use crate::frb_generated::StreamSink;
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[frb(dart_metadata=("freezed"))]
 pub struct SummaryTransaction {
-    hash: String,
-    fee: u64,
-    transaction_type: TransactionTypeBuilder,
+    pub hash: String,
+    pub fee: u64,
+    pub transaction_type: TransactionTypeBuilder,
 }
 
 #[derive(Clone, Debug)]

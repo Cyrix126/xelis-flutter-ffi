@@ -4,11 +4,11 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import '../lib.dart';
 import 'network.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `convert_float_amount`, `create_transfers`
-// These types are ignored because they are not used by any `pub` functions: `SummaryTransaction`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `fmt`, `fmt`
 
 PrecomputedTablesShared? getCachedTable() =>
@@ -42,6 +42,21 @@ Future<XelisWallet> openXelisWallet(
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
 abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SummaryTransaction>>
+abstract class SummaryTransaction implements RustOpaqueInterface {
+  BigInt get fee;
+
+  String get hash;
+
+  TransactionTypeBuilder get transactionType;
+
+  set fee(BigInt fee);
+
+  set hash(String hash);
+
+  set transactionType(TransactionTypeBuilder transactionType);
+}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Transaction>>
 abstract class Transaction implements RustOpaqueInterface {}
