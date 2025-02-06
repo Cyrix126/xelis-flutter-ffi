@@ -29,6 +29,7 @@ use crate::api::table_generation::LogProgressTableGenerationReportFunction;
 use crate::frb_generated::StreamSink;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[frb(dart_metadata=("freezed"))]
 pub struct SummaryTransaction {
     hash: String,
     fee: u64,
