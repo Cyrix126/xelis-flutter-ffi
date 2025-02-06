@@ -38,15 +38,15 @@ flutter:
     platforms:
       android:
         package: com.example.xelis_flutter
-        pluginClass: XelisFlutter
+        pluginClass: XelisFlutterPlugin
       ios:
-        pluginClass: XelisFlutter
+        pluginClass: XelisFlutterPlugin
       linux:
-        pluginClass: XelisFlutter
+        pluginClass: XelisFlutterPlugin
       macos:
-        pluginClass: XelisFlutter
+        pluginClass: XelisFlutterPlugin
       windows:
-        pluginClass: XelisFlutterCApi
+        pluginClass: XelisFlutterPluginCApi
 
   # To add assets to your package, add an assets section, like this:
   # assets:
