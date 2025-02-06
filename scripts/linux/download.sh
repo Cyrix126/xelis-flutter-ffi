@@ -15,7 +15,7 @@ else
   exit 1
 fi
 
-BIN=xelis_flutter.so
+BIN=libxelis_flutter.so
 
 for TARGET in aarch64-unknown-linux-gnu x86_64-unknown-linux-gnu
 do

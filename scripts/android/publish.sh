@@ -13,7 +13,7 @@ else
 fi
 
 TARGET_PATH=../../../android/src/main/jniLibs
-BIN=xelis_flutter.so
+BIN=libxelis_flutter.so
 
 for TARGET in arm64-v8a armeabi-v7a x86_64
 do

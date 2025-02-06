@@ -21,7 +21,7 @@ if [ "$IS_ARM" = true ]  ; then
     cargo build --target aarch64-pc-windows-gnu --release --lib
 
     mkdir -p target/x86_64-pc-windows-gnu/release
-    cp target/aarch64-pc-windows-gnu/release/xelis_flutter.so target/x86_64-pc-windows-gnu/release/
+    cp target/aarch64-pc-windows-gnu/release/libxelis_flutter.so target/x86_64-pc-windows-gnu/release/
 else
     echo "Building x86_64 version"
     cargo build --target x86_64-pc-windows-gnu --release --lib
