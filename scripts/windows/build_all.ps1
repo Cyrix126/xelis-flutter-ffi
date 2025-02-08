@@ -30,11 +30,15 @@ if (Test-Path 'env:IS_ARM ') {
 
     New-Item -ItemType Directory -Force -Path target\aarch64-pc-windows-msvc\release
     Copy-Item "target\aarch64-pc-windows-msvc\release\libxelis_flutter.so" -Destination "target\aarch64-pc-windows-gnu\release\" -Force
+    # Copy to build folder (one level up from rust)
+    Copy-Item "target\aarch64-pc-windows-msvc\release\libxelis_flutter.so" -Destination "..\\" -Force
 } else {
     Write-Output "Building x86_64 version"
     New-Item -ItemType Directory -Force -Path target\x86_64-pc-windows-msvc\release
 
     cargo build --target x86_64-pc-windows-msvc --release --lib
+    # Copy to build folder (one level up from rust)
+    Copy-Item "target\x86_64-pc-windows-msvc\release\libxelis_flutter.dll" -Destination "..\\" -Force
 }
 
 # Return to /scripts/windows

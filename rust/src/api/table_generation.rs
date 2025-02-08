@@ -1,4 +1,7 @@
 use std::ops::ControlFlow;
+use std::fs::File;
+use std::io::Write;
+use std::path::PathBuf;
 
 use log::trace;
 use xelis_common::crypto::ecdlp;
@@ -29,4 +32,10 @@ pub async fn precomputed_tables_exist(precomputed_tables_path: String) -> bool {
     )
     .await
     .expect("Failed to check precomputed tables existence")
+}
+
+pub fn save_precomputed_tables(tables: &PrecomputedTablesShared, file_path: PathBuf) -> Result<(), String> {
+    let mut file = File::create(file_path).map_err(|e| e.to_string())?;
+    file.write_all(tables.get()).map_err(|e| e.to_string())?;
+    Ok(())
 }
