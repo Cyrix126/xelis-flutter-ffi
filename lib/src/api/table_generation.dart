@@ -12,14 +12,3 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 Future<bool> precomputedTablesExist({required String precomputedTablesPath}) =>
     RustLib.instance.api.crateApiTableGenerationPrecomputedTablesExist(
         precomputedTablesPath: precomputedTablesPath);
-
-Future<void> savePrecomputedTables(
-        {required PrecomputedTablesShared tables, required PathBuf filePath}) =>
-    RustLib.instance.api.crateApiTableGenerationSavePrecomputedTables(
-        tables: tables, filePath: filePath);
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PathBuf>>
-abstract class PathBuf implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
-abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
