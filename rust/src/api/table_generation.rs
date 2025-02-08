@@ -6,6 +6,7 @@ use std::path::PathBuf;
 use log::trace;
 use xelis_common::crypto::ecdlp;
 use xelis_wallet::precomputed_tables;
+use xelis_wallet::precomputed_tables::PrecomputedTablesShared;
 
 use crate::api::progress_report::{add_progress_report, Report};
 
