@@ -65,13 +65,14 @@ pub async fn create_xelis_wallet(
     seed: Option<String>,
     private_key: Option<String>,
     precomputed_tables_path: Option<String>,
+    l1_low: Option<Bool>,
 ) -> Result<XelisWallet> {
     let precomputed_tables = {
         let tables = CACHED_TABLES.lock().clone();
         match tables {
             Some(tables) => tables,
             None => {
-                let precomputed_tables_size = if cfg!(target_arch = "wasm32") {
+                let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
                     precomputed_tables::L1_LOW
                 } else {
                     precomputed_tables::L1_FULL
@@ -104,6 +105,15 @@ pub async fn create_xelis_wallet(
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),
     })
+}
+
+// for overwriting tables to update the memory footprint, for example
+// incomplete, since I need to handle wallet swapping cleanly
+pub async fn update_tables(
+    precomputed_tables_path: String,
+    l1_low: Bool
+) -> Result<()> {
+    Ok(())
 }
 
 pub async fn open_xelis_wallet(

@@ -20,14 +20,21 @@ Future<XelisWallet> createXelisWallet(
         required Network network,
         String? seed,
         String? privateKey,
-        String? precomputedTablesPath}) =>
+        String? precomputedTablesPath,
+        Bool? l1Low}) =>
     RustLib.instance.api.crateApiWalletCreateXelisWallet(
         name: name,
         password: password,
         network: network,
         seed: seed,
         privateKey: privateKey,
-        precomputedTablesPath: precomputedTablesPath);
+        precomputedTablesPath: precomputedTablesPath,
+        l1Low: l1Low);
+
+Future<void> updateTables(
+        {required String precomputedTablesPath, required Bool l1Low}) =>
+    RustLib.instance.api.crateApiWalletUpdateTables(
+        precomputedTablesPath: precomputedTablesPath, l1Low: l1Low);
 
 Future<XelisWallet> openXelisWallet(
         {required String name,
@@ -39,6 +46,9 @@ Future<XelisWallet> openXelisWallet(
         password: password,
         network: network,
         precomputedTablesPath: precomputedTablesPath);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Bool>>
+abstract class Bool implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
 abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
