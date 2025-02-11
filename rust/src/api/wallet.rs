@@ -65,7 +65,7 @@ pub async fn create_xelis_wallet(
     seed: Option<String>,
     private_key: Option<String>,
     precomputed_tables_path: Option<String>,
-    l1_low: Option<Bool>,
+    l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
     let precomputed_tables = {
         let tables = CACHED_TABLES.lock().clone();
@@ -111,7 +111,7 @@ pub async fn create_xelis_wallet(
 // incomplete, since I need to handle wallet swapping cleanly
 pub async fn update_tables(
     precomputed_tables_path: String,
-    l1_low: Bool
+    l1_low: bool
 ) -> Result<()> {
     Ok(())
 }
