@@ -31,11 +31,6 @@ Future<XelisWallet> createXelisWallet(
         precomputedTablesPath: precomputedTablesPath,
         l1Low: l1Low);
 
-Future<void> updateTables(
-        {required String precomputedTablesPath, required bool l1Low}) =>
-    RustLib.instance.api.crateApiWalletUpdateTables(
-        precomputedTablesPath: precomputedTablesPath, l1Low: l1Low);
-
 Future<XelisWallet> openXelisWallet(
         {required String name,
         required String password,

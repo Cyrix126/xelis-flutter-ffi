@@ -109,12 +109,12 @@ pub async fn create_xelis_wallet(
 
 // for overwriting tables to update the memory footprint, for example
 // incomplete, since I need to handle wallet swapping cleanly
-pub async fn update_tables(
-    precomputed_tables_path: String,
-    l1_low: bool
-) -> Result<()> {
-    Ok(())
-}
+// pub async fn update_tables(
+//     precomputed_tables_path: String,
+//     l1_low: bool
+// ) -> Result<()> {
+//     Ok(())
+// }
 
 pub async fn open_xelis_wallet(
     name: String,

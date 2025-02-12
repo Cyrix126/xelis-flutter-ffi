@@ -74,7 +74,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.7.1';
 
   @override
-  int get rustContentHash => 1806521397;
+  int get rustContentHash => 570764315;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -257,9 +257,6 @@ abstract class RustLibApi extends BaseApi {
 
   String crateApiUtilsSplitIntegratedAddressJson(
       {required String integratedAddress});
-
-  Future<void> crateApiWalletUpdateTables(
-      {required String precomputedTablesPath, required bool l1Low});
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_LevelFilter;
@@ -1886,32 +1883,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "split_integrated_address_json",
         argNames: ["integratedAddress"],
-      );
-
-  @override
-  Future<void> crateApiWalletUpdateTables(
-      {required String precomputedTablesPath, required bool l1Low}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(precomputedTablesPath, serializer);
-        sse_encode_bool(l1Low, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 56, port: port_);
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
-      ),
-      constMeta: kCrateApiWalletUpdateTablesConstMeta,
-      argValues: [precomputedTablesPath, l1Low],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiWalletUpdateTablesConstMeta => const TaskConstMeta(
-        debugName: "update_tables",
-        argNames: ["precomputedTablesPath", "l1Low"],
       );
 
   RustArcIncrementStrongCountFnType
