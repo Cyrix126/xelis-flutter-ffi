@@ -107,14 +107,28 @@ pub async fn create_xelis_wallet(
     })
 }
 
-// for overwriting tables to update the memory footprint, for example
-// incomplete, since I need to handle wallet swapping cleanly
-// pub async fn update_tables(
-//     precomputed_tables_path: String,
-//     l1_low: bool
-// ) -> Result<()> {
-//     Ok(())
-// }
+// for overwriting tables to update the memory footprint/decryption speed tradeoff
+pub async fn update_tables(
+    precomputed_tables_path: String,
+    l1_low: bool
+) -> Result<()> {
+    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low {
+        precomputed_tables::L1_LOW
+    } else {
+        precomputed_tables::L1_FULL
+    };
+    let tables = precomputed_tables::read_or_generate_precomputed_tables(
+        precomputed_tables_path.as_deref(),
+        precomputed_tables_size,
+        LogProgressTableGenerationReportFunction,
+        true,
+    )
+    .await?;
+
+    // It is done in two steps to avoid the "Future is not Send" error
+    CACHED_TABLES.lock().replace(tables.clone());
+    Ok(())
+}
 
 pub async fn open_xelis_wallet(
     name: String,
