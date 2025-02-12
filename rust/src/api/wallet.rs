@@ -118,7 +118,7 @@ pub async fn update_tables(
         precomputed_tables::L1_FULL
     };
     let tables = precomputed_tables::read_or_generate_precomputed_tables(
-        precomputed_tables_path.as_deref(),
+        precomputed_tables_path.as_ref(),
         precomputed_tables_size,
         LogProgressTableGenerationReportFunction,
         true,
