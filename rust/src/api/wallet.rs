@@ -121,8 +121,9 @@ pub async fn open_xelis_wallet(
     password: String,
     network: Network,
     precomputed_tables_path: Option<String>,
+    l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") {
+    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
         precomputed_tables::L1_LOW
     } else {
         precomputed_tables::L1_FULL

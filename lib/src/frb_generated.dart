@@ -248,7 +248,8 @@ abstract class RustLibApi extends BaseApi {
       {required String name,
       required String password,
       required Network network,
-      String? precomputedTablesPath});
+      String? precomputedTablesPath,
+      bool? l1Low});
 
   Future<bool> crateApiTableGenerationPrecomputedTablesExist(
       {required String precomputedTablesPath});
@@ -1783,7 +1784,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required String name,
       required String password,
       required Network network,
-      String? precomputedTablesPath}) {
+      String? precomputedTablesPath,
+      bool? l1Low}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
@@ -1791,6 +1793,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_String(password, serializer);
         sse_encode_network(network, serializer);
         sse_encode_opt_String(precomputedTablesPath, serializer);
+        sse_encode_opt_box_autoadd_bool(l1Low, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 52, port: port_);
       },
@@ -1800,7 +1803,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletOpenXelisWalletConstMeta,
-      argValues: [name, password, network, precomputedTablesPath],
+      argValues: [name, password, network, precomputedTablesPath, l1Low],
       apiImpl: this,
     ));
   }
@@ -1808,7 +1811,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiWalletOpenXelisWalletConstMeta =>
       const TaskConstMeta(
         debugName: "open_xelis_wallet",
-        argNames: ["name", "password", "network", "precomputedTablesPath"],
+        argNames: [
+          "name",
+          "password",
+          "network",
+          "precomputedTablesPath",
+          "l1Low"
+        ],
       );
 
   @override

@@ -2721,6 +2721,7 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
             let api_password = <String>::sse_decode(&mut deserializer);
             let api_network = <crate::api::network::Network>::sse_decode(&mut deserializer);
             let api_precomputed_tables_path = <Option<String>>::sse_decode(&mut deserializer);
+            let api_l1_low = <Option<bool>>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| async move {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -2730,6 +2731,7 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
                             api_password,
                             api_network,
                             api_precomputed_tables_path,
+                            api_l1_low,
                         )
                         .await?;
                         Ok(output_ok)
