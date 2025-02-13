@@ -28,4 +28,4 @@ mkdir ${inc}
 mkdir ${libs}
 
 cp xelis_flutter.h ${inc}
-cp target/aarch64-apple-ios/release/xelis_flutter.a ${libs}
+cp target/aarch64-apple-ios/release/libxelis_flutter.a ${libs}
