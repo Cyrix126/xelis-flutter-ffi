@@ -226,6 +226,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<XelisWallet> crateApiWalletCreateXelisWallet(
       {required String name,
+      required String directory,
       required String password,
       required Network network,
       String? seed,
@@ -246,6 +247,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<XelisWallet> crateApiWalletOpenXelisWallet(
       {required String name,
+      required String directory,
       required String password,
       required Network network,
       String? precomputedTablesPath,
@@ -1609,6 +1611,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<XelisWallet> crateApiWalletCreateXelisWallet(
       {required String name,
+      required String directory,
       required String password,
       required Network network,
       String? seed,
@@ -1619,6 +1622,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(name, serializer);
+        sse_encode_String(directory, serializer);
         sse_encode_String(password, serializer);
         sse_encode_network(network, serializer);
         sse_encode_opt_String(seed, serializer);
@@ -1636,6 +1640,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       constMeta: kCrateApiWalletCreateXelisWalletConstMeta,
       argValues: [
         name,
+        directory,
         password,
         network,
         seed,
@@ -1652,6 +1657,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         debugName: "create_xelis_wallet",
         argNames: [
           "name",
+          "directory",
           "password",
           "network",
           "seed",
@@ -1785,6 +1791,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<XelisWallet> crateApiWalletOpenXelisWallet(
       {required String name,
+      required String directory,
       required String password,
       required Network network,
       String? precomputedTablesPath,
@@ -1793,6 +1800,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(name, serializer);
+        sse_encode_String(directory, serializer);
         sse_encode_String(password, serializer);
         sse_encode_network(network, serializer);
         sse_encode_opt_String(precomputedTablesPath, serializer);
@@ -1806,7 +1814,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletOpenXelisWalletConstMeta,
-      argValues: [name, password, network, precomputedTablesPath, l1Low],
+      argValues: [
+        name,
+        directory,
+        password,
+        network,
+        precomputedTablesPath,
+        l1Low
+      ],
       apiImpl: this,
     ));
   }
@@ -1816,6 +1831,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         debugName: "open_xelis_wallet",
         argNames: [
           "name",
+          "directory",
           "password",
           "network",
           "precomputedTablesPath",

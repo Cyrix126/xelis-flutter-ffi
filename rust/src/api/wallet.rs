@@ -60,6 +60,7 @@ pub fn get_cached_table() -> Option<PrecomputedTablesShared> {
 
 pub async fn create_xelis_wallet(
     name: String,
+    directory: String,
     password: String,
     network: Network,
     seed: Option<String>,
@@ -67,6 +68,8 @@ pub async fn create_xelis_wallet(
     precomputed_tables_path: Option<String>,
     l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
+    let full_path = directory + name;
+
     let precomputed_tables = {
         let tables = CACHED_TABLES.lock().clone();
         match tables {
@@ -100,7 +103,7 @@ pub async fn create_xelis_wallet(
         None
     };
 
-    let xelis_wallet = Wallet::create(&name, &password, recover, network, precomputed_tables)?;
+    let xelis_wallet = Wallet::create(&full_path, &password, recover, network, precomputed_tables)?;
     Ok(XelisWallet {
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),
@@ -132,11 +135,14 @@ pub async fn update_tables(
 
 pub async fn open_xelis_wallet(
     name: String,
+    directory: String,
     password: String,
     network: Network,
     precomputed_tables_path: Option<String>,
     l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
+    let full_path = directory + name;
+
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
         precomputed_tables::L1_LOW
     } else {
@@ -149,7 +155,7 @@ pub async fn open_xelis_wallet(
         true,
     )
     .await?;
-    let xelis_wallet = Wallet::open(&name, &password, network, precomputed_tables)?;
+    let xelis_wallet = Wallet::open(&full_path, &password, network, precomputed_tables)?;
     Ok(XelisWallet {
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),

@@ -16,6 +16,7 @@ PrecomputedTablesShared? getCachedTable() =>
 
 Future<XelisWallet> createXelisWallet(
         {required String name,
+        required String directory,
         required String password,
         required Network network,
         String? seed,
@@ -24,6 +25,7 @@ Future<XelisWallet> createXelisWallet(
         bool? l1Low}) =>
     RustLib.instance.api.crateApiWalletCreateXelisWallet(
         name: name,
+        directory: directory,
         password: password,
         network: network,
         seed: seed,
@@ -38,12 +40,14 @@ Future<void> updateTables(
 
 Future<XelisWallet> openXelisWallet(
         {required String name,
+        required String directory,
         required String password,
         required Network network,
         String? precomputedTablesPath,
         bool? l1Low}) =>
     RustLib.instance.api.crateApiWalletOpenXelisWallet(
         name: name,
+        directory: directory,
         password: password,
         network: network,
         precomputedTablesPath: precomputedTablesPath,

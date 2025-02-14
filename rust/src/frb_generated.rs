@@ -2502,6 +2502,7 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_name = <String>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
             let api_password = <String>::sse_decode(&mut deserializer);
             let api_network = <crate::api::network::Network>::sse_decode(&mut deserializer);
             let api_seed = <Option<String>>::sse_decode(&mut deserializer);
@@ -2514,6 +2515,7 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
                     (move || async move {
                         let output_ok = crate::api::wallet::create_xelis_wallet(
                             api_name,
+                            api_directory,
                             api_password,
                             api_network,
                             api_seed,
@@ -2718,6 +2720,7 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_name = <String>::sse_decode(&mut deserializer);
+            let api_directory = <String>::sse_decode(&mut deserializer);
             let api_password = <String>::sse_decode(&mut deserializer);
             let api_network = <crate::api::network::Network>::sse_decode(&mut deserializer);
             let api_precomputed_tables_path = <Option<String>>::sse_decode(&mut deserializer);
@@ -2728,6 +2731,7 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
                     (move || async move {
                         let output_ok = crate::api::wallet::open_xelis_wallet(
                             api_name,
+                            api_directory,
                             api_password,
                             api_network,
                             api_precomputed_tables_path,
