@@ -1,29 +1,27 @@
 #!/usr/bin/env bash
-mkdir build
-echo ''$(git log -1 --pretty=format:"%H")' '$(date) >> build/git_commit_version.txt
-VERSIONS_FILE=../../lib/git_versions.dart
-EXAMPLE_VERSIONS_FILE=../../lib/git_versions_example.dart
-if [ ! -f "$VERSIONS_FILE" ]; then
-    cp $EXAMPLE_VERSIONS_FILE $VERSIONS_FILE
+set -ex
+
+exec 3>&1
+REQUIRED_VERSION="1.84.0"
+CURRENT_VERSION=$(rustc --version | cut -d ' ' -f 2)
+
+if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
+    echo "Updating Rust to version $REQUIRED_VERSION or higher (current: $CURRENT_VERSION)"
+    rustup update $REQUIRED_VERSION
+    rustup default $REQUIRED_VERSION
 fi
-COMMIT=$(git log -1 --pretty=format:"%H")
-OSX="OSX"
-sed -i '' "/\/\*${OS}_VERSION/c\\/\*${OS}_VERSION\*\/ const ${OS}_VERSION = \"$COMMIT\";" $VERSIONS_FILE
-cp -r ../../rust build/rust
-cd build/rust
 
-# building
-cbindgen src/lib.rs -l c > xelis_flutter.h
-cargo lipo --release --targets aarch64-apple-darwin
+rustup target add aarch64-apple-darwin x86_64-apple-darwin
 
-# moving files to the ios project
-inc=../../../../macos/include
-libs=../../../../macos/libs
+RUST_DIR="$1"
+LIB_NAME="$2"
 
-rm -rf ${inc} ${libs}
+cd "$RUST_DIR"
 
-mkdir ${inc}
-mkdir ${libs}
+cargo build --release --target aarch64-apple-darwin
+cargo build --release --target x86_64-apple-darwin
 
-cp xelis_flutter.h ${inc}
-cp target/aarch64-apple-darwin/release/libxelis_flutter.a ${libs}
+lipo -create \
+    "target/aarch64-apple-darwin/release/lib${LIB_NAME}.a" \
+    "target/x86_64-apple-darwin/release/lib${LIB_NAME}.a" \
+    -output "${BUILT_PRODUCTS_DIR}/lib${LIB_NAME}.a"

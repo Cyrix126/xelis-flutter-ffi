@@ -16,6 +16,19 @@ A new Flutter plugin project.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
 
+  s.script_phase = {
+    :name => 'Build Rust library',
+    :script => 'sh "$PODS_TARGET_SRCROOT/../scripts/macos/build_all.sh" "$PODS_TARGET_SRCROOT/../rust" xelis_flutter',
+    :execution_position => :before_compile,
+    :input_files => ['${BUILT_PRODUCTS_DIR}/cargokit_phony'],
+    :output_files => ["${BUILT_PRODUCTS_DIR}/libxelis_flutter.a"],
+  }
+
+  s.pod_target_xcconfig = {
+    'DEFINES_MODULE' => 'YES',
+    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/libxelis_flutter.a'
+  }
+
   # If your plugin requires a privacy manifest, for example if it collects user
   # data, update the PrivacyInfo.xcprivacy file to describe your plugin's
   # privacy impact, and then uncomment this line. For more information,

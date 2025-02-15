@@ -17,6 +17,19 @@ A new Flutter plugin project.
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
+  s.script_phase = {
+    :name => 'Build Rust library',
+    :script => 'sh "$PODS_TARGET_SRCROOT/../scripts/ios/build_all.sh" "$PODS_TARGET_SRCROOT/../rust" xelis_flutter',
+    :execution_position => :before_compile,
+    :input_files => ['${BUILT_PRODUCTS_DIR}/cargokit_phony'],
+    :output_files => ["${BUILT_PRODUCTS_DIR}/libxelis_flutter.a"],
+  }
+
+  s.pod_target_xcconfig = {
+    'DEFINES_MODULE' => 'YES',
+    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/libxelis_flutter.a'
+  }
+
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
