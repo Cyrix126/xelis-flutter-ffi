@@ -4,7 +4,7 @@ set -ex
 REQUIRED_VERSION="1.84.0"
 CURRENT_VERSION=$(rustc --version | cut -d ' ' -f 2)
 
-BUILD_DIR=platform-build
+BUILD_DIR=build
 mkdir $BUILD_DIR
 cd $BUILD_DIR
 
