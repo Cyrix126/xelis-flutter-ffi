@@ -13,7 +13,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 Future<void> initLogger() => RustLib.instance.api.crateApiLoggerInitLogger();
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SendToDartLogger>>
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SendToDartLogger>>
 abstract class SendToDartLogger implements RustOpaqueInterface {
   LevelFilter get level;
 

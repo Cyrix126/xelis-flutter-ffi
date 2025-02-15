@@ -355,15 +355,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SearchEngine that, required List<String> seed}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
-            that, serializer);
-        sse_encode_list_String(seed, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+                that);
+        var arg1 = cst_encode_list_String(seed);
+        return wire
+            .wire__crate__api__seed_search_engine__SearchEngine_check_seed(
+                arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiSeedSearchEngineSearchEngineCheckSeedConstMeta,
       argValues: [that, seed],
@@ -382,13 +384,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required BigInt languageIndex}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_usize(languageIndex, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
+        var arg0 = cst_encode_usize(languageIndex);
+        return wire
+            .wire__crate__api__seed_search_engine__SearchEngine_init(arg0);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine,
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiSeedSearchEngineSearchEngineInitConstMeta,
@@ -408,15 +410,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SearchEngine that, required String query}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
-            that, serializer);
-        sse_encode_String(query, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+                that);
+        var arg1 = cst_encode_String(query);
+        return wire.wire__crate__api__seed_search_engine__SearchEngine_search(
+            arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiSeedSearchEngineSearchEngineSearchConstMeta,
       argValues: [that, query],
@@ -435,14 +438,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SendToDartLogger that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+                that);
+        return wire
+            .wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level(
+                arg0);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter,
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiLoggerSendToDartLoggerAutoAccessorGetLevelConstMeta,
@@ -463,15 +468,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SendToDartLogger that, required LevelFilter level}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
-            that, serializer);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
-            level, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+        var arg0 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+                that);
+        var arg1 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
+                level);
+        return wire
+            .wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level(
+                arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiLoggerSendToDartLoggerAutoAccessorSetLevelConstMeta,
@@ -492,13 +500,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     final streamSink = RustStreamSink<LogEntry>();
     unawaited(handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_StreamSink_log_entry_Sse(streamSink, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 6, port: port_);
+        var arg0 = cst_encode_StreamSink_log_entry_Dco(streamSink);
+        return wire.wire__crate__api__logger__SendToDartLogger_set_stream_sink(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiLoggerSendToDartLoggerSetStreamSinkConstMeta,
@@ -519,13 +526,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SummaryTransaction that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee(
+                arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_u_64,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_u_64,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletSummaryTransactionAutoAccessorGetFeeConstMeta,
@@ -546,13 +555,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SummaryTransaction that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash(
+                arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletSummaryTransactionAutoAccessorGetHashConstMeta,
@@ -574,14 +585,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           {required SummaryTransaction that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type(
+                arg0);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder,
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder,
         decodeErrorData: null,
       ),
       constMeta:
@@ -603,14 +616,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SummaryTransaction that, required BigInt fee}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        sse_encode_u_64(fee, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+        var arg0 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        var arg1 = cst_encode_u_64(fee);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee(
+                arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletSummaryTransactionAutoAccessorSetFeeConstMeta,
@@ -631,14 +646,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required SummaryTransaction that, required String hash}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        sse_encode_String(hash, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+        var arg0 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        var arg1 = cst_encode_String(hash);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash(
+                arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletSummaryTransactionAutoAccessorSetHashConstMeta,
@@ -660,15 +677,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       required TransactionTypeBuilder transactionType}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-            that, serializer);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
-            transactionType, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+        var arg0 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+                that);
+        var arg1 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
+                transactionType);
+        return wire
+            .wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type(
+                arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta:
@@ -690,15 +710,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 13, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_all_history(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletAllHistoryConstMeta,
       argValues: [that],
@@ -717,16 +737,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String txHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(txHash, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 14, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(txHash);
+        return wire.wire__crate__api__wallet__XelisWallet_broadcast_transaction(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletBroadcastTransactionConstMeta,
       argValues: [that, txHash],
@@ -747,17 +767,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       required String newPassword}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(oldPassword, serializer);
-        sse_encode_String(newPassword, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 15, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(oldPassword);
+        var arg2 = cst_encode_String(newPassword);
+        return wire.wire__crate__api__wallet__XelisWallet_change_password(
+            port_, arg0, arg1, arg2);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletChangePasswordConstMeta,
       argValues: [that, oldPassword, newPassword],
@@ -777,17 +797,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           {required XelisWallet that, required String txHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(txHash, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 16, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(txHash);
+        return wire.wire__crate__api__wallet__XelisWallet_clear_transaction(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state,
-        decodeErrorData: sse_decode_AnyhowException,
+            dco_decode_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletClearTransactionConstMeta,
       argValues: [that, txHash],
@@ -805,14 +825,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<void> crateApiWalletXelisWalletClose({required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 17, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_close(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletCloseConstMeta,
@@ -832,15 +851,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 18, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv(
+                port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletConvertTransactionsToCsvConstMeta,
       argValues: [that],
@@ -860,16 +880,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String assetHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(assetHash, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 19, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(assetHash);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_create_burn_all_transaction(
+                port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletCreateBurnAllTransactionConstMeta,
       argValues: [that, assetHash],
@@ -891,17 +912,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       required String assetHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_f_64(floatAmount, serializer);
-        sse_encode_String(assetHash, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 20, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_f_64(floatAmount);
+        var arg2 = cst_encode_String(assetHash);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_create_burn_transaction(
+                port_, arg0, arg1, arg2);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletCreateBurnTransactionConstMeta,
       argValues: [that, floatAmount, assetHash],
@@ -923,18 +945,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       String? extraData}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(strAddress, serializer);
-        sse_encode_opt_String(assetHash, serializer);
-        sse_encode_opt_String(extraData, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 21, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(strAddress);
+        var arg2 = cst_encode_opt_String(assetHash);
+        var arg3 = cst_encode_opt_String(extraData);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction(
+                port_, arg0, arg1, arg2, arg3);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta:
           kCrateApiWalletXelisWalletCreateTransferAllTransactionConstMeta,
@@ -955,16 +978,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required List<Transfer> transfers}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_list_transfer(transfers, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 22, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_list_transfer(transfers);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_create_transfers_transaction(
+                port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletCreateTransfersTransactionConstMeta,
       argValues: [that, transfers],
@@ -984,16 +1008,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required List<Transfer> transfers}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_list_transfer(transfers, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 23, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_list_transfer(transfers);
+        return wire.wire__crate__api__wallet__XelisWallet_estimate_fees(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletEstimateFeesConstMeta,
       argValues: [that, transfers],
@@ -1013,15 +1037,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     final sink = RustStreamSink<String>();
     unawaited(handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_StreamSink_String_Sse(sink, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 24, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_StreamSink_String_Dco(sink);
+        return wire.wire__crate__api__wallet__XelisWallet_events_stream(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletEventsStreamConstMeta,
@@ -1042,16 +1066,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String filePath}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(filePath, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 25, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(filePath);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file(
+                port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletExportTransactionsToCsvFileConstMeta,
       argValues: [that, filePath],
@@ -1073,17 +1098,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       String? assetHash}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_u_64(atomicAmount, serializer);
-        sse_encode_opt_String(assetHash, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 26, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_u_64(atomicAmount);
+        var arg2 = cst_encode_opt_String(assetHash);
+        return wire.wire__crate__api__wallet__XelisWallet_format_coin(
+            port_, arg0, arg1, arg2);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletFormatCoinConstMeta,
       argValues: [that, atomicAmount, assetHash],
@@ -1101,13 +1126,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   String crateApiWalletXelisWalletGetAddressStr({required XelisWallet that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 27)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_address_str(arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletGetAddressStrConstMeta,
@@ -1127,15 +1152,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 28, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_asset_balances(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_Map_String_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_Map_String_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetAssetBalancesConstMeta,
       argValues: [that],
@@ -1154,15 +1179,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 29, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire
+            .wire__crate__api__wallet__XelisWallet_get_asset_balances_raw(
+                port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_Map_String_u_64,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_Map_String_u_64,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetAssetBalancesRawConstMeta,
       argValues: [that],
@@ -1181,16 +1207,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String asset}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(asset, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 30, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(asset);
+        return wire.wire__crate__api__wallet__XelisWallet_get_asset_decimals(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_u_8,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_u_8,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetAssetDecimalsConstMeta,
       argValues: [that, asset],
@@ -1209,15 +1235,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 31, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_daemon_info(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetDaemonInfoConstMeta,
       argValues: [that],
@@ -1235,13 +1261,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   String crateApiWalletXelisWalletGetNetwork({required XelisWallet that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 32)!;
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_network(arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletGetNetworkConstMeta,
@@ -1261,14 +1287,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 33, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_nonce(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_u_64,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_u_64,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletGetNonceConstMeta,
@@ -1288,16 +1314,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, BigInt? languageIndex}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_opt_box_autoadd_usize(languageIndex, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 34, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_opt_box_autoadd_usize(languageIndex);
+        return wire.wire__crate__api__wallet__XelisWallet_get_seed(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetSeedConstMeta,
       argValues: [that, languageIndex],
@@ -1316,15 +1342,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 35, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_xelis_balance(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetXelisBalanceConstMeta,
       argValues: [that],
@@ -1343,15 +1369,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 36, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_u_64,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_u_64,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletGetXelisBalanceRawConstMeta,
       argValues: [that],
@@ -1370,15 +1396,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 37, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_has_xelis_balance(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_bool,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletHasXelisBalanceConstMeta,
       argValues: [that],
@@ -1396,14 +1422,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<bool> crateApiWalletXelisWalletIsOnline({required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 38, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_is_online(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_bool,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletXelisWalletIsOnlineConstMeta,
@@ -1423,16 +1449,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String password}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(password, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 39, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(password);
+        return wire.wire__crate__api__wallet__XelisWallet_is_valid_password(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletIsValidPasswordConstMeta,
       argValues: [that, password],
@@ -1451,15 +1477,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 40, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        return wire.wire__crate__api__wallet__XelisWallet_offline_mode(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletOfflineModeConstMeta,
       argValues: [that],
@@ -1478,16 +1504,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required String daemonAddress}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_String(daemonAddress, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 41, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_String(daemonAddress);
+        return wire.wire__crate__api__wallet__XelisWallet_online_mode(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletOnlineModeConstMeta,
       argValues: [that, daemonAddress],
@@ -1506,16 +1532,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required XelisWallet that, required BigInt topoheight}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-            that, serializer);
-        sse_encode_u_64(topoheight, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 42, port: port_);
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                that);
+        var arg1 = cst_encode_u_64(topoheight);
+        return wire.wire__crate__api__wallet__XelisWallet_rescan(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletXelisWalletRescanConstMeta,
       argValues: [that, topoheight],
@@ -1534,13 +1560,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required Report report}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_report(report, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 43, port: port_);
+        var arg0 = cst_encode_box_autoadd_report(report);
+        return wire.wire__crate__api__progress_report__add_progress_report(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiProgressReportAddProgressReportConstMeta,
@@ -1560,14 +1585,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     final s = RustStreamSink<LogEntry>();
     unawaited(handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_StreamSink_log_entry_Sse(s, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 44, port: port_);
+        var arg0 = cst_encode_StreamSink_log_entry_Dco(s);
+        return wire.wire__crate__api__api__create_log_stream(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiApiCreateLogStreamConstMeta,
       argValues: [s],
@@ -1586,14 +1609,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     final streamSink = RustStreamSink<Report>();
     unawaited(handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_StreamSink_report_Sse(streamSink, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 45, port: port_);
+        var arg0 = cst_encode_StreamSink_report_Dco(streamSink);
+        return wire.wire__crate__api__api__create_progress_report_stream(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiApiCreateProgressReportStreamConstMeta,
       argValues: [streamSink],
@@ -1620,22 +1642,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       bool? l1Low}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(name, serializer);
-        sse_encode_String(directory, serializer);
-        sse_encode_String(password, serializer);
-        sse_encode_network(network, serializer);
-        sse_encode_opt_String(seed, serializer);
-        sse_encode_opt_String(privateKey, serializer);
-        sse_encode_opt_String(precomputedTablesPath, serializer);
-        sse_encode_opt_box_autoadd_bool(l1Low, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 46, port: port_);
+        var arg0 = cst_encode_String(name);
+        var arg1 = cst_encode_String(directory);
+        var arg2 = cst_encode_String(password);
+        var arg3 = cst_encode_network(network);
+        var arg4 = cst_encode_opt_String(seed);
+        var arg5 = cst_encode_opt_String(privateKey);
+        var arg6 = cst_encode_opt_String(precomputedTablesPath);
+        var arg7 = cst_encode_opt_box_autoadd_bool(l1Low);
+        return wire.wire__crate__api__wallet__create_xelis_wallet(
+            port_, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet,
-        decodeErrorData: sse_decode_AnyhowException,
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletCreateXelisWalletConstMeta,
       argValues: [
@@ -1672,14 +1693,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required BigInt value, required int decimals}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_u_64(value, serializer);
-        sse_encode_u_8(decimals, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 47, port: port_);
+        var arg0 = cst_encode_u_64(value);
+        var arg1 = cst_encode_u_8(decimals);
+        return wire.wire__crate__api__utils__format_coin(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiUtilsFormatCoinConstMeta,
@@ -1697,13 +1716,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<String> crateApiUtilsFormatXelis({required BigInt value}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_u_64(value, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 48, port: port_);
+        var arg0 = cst_encode_u_64(value);
+        return wire.wire__crate__api__utils__format_xelis(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiUtilsFormatXelisConstMeta,
@@ -1721,12 +1738,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PrecomputedTablesShared? crateApiWalletGetCachedTable() {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 49)!;
+        return wire.wire__crate__api__wallet__get_cached_table();
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared,
+            dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiWalletGetCachedTableConstMeta,
@@ -1745,12 +1761,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<void> crateApiLoggerInitLogger() {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 50, port: port_);
+        return wire.wire__crate__api__logger__init_logger(port_);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiLoggerInitLoggerConstMeta,
@@ -1768,12 +1782,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   bool crateApiUtilsIsAddressValid({required String strAddress}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(strAddress, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 51)!;
+        var arg0 = cst_encode_String(strAddress);
+        return wire.wire__crate__api__utils__is_address_valid(arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_bool,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiUtilsIsAddressValidConstMeta,
@@ -1798,20 +1811,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       bool? l1Low}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(name, serializer);
-        sse_encode_String(directory, serializer);
-        sse_encode_String(password, serializer);
-        sse_encode_network(network, serializer);
-        sse_encode_opt_String(precomputedTablesPath, serializer);
-        sse_encode_opt_box_autoadd_bool(l1Low, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 52, port: port_);
+        var arg0 = cst_encode_String(name);
+        var arg1 = cst_encode_String(directory);
+        var arg2 = cst_encode_String(password);
+        var arg3 = cst_encode_network(network);
+        var arg4 = cst_encode_opt_String(precomputedTablesPath);
+        var arg5 = cst_encode_opt_box_autoadd_bool(l1Low);
+        return wire.wire__crate__api__wallet__open_xelis_wallet(
+            port_, arg0, arg1, arg2, arg3, arg4, arg5);
       },
-      codec: SseCodec(
+      codec: DcoCodec(
         decodeSuccessData:
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet,
-        decodeErrorData: sse_decode_AnyhowException,
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletOpenXelisWalletConstMeta,
       argValues: [
@@ -1844,13 +1856,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required String precomputedTablesPath}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(precomputedTablesPath, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 53, port: port_);
+        var arg0 = cst_encode_String(precomputedTablesPath);
+        return wire
+            .wire__crate__api__table_generation__precomputed_tables_exist(
+                port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_bool,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiTableGenerationPrecomputedTablesExistConstMeta,
@@ -1869,12 +1881,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<void> crateApiApiSetUpRustLogger() {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 54, port: port_);
+        return wire.wire__crate__api__api__set_up_rust_logger(port_);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kCrateApiApiSetUpRustLoggerConstMeta,
@@ -1893,13 +1903,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required String integratedAddress}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(integratedAddress, serializer);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 55)!;
+        var arg0 = cst_encode_String(integratedAddress);
+        return wire
+            .wire__crate__api__utils__split_integrated_address_json(arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiUtilsSplitIntegratedAddressJsonConstMeta,
       argValues: [integratedAddress],
@@ -1918,15 +1928,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required String precomputedTablesPath, required bool l1Low}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(precomputedTablesPath, serializer);
-        sse_encode_bool(l1Low, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 56, port: port_);
+        var arg0 = cst_encode_String(precomputedTablesPath);
+        var arg1 = cst_encode_bool(l1Low);
+        return wire.wire__crate__api__wallet__update_tables(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: sse_decode_AnyhowException,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_AnyhowException,
       ),
       constMeta: kCrateApiWalletUpdateTablesConstMeta,
       argValues: [precomputedTablesPath, l1Low],
@@ -2230,19 +2238,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw) {
+  RustStreamSink<String> dco_decode_StreamSink_String_Dco(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
 
   @protected
-  RustStreamSink<LogEntry> dco_decode_StreamSink_log_entry_Sse(dynamic raw) {
+  RustStreamSink<LogEntry> dco_decode_StreamSink_log_entry_Dco(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
 
   @protected
-  RustStreamSink<Report> dco_decode_StreamSink_report_Sse(dynamic raw) {
+  RustStreamSink<Report> dco_decode_StreamSink_report_Dco(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
@@ -2723,21 +2731,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
+  RustStreamSink<String> sse_decode_StreamSink_String_Dco(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     throw UnimplementedError('Unreachable ()');
   }
 
   @protected
-  RustStreamSink<LogEntry> sse_decode_StreamSink_log_entry_Sse(
+  RustStreamSink<LogEntry> sse_decode_StreamSink_log_entry_Dco(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     throw UnimplementedError('Unreachable ()');
   }
 
   @protected
-  RustStreamSink<Report> sse_decode_StreamSink_report_Sse(
+  RustStreamSink<Report> sse_decode_StreamSink_report_Dco(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     throw UnimplementedError('Unreachable ()');
@@ -3013,6 +3021,242 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
+      LevelFilter raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as LevelFilterImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+      PrecomputedTablesShared raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as PrecomputedTablesSharedImpl)
+        .frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SearchEngineImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SendToDartLoggerImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SummaryTransactionImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransaction(
+      Transaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState(
+      TransactionBuilderState raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionBuilderStateImpl)
+        .frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
+      TransactionTypeBuilder raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionTypeBuilderImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as XelisWalletImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SendToDartLoggerImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SummaryTransactionImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SearchEngineImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SendToDartLoggerImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SummaryTransactionImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as XelisWalletImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
+      LevelFilter raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as LevelFilterImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+      PrecomputedTablesShared raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as PrecomputedTablesSharedImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SearchEngineImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SendToDartLoggerImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SummaryTransactionImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransaction(
+      Transaction raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState(
+      TransactionBuilderState raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionBuilderStateImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
+      TransactionTypeBuilder raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as TransactionTypeBuilderImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as XelisWalletImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  bool cst_encode_bool(bool raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  double cst_encode_f_64(double raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  int cst_encode_i_32(int raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  int cst_encode_level(Level raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_i_32(raw.index);
+  }
+
+  @protected
+  int cst_encode_network(Network raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_i_32(raw.index);
+  }
+
+  @protected
+  int cst_encode_u_8(int raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  void cst_encode_unit(void raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
   void sse_encode_AnyhowException(
       AnyhowException self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -3270,40 +3514,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_StreamSink_String_Sse(
+  void sse_encode_StreamSink_String_Dco(
       RustStreamSink<String> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(
         self.setupAndSerialize(
-            codec: SseCodec(
-          decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
+            codec: DcoCodec(
+          decodeSuccessData: dco_decode_String,
+          decodeErrorData: dco_decode_AnyhowException,
         )),
         serializer);
   }
 
   @protected
-  void sse_encode_StreamSink_log_entry_Sse(
+  void sse_encode_StreamSink_log_entry_Dco(
       RustStreamSink<LogEntry> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(
         self.setupAndSerialize(
-            codec: SseCodec(
-          decodeSuccessData: sse_decode_log_entry,
-          decodeErrorData: sse_decode_AnyhowException,
+            codec: DcoCodec(
+          decodeSuccessData: dco_decode_log_entry,
+          decodeErrorData: dco_decode_AnyhowException,
         )),
         serializer);
   }
 
   @protected
-  void sse_encode_StreamSink_report_Sse(
+  void sse_encode_StreamSink_report_Dco(
       RustStreamSink<Report> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(
         self.setupAndSerialize(
-            codec: SseCodec(
-          decodeSuccessData: sse_decode_report,
-          decodeErrorData: sse_decode_AnyhowException,
+            codec: DcoCodec(
+          decodeSuccessData: dco_decode_report,
+          decodeErrorData: dco_decode_AnyhowException,
         )),
         serializer);
   }

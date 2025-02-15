@@ -192,13 +192,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           dynamic raw);
 
   @protected
-  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw);
+  RustStreamSink<String> dco_decode_StreamSink_String_Dco(dynamic raw);
 
   @protected
-  RustStreamSink<LogEntry> dco_decode_StreamSink_log_entry_Sse(dynamic raw);
+  RustStreamSink<LogEntry> dco_decode_StreamSink_log_entry_Dco(dynamic raw);
 
   @protected
-  RustStreamSink<Report> dco_decode_StreamSink_report_Sse(dynamic raw);
+  RustStreamSink<Report> dco_decode_StreamSink_report_Dco(dynamic raw);
 
   @protected
   String dco_decode_String(dynamic raw);
@@ -426,15 +426,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           SseDeserializer deserializer);
 
   @protected
-  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
+  RustStreamSink<String> sse_decode_StreamSink_String_Dco(
       SseDeserializer deserializer);
 
   @protected
-  RustStreamSink<LogEntry> sse_decode_StreamSink_log_entry_Sse(
+  RustStreamSink<LogEntry> sse_decode_StreamSink_log_entry_Dco(
       SseDeserializer deserializer);
 
   @protected
-  RustStreamSink<Report> sse_decode_StreamSink_report_Sse(
+  RustStreamSink<Report> sse_decode_StreamSink_report_Dco(
       SseDeserializer deserializer);
 
   @protected
@@ -534,6 +534,380 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_AnyhowException(
+      AnyhowException raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    throw UnimplementedError();
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_record_string_string> cst_encode_Map_String_String(
+      Map<String, String> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_list_record_string_string(
+        raw.entries.map((e) => (e.key, e.value)).toList());
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_record_string_u_64> cst_encode_Map_String_u_64(
+      Map<String, BigInt> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_list_record_string_u_64(
+        raw.entries.map((e) => (e.key, e.value)).toList());
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_StreamSink_String_Dco(
+      RustStreamSink<String> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_String(raw.setupAndSerialize(
+        codec: DcoCodec(
+      decodeSuccessData: dco_decode_String,
+      decodeErrorData: dco_decode_AnyhowException,
+    )));
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict>
+      cst_encode_StreamSink_log_entry_Dco(RustStreamSink<LogEntry> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_String(raw.setupAndSerialize(
+        codec: DcoCodec(
+      decodeSuccessData: dco_decode_log_entry,
+      decodeErrorData: dco_decode_AnyhowException,
+    )));
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_StreamSink_report_Dco(
+      RustStreamSink<Report> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_String(raw.setupAndSerialize(
+        codec: DcoCodec(
+      decodeSuccessData: dco_decode_report,
+      decodeErrorData: dco_decode_AnyhowException,
+    )));
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_String(String raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_list_prim_u_8_strict(utf8.encoder.convert(raw));
+  }
+
+  @protected
+  ffi.Pointer<ffi.UintPtr>
+      cst_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+          PrecomputedTablesShared raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return wire
+        .cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+                raw));
+  }
+
+  @protected
+  ffi.Pointer<ffi.Bool> cst_encode_box_autoadd_bool(bool raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return wire.cst_new_box_autoadd_bool(cst_encode_bool(raw));
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_report> cst_encode_box_autoadd_report(Report raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_report();
+    cst_api_fill_to_wire_report(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<ffi.UintPtr> cst_encode_box_autoadd_usize(BigInt raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return wire.cst_new_box_autoadd_usize(cst_encode_usize(raw));
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_String> cst_encode_list_String(List<String> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ans = wire.cst_new_list_String(raw.length);
+    for (var i = 0; i < raw.length; ++i) {
+      ans.ref.ptr[i] = cst_encode_String(raw[i]);
+    }
+    return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_list_prim_u_8_strict(
+      Uint8List raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ans = wire.cst_new_list_prim_u_8_strict(raw.length);
+    ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
+    return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_record_string_string>
+      cst_encode_list_record_string_string(List<(String, String)> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ans = wire.cst_new_list_record_string_string(raw.length);
+    for (var i = 0; i < raw.length; ++i) {
+      cst_api_fill_to_wire_record_string_string(raw[i], ans.ref.ptr[i]);
+    }
+    return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_record_string_u_64>
+      cst_encode_list_record_string_u_64(List<(String, BigInt)> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ans = wire.cst_new_list_record_string_u_64(raw.length);
+    for (var i = 0; i < raw.length; ++i) {
+      cst_api_fill_to_wire_record_string_u_64(raw[i], ans.ref.ptr[i]);
+    }
+    return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_transfer> cst_encode_list_transfer(
+      List<Transfer> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ans = wire.cst_new_list_transfer(raw.length);
+    for (var i = 0; i < raw.length; ++i) {
+      cst_api_fill_to_wire_transfer(raw[i], ans.ref.ptr[i]);
+    }
+    return ans;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_opt_String(
+      String? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_String(raw);
+  }
+
+  @protected
+  ffi.Pointer<ffi.UintPtr>
+      cst_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+          PrecomputedTablesShared? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null
+        ? ffi.nullptr
+        : cst_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+            raw);
+  }
+
+  @protected
+  ffi.Pointer<ffi.Bool> cst_encode_opt_box_autoadd_bool(bool? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_box_autoadd_bool(raw);
+  }
+
+  @protected
+  ffi.Pointer<ffi.UintPtr> cst_encode_opt_box_autoadd_usize(BigInt? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_box_autoadd_usize(raw);
+  }
+
+  @protected
+  int cst_encode_u_64(BigInt raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw.toSigned(64).toInt();
+  }
+
+  @protected
+  int cst_encode_usize(BigInt raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw.toSigned(64).toInt();
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_report(
+      Report apiObj, ffi.Pointer<wire_cst_report> wireObj) {
+    cst_api_fill_to_wire_report(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_log_entry(
+      LogEntry apiObj, wire_cst_log_entry wireObj) {
+    wireObj.level = cst_encode_level(apiObj.level);
+    wireObj.tag = cst_encode_String(apiObj.tag);
+    wireObj.msg = cst_encode_String(apiObj.msg);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state(
+      (Transaction, TransactionBuilderState) apiObj,
+      wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state
+          wireObj) {
+    wireObj.field0 =
+        cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransaction(
+            apiObj.$1);
+    wireObj.field1 =
+        cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState(
+            apiObj.$2);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_record_string_string(
+      (String, String) apiObj, wire_cst_record_string_string wireObj) {
+    wireObj.field0 = cst_encode_String(apiObj.$1);
+    wireObj.field1 = cst_encode_String(apiObj.$2);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_record_string_u_64(
+      (String, BigInt) apiObj, wire_cst_record_string_u_64 wireObj) {
+    wireObj.field0 = cst_encode_String(apiObj.$1);
+    wireObj.field1 = cst_encode_u_64(apiObj.$2);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_report(Report apiObj, wire_cst_report wireObj) {
+    if (apiObj is Report_TableGeneration) {
+      var pre_progress = cst_encode_f_64(apiObj.progress);
+      var pre_step = cst_encode_String(apiObj.step);
+      var pre_message = cst_encode_opt_String(apiObj.message);
+      wireObj.tag = 0;
+      wireObj.kind.TableGeneration.progress = pre_progress;
+      wireObj.kind.TableGeneration.step = pre_step;
+      wireObj.kind.TableGeneration.message = pre_message;
+      return;
+    }
+    if (apiObj is Report_Misc) {
+      var pre_message = cst_encode_opt_String(apiObj.message);
+      wireObj.tag = 1;
+      wireObj.kind.Misc.message = pre_message;
+      return;
+    }
+  }
+
+  @protected
+  void cst_api_fill_to_wire_transfer(
+      Transfer apiObj, wire_cst_transfer wireObj) {
+    wireObj.float_amount = cst_encode_f_64(apiObj.floatAmount);
+    wireObj.str_address = cst_encode_String(apiObj.strAddress);
+    wireObj.asset_hash = cst_encode_String(apiObj.assetHash);
+    wireObj.extra_data = cst_encode_opt_String(apiObj.extraData);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
+      LevelFilter raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+      PrecomputedTablesShared raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransaction(
+      Transaction raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState(
+      TransactionBuilderState raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
+      TransactionTypeBuilder raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw);
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw);
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
+      LevelFilter raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+      PrecomputedTablesShared raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
+      SearchEngine raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSendToDartLogger(
+      SendToDartLogger raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
+      SummaryTransaction raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransaction(
+      Transaction raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState(
+      TransactionBuilderState raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder(
+      TransactionTypeBuilder raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+      XelisWallet raw);
+
+  @protected
+  bool cst_encode_bool(bool raw);
+
+  @protected
+  double cst_encode_f_64(double raw);
+
+  @protected
+  int cst_encode_i_32(int raw);
+
+  @protected
+  int cst_encode_level(Level raw);
+
+  @protected
+  int cst_encode_network(Network raw);
+
+  @protected
+  int cst_encode_u_8(int raw);
+
+  @protected
+  void cst_encode_unit(void raw);
 
   @protected
   void sse_encode_AnyhowException(
@@ -668,15 +1042,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           XelisWallet self, SseSerializer serializer);
 
   @protected
-  void sse_encode_StreamSink_String_Sse(
+  void sse_encode_StreamSink_String_Dco(
       RustStreamSink<String> self, SseSerializer serializer);
 
   @protected
-  void sse_encode_StreamSink_log_entry_Sse(
+  void sse_encode_StreamSink_log_entry_Dco(
       RustStreamSink<LogEntry> self, SseSerializer serializer);
 
   @protected
-  void sse_encode_StreamSink_report_Sse(
+  void sse_encode_StreamSink_report_Dco(
       RustStreamSink<Report> self, SseSerializer serializer);
 
   @protected
@@ -781,6 +1155,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
 // Section: wire_class
 
+// ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
+// AUTO GENERATED FILE, DO NOT EDIT.
+//
+// Generated by `package:ffigen`.
+// ignore_for_file: type=lint
+
+/// generated by flutter_rust_bridge
 class RustLibWire implements BaseWire {
   factory RustLibWire.fromExternalLibrary(ExternalLibrary lib) =>
       RustLibWire(lib.ffiDynamicLibrary);
@@ -792,6 +1173,1172 @@ class RustLibWire implements BaseWire {
   /// The symbols are looked up in [dynamicLibrary].
   RustLibWire(ffi.DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
+
+  /// The symbols are looked up with [lookup].
+  RustLibWire.fromLookup(
+      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
+          lookup)
+      : _lookup = lookup;
+
+  void store_dart_post_cobject(
+    DartPostCObjectFnType ptr,
+  ) {
+    return _store_dart_post_cobject(
+      ptr,
+    );
+  }
+
+  late final _store_dart_post_cobjectPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(DartPostCObjectFnType)>>(
+          'store_dart_post_cobject');
+  late final _store_dart_post_cobject = _store_dart_post_cobjectPtr
+      .asFunction<void Function(DartPostCObjectFnType)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__seed_search_engine__SearchEngine_check_seed(
+    int that,
+    ffi.Pointer<wire_cst_list_String> seed,
+  ) {
+    return _wire__crate__api__seed_search_engine__SearchEngine_check_seed(
+      that,
+      seed,
+    );
+  }
+
+  late final _wire__crate__api__seed_search_engine__SearchEngine_check_seedPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(
+                      ffi.UintPtr, ffi.Pointer<wire_cst_list_String>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_check_seed');
+  late final _wire__crate__api__seed_search_engine__SearchEngine_check_seed =
+      _wire__crate__api__seed_search_engine__SearchEngine_check_seedPtr
+          .asFunction<
+              WireSyncRust2DartDco Function(
+                  int, ffi.Pointer<wire_cst_list_String>)>();
+
+  WireSyncRust2DartDco wire__crate__api__seed_search_engine__SearchEngine_init(
+    int language_index,
+  ) {
+    return _wire__crate__api__seed_search_engine__SearchEngine_init(
+      language_index,
+    );
+  }
+
+  late final _wire__crate__api__seed_search_engine__SearchEngine_initPtr = _lookup<
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_init');
+  late final _wire__crate__api__seed_search_engine__SearchEngine_init =
+      _wire__crate__api__seed_search_engine__SearchEngine_initPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__seed_search_engine__SearchEngine_search(
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> query,
+  ) {
+    return _wire__crate__api__seed_search_engine__SearchEngine_search(
+      that,
+      query,
+    );
+  }
+
+  late final _wire__crate__api__seed_search_engine__SearchEngine_searchPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_search');
+  late final _wire__crate__api__seed_search_engine__SearchEngine_search =
+      _wire__crate__api__seed_search_engine__SearchEngine_searchPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level(
+    int that,
+  ) {
+    return _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_levelPtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level');
+  late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level =
+      _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_levelPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level(
+    int that,
+    int level,
+  ) {
+    return _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level(
+      that,
+      level,
+    );
+  }
+
+  late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_levelPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level');
+  late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level =
+      _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_levelPtr
+          .asFunction<WireSyncRust2DartDco Function(int, int)>();
+
+  void wire__crate__api__logger__SendToDartLogger_set_stream_sink(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> stream_sink,
+  ) {
+    return _wire__crate__api__logger__SendToDartLogger_set_stream_sink(
+      port_,
+      stream_sink,
+    );
+  }
+
+  late final _wire__crate__api__logger__SendToDartLogger_set_stream_sinkPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_set_stream_sink');
+  late final _wire__crate__api__logger__SendToDartLogger_set_stream_sink =
+      _wire__crate__api__logger__SendToDartLogger_set_stream_sinkPtr.asFunction<
+          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee(
+    int that,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_feePtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_feePtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash(
+    int that,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hashPtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hashPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type(
+    int that,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_typePtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_typePtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee(
+    int that,
+    int fee,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee(
+      that,
+      fee,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_feePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.Uint64)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_feePtr
+          .asFunction<WireSyncRust2DartDco Function(int, int)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash(
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> hash,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash(
+      that,
+      hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hashPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hashPtr
+          .asFunction<
+              WireSyncRust2DartDco Function(
+                  int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco
+      wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type(
+    int that,
+    int transaction_type,
+  ) {
+    return _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type(
+      that,
+      transaction_type,
+    );
+  }
+
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_typePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type');
+  late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type =
+      _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_typePtr
+          .asFunction<WireSyncRust2DartDco Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_all_history(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_all_history(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_all_historyPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_all_history');
+  late final _wire__crate__api__wallet__XelisWallet_all_history =
+      _wire__crate__api__wallet__XelisWallet_all_historyPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_broadcast_transaction(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> tx_hash,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_broadcast_transaction(
+      port_,
+      that,
+      tx_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_broadcast_transactionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_broadcast_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_broadcast_transaction =
+      _wire__crate__api__wallet__XelisWallet_broadcast_transactionPtr
+          .asFunction<
+              void Function(
+                  int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_change_password(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> old_password,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> new_password,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_change_password(
+      port_,
+      that,
+      old_password,
+      new_password,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_change_passwordPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_change_password');
+  late final _wire__crate__api__wallet__XelisWallet_change_password =
+      _wire__crate__api__wallet__XelisWallet_change_passwordPtr.asFunction<
+          void Function(int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_clear_transaction(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> tx_hash,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_clear_transaction(
+      port_,
+      that,
+      tx_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_clear_transactionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_clear_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_clear_transaction =
+      _wire__crate__api__wallet__XelisWallet_clear_transactionPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_close(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_close(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_closePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_close');
+  late final _wire__crate__api__wallet__XelisWallet_close =
+      _wire__crate__api__wallet__XelisWallet_closePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csvPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv');
+  late final _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv =
+      _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csvPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_create_burn_all_transaction(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset_hash,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_create_burn_all_transaction(
+      port_,
+      that,
+      asset_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_create_burn_all_transactionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_all_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_create_burn_all_transaction =
+      _wire__crate__api__wallet__XelisWallet_create_burn_all_transactionPtr
+          .asFunction<
+              void Function(
+                  int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_create_burn_transaction(
+    int port_,
+    int that,
+    double float_amount,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset_hash,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_create_burn_transaction(
+      port_,
+      that,
+      float_amount,
+      asset_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_create_burn_transactionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Double,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_create_burn_transaction =
+      _wire__crate__api__wallet__XelisWallet_create_burn_transactionPtr
+          .asFunction<
+              void Function(int, int, double,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> str_address,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset_hash,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> extra_data,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction(
+      port_,
+      that,
+      str_address,
+      asset_hash,
+      extra_data,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_create_transfer_all_transactionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction =
+      _wire__crate__api__wallet__XelisWallet_create_transfer_all_transactionPtr
+          .asFunction<
+              void Function(
+                  int,
+                  int,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_create_transfers_transaction(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_transfer> transfers,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_create_transfers_transaction(
+      port_,
+      that,
+      transfers,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_create_transfers_transactionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_transfer>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers_transaction');
+  late final _wire__crate__api__wallet__XelisWallet_create_transfers_transaction =
+      _wire__crate__api__wallet__XelisWallet_create_transfers_transactionPtr
+          .asFunction<
+              void Function(int, int, ffi.Pointer<wire_cst_list_transfer>)>();
+
+  void wire__crate__api__wallet__XelisWallet_estimate_fees(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_transfer> transfers,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_estimate_fees(
+      port_,
+      that,
+      transfers,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_estimate_feesPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_transfer>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees');
+  late final _wire__crate__api__wallet__XelisWallet_estimate_fees =
+      _wire__crate__api__wallet__XelisWallet_estimate_feesPtr.asFunction<
+          void Function(int, int, ffi.Pointer<wire_cst_list_transfer>)>();
+
+  void wire__crate__api__wallet__XelisWallet_events_stream(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> sink,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_events_stream(
+      port_,
+      that,
+      sink,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_events_streamPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_events_stream');
+  late final _wire__crate__api__wallet__XelisWallet_events_stream =
+      _wire__crate__api__wallet__XelisWallet_events_streamPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> file_path,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file(
+      port_,
+      that,
+      file_path,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_filePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file');
+  late final _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file =
+      _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_filePtr
+          .asFunction<
+              void Function(
+                  int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_format_coin(
+    int port_,
+    int that,
+    int atomic_amount,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset_hash,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_format_coin(
+      port_,
+      that,
+      atomic_amount,
+      asset_hash,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_format_coinPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Uint64,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_format_coin');
+  late final _wire__crate__api__wallet__XelisWallet_format_coin =
+      _wire__crate__api__wallet__XelisWallet_format_coinPtr.asFunction<
+          void Function(
+              int, int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco wire__crate__api__wallet__XelisWallet_get_address_str(
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_address_str(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_address_strPtr = _lookup<
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_address_str');
+  late final _wire__crate__api__wallet__XelisWallet_get_address_str =
+      _wire__crate__api__wallet__XelisWallet_get_address_strPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_balances(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_balances(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balancesPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balances =
+      _wire__crate__api__wallet__XelisWallet_get_asset_balancesPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_balances_raw(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_balances_raw(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balances_rawPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances_raw');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balances_raw =
+      _wire__crate__api__wallet__XelisWallet_get_asset_balances_rawPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_decimals(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_decimals(
+      port_,
+      that,
+      asset,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_decimalsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_decimals');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_decimals =
+      _wire__crate__api__wallet__XelisWallet_get_asset_decimalsPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_daemon_info(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_daemon_info(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_daemon_infoPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_daemon_info');
+  late final _wire__crate__api__wallet__XelisWallet_get_daemon_info =
+      _wire__crate__api__wallet__XelisWallet_get_daemon_infoPtr
+          .asFunction<void Function(int, int)>();
+
+  WireSyncRust2DartDco wire__crate__api__wallet__XelisWallet_get_network(
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_network(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_networkPtr = _lookup<
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_network');
+  late final _wire__crate__api__wallet__XelisWallet_get_network =
+      _wire__crate__api__wallet__XelisWallet_get_networkPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_nonce(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_nonce(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_noncePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_nonce');
+  late final _wire__crate__api__wallet__XelisWallet_get_nonce =
+      _wire__crate__api__wallet__XelisWallet_get_noncePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_seed(
+    int port_,
+    int that,
+    ffi.Pointer<ffi.UintPtr> language_index,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_seed(
+      port_,
+      that,
+      language_index,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_seedPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64, ffi.UintPtr, ffi.Pointer<ffi.UintPtr>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_seed');
+  late final _wire__crate__api__wallet__XelisWallet_get_seed =
+      _wire__crate__api__wallet__XelisWallet_get_seedPtr
+          .asFunction<void Function(int, int, ffi.Pointer<ffi.UintPtr>)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_xelis_balance(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_xelis_balance(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_xelis_balancePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance');
+  late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance =
+      _wire__crate__api__wallet__XelisWallet_get_xelis_balancePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance_rawPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw');
+  late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw =
+      _wire__crate__api__wallet__XelisWallet_get_xelis_balance_rawPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_has_xelis_balance(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_has_xelis_balance(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_has_xelis_balancePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_has_xelis_balance');
+  late final _wire__crate__api__wallet__XelisWallet_has_xelis_balance =
+      _wire__crate__api__wallet__XelisWallet_has_xelis_balancePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_is_online(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_is_online(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_is_onlinePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_online');
+  late final _wire__crate__api__wallet__XelisWallet_is_online =
+      _wire__crate__api__wallet__XelisWallet_is_onlinePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_is_valid_password(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> password,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_is_valid_password(
+      port_,
+      that,
+      password,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_is_valid_passwordPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_valid_password');
+  late final _wire__crate__api__wallet__XelisWallet_is_valid_password =
+      _wire__crate__api__wallet__XelisWallet_is_valid_passwordPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_offline_mode(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_offline_mode(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_offline_modePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_offline_mode');
+  late final _wire__crate__api__wallet__XelisWallet_offline_mode =
+      _wire__crate__api__wallet__XelisWallet_offline_modePtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__wallet__XelisWallet_online_mode(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> daemon_address,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_online_mode(
+      port_,
+      that,
+      daemon_address,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_online_modePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_online_mode');
+  late final _wire__crate__api__wallet__XelisWallet_online_mode =
+      _wire__crate__api__wallet__XelisWallet_online_modePtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_rescan(
+    int port_,
+    int that,
+    int topoheight,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_rescan(
+      port_,
+      that,
+      topoheight,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_rescanPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Uint64)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_rescan');
+  late final _wire__crate__api__wallet__XelisWallet_rescan =
+      _wire__crate__api__wallet__XelisWallet_rescanPtr
+          .asFunction<void Function(int, int, int)>();
+
+  void wire__crate__api__progress_report__add_progress_report(
+    int port_,
+    ffi.Pointer<wire_cst_report> report,
+  ) {
+    return _wire__crate__api__progress_report__add_progress_report(
+      port_,
+      report,
+    );
+  }
+
+  late final _wire__crate__api__progress_report__add_progress_reportPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_report>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__progress_report__add_progress_report');
+  late final _wire__crate__api__progress_report__add_progress_report =
+      _wire__crate__api__progress_report__add_progress_reportPtr
+          .asFunction<void Function(int, ffi.Pointer<wire_cst_report>)>();
+
+  void wire__crate__api__api__create_log_stream(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> s,
+  ) {
+    return _wire__crate__api__api__create_log_stream(
+      port_,
+      s,
+    );
+  }
+
+  late final _wire__crate__api__api__create_log_streamPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__api__create_log_stream');
+  late final _wire__crate__api__api__create_log_stream =
+      _wire__crate__api__api__create_log_streamPtr.asFunction<
+          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__api__create_progress_report_stream(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> stream_sink,
+  ) {
+    return _wire__crate__api__api__create_progress_report_stream(
+      port_,
+      stream_sink,
+    );
+  }
+
+  late final _wire__crate__api__api__create_progress_report_streamPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__api__create_progress_report_stream');
+  late final _wire__crate__api__api__create_progress_report_stream =
+      _wire__crate__api__api__create_progress_report_streamPtr.asFunction<
+          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__create_xelis_wallet(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> name,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> directory,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> password,
+    int network,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> seed,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> private_key,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
+    ffi.Pointer<ffi.Bool> l1_low,
+  ) {
+    return _wire__crate__api__wallet__create_xelis_wallet(
+      port_,
+      name,
+      directory,
+      password,
+      network,
+      seed,
+      private_key,
+      precomputed_tables_path,
+      l1_low,
+    );
+  }
+
+  late final _wire__crate__api__wallet__create_xelis_walletPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Int32,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet');
+  late final _wire__crate__api__wallet__create_xelis_wallet =
+      _wire__crate__api__wallet__create_xelis_walletPtr.asFunction<
+          void Function(
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  void wire__crate__api__utils__format_coin(
+    int port_,
+    int value,
+    int decimals,
+  ) {
+    return _wire__crate__api__utils__format_coin(
+      port_,
+      value,
+      decimals,
+    );
+  }
+
+  late final _wire__crate__api__utils__format_coinPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint64, ffi.Uint8)>>(
+      'frbgen_xelis_flutter_wire__crate__api__utils__format_coin');
+  late final _wire__crate__api__utils__format_coin =
+      _wire__crate__api__utils__format_coinPtr
+          .asFunction<void Function(int, int, int)>();
+
+  void wire__crate__api__utils__format_xelis(
+    int port_,
+    int value,
+  ) {
+    return _wire__crate__api__utils__format_xelis(
+      port_,
+      value,
+    );
+  }
+
+  late final _wire__crate__api__utils__format_xelisPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint64)>>(
+          'frbgen_xelis_flutter_wire__crate__api__utils__format_xelis');
+  late final _wire__crate__api__utils__format_xelis =
+      _wire__crate__api__utils__format_xelisPtr
+          .asFunction<void Function(int, int)>();
+
+  WireSyncRust2DartDco wire__crate__api__wallet__get_cached_table() {
+    return _wire__crate__api__wallet__get_cached_table();
+  }
+
+  late final _wire__crate__api__wallet__get_cached_tablePtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function()>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__get_cached_table');
+  late final _wire__crate__api__wallet__get_cached_table =
+      _wire__crate__api__wallet__get_cached_tablePtr
+          .asFunction<WireSyncRust2DartDco Function()>();
+
+  void wire__crate__api__logger__init_logger(
+    int port_,
+  ) {
+    return _wire__crate__api__logger__init_logger(
+      port_,
+    );
+  }
+
+  late final _wire__crate__api__logger__init_loggerPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'frbgen_xelis_flutter_wire__crate__api__logger__init_logger');
+  late final _wire__crate__api__logger__init_logger =
+      _wire__crate__api__logger__init_loggerPtr
+          .asFunction<void Function(int)>();
+
+  WireSyncRust2DartDco wire__crate__api__utils__is_address_valid(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> str_address,
+  ) {
+    return _wire__crate__api__utils__is_address_valid(
+      str_address,
+    );
+  }
+
+  late final _wire__crate__api__utils__is_address_validPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__utils__is_address_valid');
+  late final _wire__crate__api__utils__is_address_valid =
+      _wire__crate__api__utils__is_address_validPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__open_xelis_wallet(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> name,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> directory,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> password,
+    int network,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
+    ffi.Pointer<ffi.Bool> l1_low,
+  ) {
+    return _wire__crate__api__wallet__open_xelis_wallet(
+      port_,
+      name,
+      directory,
+      password,
+      network,
+      precomputed_tables_path,
+      l1_low,
+    );
+  }
+
+  late final _wire__crate__api__wallet__open_xelis_walletPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Int32,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__open_xelis_wallet');
+  late final _wire__crate__api__wallet__open_xelis_wallet =
+      _wire__crate__api__wallet__open_xelis_walletPtr.asFunction<
+          void Function(
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  void wire__crate__api__table_generation__precomputed_tables_exist(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
+  ) {
+    return _wire__crate__api__table_generation__precomputed_tables_exist(
+      port_,
+      precomputed_tables_path,
+    );
+  }
+
+  late final _wire__crate__api__table_generation__precomputed_tables_existPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__table_generation__precomputed_tables_exist');
+  late final _wire__crate__api__table_generation__precomputed_tables_exist =
+      _wire__crate__api__table_generation__precomputed_tables_existPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__api__set_up_rust_logger(
+    int port_,
+  ) {
+    return _wire__crate__api__api__set_up_rust_logger(
+      port_,
+    );
+  }
+
+  late final _wire__crate__api__api__set_up_rust_loggerPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'frbgen_xelis_flutter_wire__crate__api__api__set_up_rust_logger');
+  late final _wire__crate__api__api__set_up_rust_logger =
+      _wire__crate__api__api__set_up_rust_loggerPtr
+          .asFunction<void Function(int)>();
+
+  WireSyncRust2DartDco wire__crate__api__utils__split_integrated_address_json(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> integrated_address,
+  ) {
+    return _wire__crate__api__utils__split_integrated_address_json(
+      integrated_address,
+    );
+  }
+
+  late final _wire__crate__api__utils__split_integrated_address_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__utils__split_integrated_address_json');
+  late final _wire__crate__api__utils__split_integrated_address_json =
+      _wire__crate__api__utils__split_integrated_address_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__update_tables(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
+    bool l1_low,
+  ) {
+    return _wire__crate__api__wallet__update_tables(
+      port_,
+      precomputed_tables_path,
+      l1_low,
+    );
+  }
+
+  late final _wire__crate__api__wallet__update_tablesPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Bool)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__update_tables');
+  late final _wire__crate__api__wallet__update_tables =
+      _wire__crate__api__wallet__update_tablesPtr.asFunction<
+          void Function(
+              int, ffi.Pointer<wire_cst_list_prim_u_8_strict>, bool)>();
 
   void
       rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
@@ -1080,4 +2627,262 @@ class RustLibWire implements BaseWire {
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWalletPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  ffi.Pointer<ffi.UintPtr>
+      cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+    int value,
+  ) {
+    return _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
+      value,
+    );
+  }
+
+  late final _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesSharedPtr =
+      _lookup<
+              ffi
+              .NativeFunction<ffi.Pointer<ffi.UintPtr> Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared');
+  late final _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared =
+      _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesSharedPtr
+          .asFunction<ffi.Pointer<ffi.UintPtr> Function(int)>();
+
+  ffi.Pointer<ffi.Bool> cst_new_box_autoadd_bool(
+    bool value,
+  ) {
+    return _cst_new_box_autoadd_bool(
+      value,
+    );
+  }
+
+  late final _cst_new_box_autoadd_boolPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Bool> Function(ffi.Bool)>>(
+          'frbgen_xelis_flutter_cst_new_box_autoadd_bool');
+  late final _cst_new_box_autoadd_bool = _cst_new_box_autoadd_boolPtr
+      .asFunction<ffi.Pointer<ffi.Bool> Function(bool)>();
+
+  ffi.Pointer<wire_cst_report> cst_new_box_autoadd_report() {
+    return _cst_new_box_autoadd_report();
+  }
+
+  late final _cst_new_box_autoadd_reportPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<wire_cst_report> Function()>>(
+          'frbgen_xelis_flutter_cst_new_box_autoadd_report');
+  late final _cst_new_box_autoadd_report = _cst_new_box_autoadd_reportPtr
+      .asFunction<ffi.Pointer<wire_cst_report> Function()>();
+
+  ffi.Pointer<ffi.UintPtr> cst_new_box_autoadd_usize(
+    int value,
+  ) {
+    return _cst_new_box_autoadd_usize(
+      value,
+    );
+  }
+
+  late final _cst_new_box_autoadd_usizePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.UintPtr> Function(ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_cst_new_box_autoadd_usize');
+  late final _cst_new_box_autoadd_usize = _cst_new_box_autoadd_usizePtr
+      .asFunction<ffi.Pointer<ffi.UintPtr> Function(int)>();
+
+  ffi.Pointer<wire_cst_list_String> cst_new_list_String(
+    int len,
+  ) {
+    return _cst_new_list_String(
+      len,
+    );
+  }
+
+  late final _cst_new_list_StringPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<wire_cst_list_String> Function(
+              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_String');
+  late final _cst_new_list_String = _cst_new_list_StringPtr
+      .asFunction<ffi.Pointer<wire_cst_list_String> Function(int)>();
+
+  ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_new_list_prim_u_8_strict(
+    int len,
+  ) {
+    return _cst_new_list_prim_u_8_strict(
+      len,
+    );
+  }
+
+  late final _cst_new_list_prim_u_8_strictPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<wire_cst_list_prim_u_8_strict> Function(
+              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_prim_u_8_strict');
+  late final _cst_new_list_prim_u_8_strict = _cst_new_list_prim_u_8_strictPtr
+      .asFunction<ffi.Pointer<wire_cst_list_prim_u_8_strict> Function(int)>();
+
+  ffi.Pointer<wire_cst_list_record_string_string>
+      cst_new_list_record_string_string(
+    int len,
+  ) {
+    return _cst_new_list_record_string_string(
+      len,
+    );
+  }
+
+  late final _cst_new_list_record_string_stringPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_list_record_string_string> Function(
+                  ffi.Int32)>>(
+      'frbgen_xelis_flutter_cst_new_list_record_string_string');
+  late final _cst_new_list_record_string_string =
+      _cst_new_list_record_string_stringPtr.asFunction<
+          ffi.Pointer<wire_cst_list_record_string_string> Function(int)>();
+
+  ffi.Pointer<wire_cst_list_record_string_u_64> cst_new_list_record_string_u_64(
+    int len,
+  ) {
+    return _cst_new_list_record_string_u_64(
+      len,
+    );
+  }
+
+  late final _cst_new_list_record_string_u_64Ptr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_list_record_string_u_64> Function(
+                  ffi.Int32)>>(
+      'frbgen_xelis_flutter_cst_new_list_record_string_u_64');
+  late final _cst_new_list_record_string_u_64 =
+      _cst_new_list_record_string_u_64Ptr.asFunction<
+          ffi.Pointer<wire_cst_list_record_string_u_64> Function(int)>();
+
+  ffi.Pointer<wire_cst_list_transfer> cst_new_list_transfer(
+    int len,
+  ) {
+    return _cst_new_list_transfer(
+      len,
+    );
+  }
+
+  late final _cst_new_list_transferPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<wire_cst_list_transfer> Function(
+              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_transfer');
+  late final _cst_new_list_transfer = _cst_new_list_transferPtr
+      .asFunction<ffi.Pointer<wire_cst_list_transfer> Function(int)>();
+
+  int dummy_method_to_enforce_bundling() {
+    return _dummy_method_to_enforce_bundling();
+  }
+
+  late final _dummy_method_to_enforce_bundlingPtr =
+      _lookup<ffi.NativeFunction<ffi.Int64 Function()>>(
+          'dummy_method_to_enforce_bundling');
+  late final _dummy_method_to_enforce_bundling =
+      _dummy_method_to_enforce_bundlingPtr.asFunction<int Function()>();
+}
+
+typedef DartPort = ffi.Int64;
+typedef DartDartPort = int;
+typedef DartPostCObjectFnTypeFunction = ffi.Bool Function(
+    DartPort port_id, ffi.Pointer<ffi.Void> message);
+typedef DartDartPostCObjectFnTypeFunction = bool Function(
+    DartDartPort port_id, ffi.Pointer<ffi.Void> message);
+typedef DartPostCObjectFnType
+    = ffi.Pointer<ffi.NativeFunction<DartPostCObjectFnTypeFunction>>;
+
+final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
+
+final class wire_cst_list_String extends ffi.Struct {
+  external ffi.Pointer<ffi.Pointer<wire_cst_list_prim_u_8_strict>> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
+
+final class wire_cst_transfer extends ffi.Struct {
+  @ffi.Double()
+  external double float_amount;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> str_address;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> asset_hash;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> extra_data;
+}
+
+final class wire_cst_list_transfer extends ffi.Struct {
+  external ffi.Pointer<wire_cst_transfer> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
+
+final class wire_cst_Report_TableGeneration extends ffi.Struct {
+  @ffi.Double()
+  external double progress;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> step;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
+}
+
+final class wire_cst_Report_Misc extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
+}
+
+final class ReportKind extends ffi.Union {
+  external wire_cst_Report_TableGeneration TableGeneration;
+
+  external wire_cst_Report_Misc Misc;
+}
+
+final class wire_cst_report extends ffi.Struct {
+  @ffi.Int32()
+  external int tag;
+
+  external ReportKind kind;
+}
+
+final class wire_cst_record_string_string extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> field0;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> field1;
+}
+
+final class wire_cst_list_record_string_string extends ffi.Struct {
+  external ffi.Pointer<wire_cst_record_string_string> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
+
+final class wire_cst_record_string_u_64 extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> field0;
+
+  @ffi.Uint64()
+  external int field1;
+}
+
+final class wire_cst_list_record_string_u_64 extends ffi.Struct {
+  external ffi.Pointer<wire_cst_record_string_u_64> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
+
+final class wire_cst_log_entry extends ffi.Struct {
+  @ffi.Int32()
+  external int level;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> tag;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> msg;
+}
+
+final class wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state
+    extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+
+  @ffi.UintPtr()
+  external int field1;
 }
