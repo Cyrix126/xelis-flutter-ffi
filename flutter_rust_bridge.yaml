@@ -1,2 +1,4 @@
 rust_input: rust/src/api/**/*.rs
 dart_output: lib/src
+c_output: macos/Classes/frb_generated.h
+full_dep: true
