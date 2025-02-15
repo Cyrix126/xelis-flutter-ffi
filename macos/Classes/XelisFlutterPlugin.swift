@@ -1,6 +1,5 @@
 import Cocoa
 import FlutterMacOS
-import XelisFlutter
 
 public class XelisFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {

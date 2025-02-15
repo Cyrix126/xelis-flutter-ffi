@@ -73,11 +73,6 @@ A new Flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.vendored_frameworks = "Frameworks/#{framework_name}"
 
-  s.pod_target_xcconfig = {
-    'DEFINES_MODULE' => 'YES',
-    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/libxelis_flutter.a'
-  }
-
   s.ios.deployment_target = '12.0'
   s.osx.deployment_target = '10.11'
 

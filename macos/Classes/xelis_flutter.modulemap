@@ -1,4 +1,0 @@
-module XelisFlutter {
-  header "XelisFlutter.h"
-  export *
-}
