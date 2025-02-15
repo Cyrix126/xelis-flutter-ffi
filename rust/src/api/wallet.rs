@@ -68,7 +68,7 @@ pub async fn create_xelis_wallet(
     precomputed_tables_path: Option<String>,
     l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
-    let full_path = Path::new(&directory).join(name).to_str().unwrap();;
+    let full_path = format!("{}/{}", directory, name);
 
     let precomputed_tables = {
         let tables = CACHED_TABLES.lock().clone();
@@ -141,7 +141,7 @@ pub async fn open_xelis_wallet(
     precomputed_tables_path: Option<String>,
     l1_low: Option<bool>,
 ) -> Result<XelisWallet> {
-    let full_path = Path::new(&directory).join(name).to_str().unwrap();
+    let full_path = format!("{}/{}", directory, name);
 
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
         precomputed_tables::L1_LOW
