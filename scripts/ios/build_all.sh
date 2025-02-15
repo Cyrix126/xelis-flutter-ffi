@@ -14,7 +14,8 @@ if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n
     rustup default $REQUIRED_VERSION
 fi
 
-cp ../../../rust ./rust
+rm -rf rust
+cp -rf ../../../rust ./rust
 cd rust
 
 # Build static libs
