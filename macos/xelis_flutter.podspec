@@ -40,11 +40,11 @@ end
 if build_local
   puts "Building #{framework_name} locally..."
   system(<<-SCRIPT
-    cd ..
-    ./scripts/apple/build_all.sh || exit 1
+    cd "$(dirname "$0")/.."
+    ./scripts/apple/build_all.sh
     mkdir -p ios/Frameworks macos/Frameworks
-    cp -R platform-build/#{framework_name}.zip ios/Frameworks/#{local_zip_name}
-    cp -R platform-build/#{framework_name}.zip macos/Frameworks/#{local_zip_name}
+    cp scripts/apple/build/#{framework_name}.zip ios/Frameworks/#{local_zip_name}
+    cp scripts/apple/build/#{framework_name}.zip macos/Frameworks/#{local_zip_name}
     cd ios/Frameworks
     unzip -o #{local_zip_name}
     cd ../../macos/Frameworks
@@ -53,7 +53,7 @@ if build_local
   )
   
   if !$?.success?
-    raise "Local build failed. Please ensure your Rust environment is properly configured and build-apple.sh exists."
+    raise "Local build failed. Please ensure your Rust environment is properly configured."
   end
 end
 
