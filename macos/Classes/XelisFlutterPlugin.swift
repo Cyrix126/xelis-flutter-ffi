@@ -2,8 +2,6 @@ import Cocoa
 import FlutterMacOS
 import XelisFlutter
 
-private let dummyVar = dummy_method_to_enforce_bundling()
-
 public class XelisFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "xelis_flutter", binaryMessenger: registrar.messenger)
