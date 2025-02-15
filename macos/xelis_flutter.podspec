@@ -3,25 +3,59 @@
 # Run `pod lib lint xelis_flutter.podspec` to validate before publishing.
 #
 release_tag_name = 'xelis_flutter_apple-v0.0.1'
-local_zip_name = "#{release_tag_name}.zip"
-
 framework_name = 'XelisFlutter.xcframework'
 remote_zip_name = "#{framework_name}.zip"
 url = "https://github.com/Tritonn204/xelis_flutter_ffi/releases/download/#{release_tag_name}/#{remote_zip_name}"
 local_zip_name = "#{release_tag_name}.zip"
+local_framework_path = "Frameworks/#{framework_name}"
 
-`
-cd Frameworks
-rm -rf #{framework_name}
+# Check if we should do a local build or try download
+if ENV['XELIS_FLUTTER_BUILD_LOCAL'] == '1'
+  puts "Building #{framework_name} locally as requested by environment variable..."
+  build_local = true
+else
+  # Try downloading first
+  system(<<-SCRIPT
+    mkdir -p Frameworks
+    cd Frameworks
+    rm -rf #{framework_name}
+    
+    if [ ! -f #{local_zip_name} ]; then
+      curl -L #{url} -o #{local_zip_name} || exit 1
+    fi
+    
+    unzip -o #{local_zip_name} || exit 1
+    cd -
+  SCRIPT
+  )
+  
+  # If the download or unzip failed, or framework doesn't exist, fall back to local build
+  build_local = !$?.success? || !File.exist?(local_framework_path)
+  
+  if build_local
+    puts "Download failed or framework missing. Falling back to local build..."
+  end
+end
 
-if [ ! -f #{local_zip_name} ]
-then
-  curl -L #{url} -o #{local_zip_name}
-fi
-
-unzip #{local_zip_name}
-cd -
-`
+if build_local
+  puts "Building #{framework_name} locally..."
+  system(<<-SCRIPT
+    cd ..
+    ./scripts/apple/build_all.sh || exit 1
+    mkdir -p ios/Frameworks macos/Frameworks
+    cp -R platform-build/#{framework_name}.zip ios/Frameworks/#{local_zip_name}
+    cp -R platform-build/#{framework_name}.zip macos/Frameworks/#{local_zip_name}
+    cd ios/Frameworks
+    unzip -o #{local_zip_name}
+    cd ../../macos/Frameworks
+    unzip -o #{local_zip_name}
+  SCRIPT
+  )
+  
+  if !$?.success?
+    raise "Local build failed. Please ensure your Rust environment is properly configured and build-apple.sh exists."
+  end
+end
 
 Pod::Spec.new do |s|
   s.name             = 'xelis_flutter'
@@ -44,8 +78,8 @@ A new Flutter plugin project.
     'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/libxelis_flutter.a'
   }
 
-  spec.ios.deployment_target = '12.0'
-  spec.osx.deployment_target = '10.1'
+  s.ios.deployment_target = '12.0'
+  s.osx.deployment_target = '10.11'
 
   s.dependency 'FlutterMacOS'
 end

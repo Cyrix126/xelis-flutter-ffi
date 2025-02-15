@@ -6,7 +6,6 @@ CURRENT_VERSION=$(rustc --version | cut -d ' ' -f 2)
 
 BUILD_DIR=build
 mkdir -p $BUILD_DIR
-cd $BUILD_DIR
 
 if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
     echo "Updating Rust to version $REQUIRED_VERSION or higher (current: $CURRENT_VERSION)"
@@ -14,9 +13,13 @@ if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n
     rustup default $REQUIRED_VERSION
 fi
 
-rm -rf rust
-cp -rf ../../../rust ./rust
-cd rust
+# Copy rust directory to build directory
+rm -rf $BUILD_DIR/rust
+cp -rf ../../rust $BUILD_DIR/rust
+
+# Run cargo from build directory but keep target in the build root
+cd $BUILD_DIR
+CARGO_TARGET_DIR=$PWD/target
 
 # Build static libs
 for TARGET in \
@@ -24,25 +27,25 @@ for TARGET in \
         x86_64-apple-darwin aarch64-apple-darwin
 do
     rustup target add $TARGET
-    cargo build -r --target=$TARGET --target-dir="../"
+    cd rust && CARGO_TARGET_DIR=$CARGO_TARGET_DIR cargo build -r --target=$TARGET && cd ..
 done
 
 # Create XCFramework zip
 FRAMEWORK="XelisFlutter.xcframework"
 LIBNAME=libxelis_flutter.a
-mkdir mac-lipo ios-sim-lipo
+mkdir -p mac-lipo ios-sim-lipo
 IOS_SIM_LIPO=ios-sim-lipo/$LIBNAME
 MAC_LIPO=mac-lipo/$LIBNAME
 lipo -create -output $IOS_SIM_LIPO \
-        ../target/aarch64-apple-ios-sim/release/$LIBNAME \
-        ../target/x86_64-apple-ios/release/$LIBNAME
+        target/aarch64-apple-ios-sim/release/$LIBNAME \
+        target/x86_64-apple-ios/release/$LIBNAME
 lipo -create -output $MAC_LIPO \
-        ../target/aarch64-apple-darwin/release/$LIBNAME \
-        ../target/x86_64-apple-darwin/release/$LIBNAME
+        target/aarch64-apple-darwin/release/$LIBNAME \
+        target/x86_64-apple-darwin/release/$LIBNAME
 xcodebuild -create-xcframework \
         -library $IOS_SIM_LIPO \
         -library $MAC_LIPO \
-        -library ../target/aarch64-apple-ios/release/$LIBNAME \
+        -library target/aarch64-apple-ios/release/$LIBNAME \
         -output $FRAMEWORK
 zip -r $FRAMEWORK.zip $FRAMEWORK
 
