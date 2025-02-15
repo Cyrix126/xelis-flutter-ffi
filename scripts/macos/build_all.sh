@@ -14,6 +14,9 @@ if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n
     rustup default $REQUIRED_VERSION
 fi
 
+cp ../../../../rust ./rust
+cd rust
+
 # Build static libs
 for TARGET in \
         aarch64-apple-ios x86_64-apple-ios aarch64-apple-ios-sim \
