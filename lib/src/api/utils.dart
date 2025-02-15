@@ -15,11 +15,14 @@ bool isAddressValid({required String strAddress}) =>
 
 String splitIntegratedAddressJson({required String integratedAddress}) =>
     RustLib.instance.api.crateApiUtilsSplitIntegratedAddressJson(
-        integratedAddress: integratedAddress);
+      integratedAddress: integratedAddress,
+    );
 
 Future<String> formatCoin({required BigInt value, required int decimals}) =>
-    RustLib.instance.api
-        .crateApiUtilsFormatCoin(value: value, decimals: decimals);
+    RustLib.instance.api.crateApiUtilsFormatCoin(
+      value: value,
+      decimals: decimals,
+    );
 
 Future<String> formatXelis({required BigInt value}) =>
     RustLib.instance.api.crateApiUtilsFormatXelis(value: value);

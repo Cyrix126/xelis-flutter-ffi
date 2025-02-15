@@ -13,7 +13,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 Future<void> initLogger() => RustLib.instance.api.crateApiLoggerInitLogger();
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SendToDartLogger>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SendToDartLogger>>
 abstract class SendToDartLogger implements RustOpaqueInterface {
   LevelFilter get level;
 
@@ -23,25 +23,14 @@ abstract class SendToDartLogger implements RustOpaqueInterface {
       RustLib.instance.api.crateApiLoggerSendToDartLoggerSetStreamSink();
 }
 
-enum Level {
-  error,
-  warn,
-  info,
-  debug,
-  trace,
-  ;
-}
+enum Level { error, warn, info, debug, trace }
 
 class LogEntry {
   final Level level;
   final String tag;
   final String msg;
 
-  const LogEntry({
-    required this.level,
-    required this.tag,
-    required this.msg,
-  });
+  const LogEntry({required this.level, required this.tag, required this.msg});
 
   @override
   int get hashCode => level.hashCode ^ tag.hashCode ^ msg.hashCode;

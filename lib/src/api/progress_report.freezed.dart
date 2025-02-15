@@ -12,7 +12,8 @@ part of 'progress_report.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$Report {
@@ -20,44 +21,38 @@ mixin _$Report {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double progress, String step, String? message)
-        tableGeneration,
+    tableGeneration,
     required TResult Function(String? message) misc,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult? Function(String? message)? misc,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult Function(String? message)? misc,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Report_TableGeneration value) tableGeneration,
     required TResult Function(Report_Misc value) misc,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Report_TableGeneration value)? tableGeneration,
     TResult? Function(Report_Misc value)? misc,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Report_TableGeneration value)? tableGeneration,
     TResult Function(Report_Misc value)? misc,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
@@ -87,15 +82,17 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_value.copyWith(
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? message = freezed}) {
+    return _then(
+      _value.copyWith(
+            message:
+                freezed == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -103,9 +100,9 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
 abstract class _$$Report_TableGenerationImplCopyWith<$Res>
     implements $ReportCopyWith<$Res> {
   factory _$$Report_TableGenerationImplCopyWith(
-          _$Report_TableGenerationImpl value,
-          $Res Function(_$Report_TableGenerationImpl) then) =
-      __$$Report_TableGenerationImplCopyWithImpl<$Res>;
+    _$Report_TableGenerationImpl value,
+    $Res Function(_$Report_TableGenerationImpl) then,
+  ) = __$$Report_TableGenerationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double progress, String step, String? message});
@@ -116,9 +113,9 @@ class __$$Report_TableGenerationImplCopyWithImpl<$Res>
     extends _$ReportCopyWithImpl<$Res, _$Report_TableGenerationImpl>
     implements _$$Report_TableGenerationImplCopyWith<$Res> {
   __$$Report_TableGenerationImplCopyWithImpl(
-      _$Report_TableGenerationImpl _value,
-      $Res Function(_$Report_TableGenerationImpl) _then)
-      : super(_value, _then);
+    _$Report_TableGenerationImpl _value,
+    $Res Function(_$Report_TableGenerationImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
@@ -129,29 +126,36 @@ class __$$Report_TableGenerationImplCopyWithImpl<$Res>
     Object? step = null,
     Object? message = freezed,
   }) {
-    return _then(_$Report_TableGenerationImpl(
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as double,
-      step: null == step
-          ? _value.step
-          : step // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$Report_TableGenerationImpl(
+        progress:
+            null == progress
+                ? _value.progress
+                : progress // ignore: cast_nullable_to_non_nullable
+                    as double,
+        step:
+            null == step
+                ? _value.step
+                : step // ignore: cast_nullable_to_non_nullable
+                    as String,
+        message:
+            freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$Report_TableGenerationImpl extends Report_TableGeneration {
-  const _$Report_TableGenerationImpl(
-      {required this.progress, required this.step, this.message})
-      : super._();
+  const _$Report_TableGenerationImpl({
+    required this.progress,
+    required this.step,
+    this.message,
+  }) : super._();
 
   @override
   final double progress;
@@ -185,14 +189,17 @@ class _$Report_TableGenerationImpl extends Report_TableGeneration {
   @override
   @pragma('vm:prefer-inline')
   _$$Report_TableGenerationImplCopyWith<_$Report_TableGenerationImpl>
-      get copyWith => __$$Report_TableGenerationImplCopyWithImpl<
-          _$Report_TableGenerationImpl>(this, _$identity);
+  get copyWith =>
+      __$$Report_TableGenerationImplCopyWithImpl<_$Report_TableGenerationImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double progress, String step, String? message)
-        tableGeneration,
+    tableGeneration,
     required TResult Function(String? message) misc,
   }) {
     return tableGeneration(progress, step, message);
@@ -202,7 +209,7 @@ class _$Report_TableGenerationImpl extends Report_TableGeneration {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult? Function(String? message)? misc,
   }) {
     return tableGeneration?.call(progress, step, message);
@@ -212,7 +219,7 @@ class _$Report_TableGenerationImpl extends Report_TableGeneration {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult Function(String? message)? misc,
     required TResult orElse(),
   }) {
@@ -255,10 +262,11 @@ class _$Report_TableGenerationImpl extends Report_TableGeneration {
 }
 
 abstract class Report_TableGeneration extends Report {
-  const factory Report_TableGeneration(
-      {required final double progress,
-      required final String step,
-      final String? message}) = _$Report_TableGenerationImpl;
+  const factory Report_TableGeneration({
+    required final double progress,
+    required final String step,
+    final String? message,
+  }) = _$Report_TableGenerationImpl;
   const Report_TableGeneration._() : super._();
 
   double get progress;
@@ -271,15 +279,16 @@ abstract class Report_TableGeneration extends Report {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$Report_TableGenerationImplCopyWith<_$Report_TableGenerationImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$Report_MiscImplCopyWith<$Res>
     implements $ReportCopyWith<$Res> {
   factory _$$Report_MiscImplCopyWith(
-          _$Report_MiscImpl value, $Res Function(_$Report_MiscImpl) then) =
-      __$$Report_MiscImplCopyWithImpl<$Res>;
+    _$Report_MiscImpl value,
+    $Res Function(_$Report_MiscImpl) then,
+  ) = __$$Report_MiscImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? message});
@@ -290,22 +299,24 @@ class __$$Report_MiscImplCopyWithImpl<$Res>
     extends _$ReportCopyWithImpl<$Res, _$Report_MiscImpl>
     implements _$$Report_MiscImplCopyWith<$Res> {
   __$$Report_MiscImplCopyWithImpl(
-      _$Report_MiscImpl _value, $Res Function(_$Report_MiscImpl) _then)
-      : super(_value, _then);
+    _$Report_MiscImpl _value,
+    $Res Function(_$Report_MiscImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Report
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_$Report_MiscImpl(
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? message = freezed}) {
+    return _then(
+      _$Report_MiscImpl(
+        message:
+            freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -345,7 +356,7 @@ class _$Report_MiscImpl extends Report_Misc {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double progress, String step, String? message)
-        tableGeneration,
+    tableGeneration,
     required TResult Function(String? message) misc,
   }) {
     return misc(message);
@@ -355,7 +366,7 @@ class _$Report_MiscImpl extends Report_Misc {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult? Function(String? message)? misc,
   }) {
     return misc?.call(message);
@@ -365,7 +376,7 @@ class _$Report_MiscImpl extends Report_Misc {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double progress, String step, String? message)?
-        tableGeneration,
+    tableGeneration,
     TResult Function(String? message)? misc,
     required TResult orElse(),
   }) {

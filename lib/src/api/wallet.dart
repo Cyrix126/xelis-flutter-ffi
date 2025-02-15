@@ -14,49 +14,54 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 PrecomputedTablesShared? getCachedTable() =>
     RustLib.instance.api.crateApiWalletGetCachedTable();
 
-Future<XelisWallet> createXelisWallet(
-        {required String name,
-        required String directory,
-        required String password,
-        required Network network,
-        String? seed,
-        String? privateKey,
-        String? precomputedTablesPath,
-        bool? l1Low}) =>
-    RustLib.instance.api.crateApiWalletCreateXelisWallet(
-        name: name,
-        directory: directory,
-        password: password,
-        network: network,
-        seed: seed,
-        privateKey: privateKey,
-        precomputedTablesPath: precomputedTablesPath,
-        l1Low: l1Low);
+Future<XelisWallet> createXelisWallet({
+  required String name,
+  required String directory,
+  required String password,
+  required Network network,
+  String? seed,
+  String? privateKey,
+  String? precomputedTablesPath,
+  bool? l1Low,
+}) => RustLib.instance.api.crateApiWalletCreateXelisWallet(
+  name: name,
+  directory: directory,
+  password: password,
+  network: network,
+  seed: seed,
+  privateKey: privateKey,
+  precomputedTablesPath: precomputedTablesPath,
+  l1Low: l1Low,
+);
 
-Future<void> updateTables(
-        {required String precomputedTablesPath, required bool l1Low}) =>
-    RustLib.instance.api.crateApiWalletUpdateTables(
-        precomputedTablesPath: precomputedTablesPath, l1Low: l1Low);
+Future<void> updateTables({
+  required String precomputedTablesPath,
+  required bool l1Low,
+}) => RustLib.instance.api.crateApiWalletUpdateTables(
+  precomputedTablesPath: precomputedTablesPath,
+  l1Low: l1Low,
+);
 
-Future<XelisWallet> openXelisWallet(
-        {required String name,
-        required String directory,
-        required String password,
-        required Network network,
-        String? precomputedTablesPath,
-        bool? l1Low}) =>
-    RustLib.instance.api.crateApiWalletOpenXelisWallet(
-        name: name,
-        directory: directory,
-        password: password,
-        network: network,
-        precomputedTablesPath: precomputedTablesPath,
-        l1Low: l1Low);
+Future<XelisWallet> openXelisWallet({
+  required String name,
+  required String directory,
+  required String password,
+  required Network network,
+  String? precomputedTablesPath,
+  bool? l1Low,
+}) => RustLib.instance.api.crateApiWalletOpenXelisWallet(
+  name: name,
+  directory: directory,
+  password: password,
+  network: network,
+  precomputedTablesPath: precomputedTablesPath,
+  l1Low: l1Low,
+);
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
 abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SummaryTransaction>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SummaryTransaction>>
 abstract class SummaryTransaction implements RustOpaqueInterface {
   BigInt get fee;
 
@@ -71,23 +76,26 @@ abstract class SummaryTransaction implements RustOpaqueInterface {
   set transactionType(TransactionTypeBuilder transactionType);
 }
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Transaction>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Transaction>>
 abstract class Transaction implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TransactionBuilderState>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TransactionBuilderState>>
 abstract class TransactionBuilderState implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>
 abstract class XelisWallet implements RustOpaqueInterface {
   Future<List<String>> allHistory();
 
   Future<void> broadcastTransaction({required String txHash});
 
-  Future<void> changePassword(
-      {required String oldPassword, required String newPassword});
+  Future<void> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
 
-  Future<(Transaction, TransactionBuilderState)> clearTransaction(
-      {required String txHash});
+  Future<(Transaction, TransactionBuilderState)> clearTransaction({
+    required String txHash,
+  });
 
   Future<void> close();
 
@@ -95,14 +103,20 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   Future<String> createBurnAllTransaction({required String assetHash});
 
-  Future<String> createBurnTransaction(
-      {required double floatAmount, required String assetHash});
+  Future<String> createBurnTransaction({
+    required double floatAmount,
+    required String assetHash,
+  });
 
-  Future<String> createTransferAllTransaction(
-      {required String strAddress, String? assetHash, String? extraData});
+  Future<String> createTransferAllTransaction({
+    required String strAddress,
+    String? assetHash,
+    String? extraData,
+  });
 
-  Future<String> createTransfersTransaction(
-      {required List<Transfer> transfers});
+  Future<String> createTransfersTransaction({
+    required List<Transfer> transfers,
+  });
 
   Future<String> estimateFees({required List<Transfer> transfers});
 
