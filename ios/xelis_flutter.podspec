@@ -74,7 +74,7 @@ A new Flutter plugin project.
   s.vendored_frameworks = "Frameworks/#{framework_name}"
 
   s.pod_target_xcconfig = {
-    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/XelisFlutter.framework/XelisFlutter'
+    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/Frameworks/XelisFlutter.framework/XelisFlutter'
   }
 
   s.ios.deployment_target = '12.0'
