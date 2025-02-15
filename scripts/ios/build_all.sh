@@ -5,7 +5,7 @@ REQUIRED_VERSION="1.84.0"
 CURRENT_VERSION=$(rustc --version | cut -d ' ' -f 2)
 
 BUILD_DIR=build
-mkdir $BUILD_DIR
+mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
 if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
@@ -14,7 +14,7 @@ if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n
     rustup default $REQUIRED_VERSION
 fi
 
-cp ../../../../rust ./rust
+cp ../../rust ./rust
 cd rust
 
 # Build static libs
