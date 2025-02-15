@@ -73,6 +73,8 @@ A new Flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.vendored_frameworks = "Frameworks/#{framework_name}"
 
+  s.module_map = 'macos/Classes/xelis_flutter.modulemap'
+
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
     'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/libxelis_flutter.a'

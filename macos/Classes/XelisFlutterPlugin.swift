@@ -1,8 +1,6 @@
 import Cocoa
 import FlutterMacOS
-
-@_cdecl("dummy_method_to_enforce_bundling")
-internal func dummy_method_to_enforce_bundling() -> Int64
+import XelisFlutter
 
 private let dummyVar = dummy_method_to_enforce_bundling()
 
