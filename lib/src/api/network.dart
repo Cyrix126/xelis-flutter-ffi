@@ -6,4 +6,9 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-enum Network { mainnet, testnet, dev }
+enum Network {
+  mainnet,
+  testnet,
+  dev,
+  ;
+}

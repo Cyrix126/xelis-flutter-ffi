@@ -11,5 +11,4 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 Future<bool> precomputedTablesExist({required String precomputedTablesPath}) =>
     RustLib.instance.api.crateApiTableGenerationPrecomputedTablesExist(
-      precomputedTablesPath: precomputedTablesPath,
-    );
+        precomputedTablesPath: precomputedTablesPath);
