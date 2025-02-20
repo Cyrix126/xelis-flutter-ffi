@@ -300,7 +300,7 @@ impl XelisWallet {
 
         let estimated_fees = self
             .wallet
-            .estimate_fees(transaction_type_builder)
+            .estimate_fees(transaction_type_builder, FeeBuilder::default())
             .await
             .context("Error while estimating fees")?;
 
@@ -383,7 +383,7 @@ impl XelisWallet {
 
         let estimated_fees = self
             .wallet
-            .estimate_fees(TransactionTypeBuilder::Transfers(vec![transfer]))
+            .estimate_fees(TransactionTypeBuilder::Transfers(vec![transfer]), FeeBuilder::default())
             .await
             .context("Error while estimating fees")?;
 
@@ -512,7 +512,7 @@ impl XelisWallet {
 
         let estimated_fees = self
             .wallet
-            .estimate_fees(TransactionTypeBuilder::Burn(payload.clone()))
+            .estimate_fees(TransactionTypeBuilder::Burn(payload.clone()), FeeBuilder::default())
             .await
             .context("Error while estimating fees")?;
 
