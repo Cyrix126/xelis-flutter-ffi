@@ -3,7 +3,6 @@ use std::fmt::Debug;
 use std::fs::File;
 use std::path::Path;
 use std::sync::Arc;
-use std::str::FromStr;
 
 use anyhow::{anyhow, bail, Context, Result};
 use flutter_rust_bridge::frb;
@@ -264,7 +263,7 @@ impl XelisWallet {
         let storage = self.wallet.get_storage().read().await;
         let mut balances = HashMap::new();
 
-        for (asset, data) in storage.get_assets_with_data().await? {
+        for (asset, _data) in storage.get_assets_with_data().await? {
             let balance = storage.get_balance_for(&asset).await?;
             balances.insert(
                 asset.to_string(),
@@ -379,6 +378,7 @@ impl XelisWallet {
             amount,
             asset: asset.clone(),
             extra_data: extra_data.clone(),
+            encrypt_extra_data: true,
         };
 
         let estimated_fees = self
@@ -398,6 +398,7 @@ impl XelisWallet {
             amount,
             asset: asset.clone(),
             extra_data,
+            encrypt_extra_data: true,
         };
 
         let transaction_type_builder = TransactionTypeBuilder::Transfers(vec![transfer]);
@@ -737,6 +738,7 @@ impl XelisWallet {
                     None => None,
                     Some(value) => Some(DataElement::Value(DataValue::String(value))),
                 },
+                encrypt_extra_data: true,
             };
 
             vec.push(transfer_builder);
