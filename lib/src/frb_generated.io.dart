@@ -1181,7 +1181,7 @@ class RustLibWire implements BaseWire {
       : _lookup = lookup;
 
   void store_dart_post_cobject(
-    DartPostCObjectFnType ptr,
+    int ptr,
   ) {
     return _store_dart_post_cobject(
       ptr,
@@ -1189,10 +1189,10 @@ class RustLibWire implements BaseWire {
   }
 
   late final _store_dart_post_cobjectPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(DartPostCObjectFnType)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
           'store_dart_post_cobject');
-  late final _store_dart_post_cobject = _store_dart_post_cobjectPtr
-      .asFunction<void Function(DartPostCObjectFnType)>();
+  late final _store_dart_post_cobject =
+      _store_dart_post_cobjectPtr.asFunction<void Function(int)>();
 
   WireSyncRust2DartDco
       wire__crate__api__seed_search_engine__SearchEngine_check_seed(
@@ -1209,7 +1209,7 @@ class RustLibWire implements BaseWire {
       _lookup<
               ffi.NativeFunction<
                   WireSyncRust2DartDco Function(
-                      ffi.UintPtr, ffi.Pointer<wire_cst_list_String>)>>(
+                      ffi.Int, ffi.Pointer<wire_cst_list_String>)>>(
           'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_check_seed');
   late final _wire__crate__api__seed_search_engine__SearchEngine_check_seed =
       _wire__crate__api__seed_search_engine__SearchEngine_check_seedPtr
@@ -1226,7 +1226,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__seed_search_engine__SearchEngine_initPtr = _lookup<
-          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_init');
   late final _wire__crate__api__seed_search_engine__SearchEngine_init =
       _wire__crate__api__seed_search_engine__SearchEngine_initPtr
@@ -1246,8 +1246,8 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__seed_search_engine__SearchEngine_searchPtr =
       _lookup<
               ffi.NativeFunction<
-                  WireSyncRust2DartDco Function(ffi.UintPtr,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                  WireSyncRust2DartDco Function(
+                      ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_search');
   late final _wire__crate__api__seed_search_engine__SearchEngine_search =
       _wire__crate__api__seed_search_engine__SearchEngine_searchPtr.asFunction<
@@ -1264,7 +1264,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_levelPtr =
-      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level');
   late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_level =
       _wire__crate__api__logger__SendToDartLogger_auto_accessor_get_levelPtr
@@ -1283,8 +1283,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_levelPtr =
       _lookup<
-              ffi.NativeFunction<
-                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.UintPtr)>>(
+              ffi
+              .NativeFunction<WireSyncRust2DartDco Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level');
   late final _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_level =
       _wire__crate__api__logger__SendToDartLogger_auto_accessor_set_levelPtr
@@ -1304,7 +1304,7 @@ class RustLibWire implements BaseWire {
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                      ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__logger__SendToDartLogger_set_stream_sink');
   late final _wire__crate__api__logger__SendToDartLogger_set_stream_sink =
       _wire__crate__api__logger__SendToDartLogger_set_stream_sinkPtr.asFunction<
@@ -1320,7 +1320,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_feePtr =
-      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_fee =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_feePtr
@@ -1336,7 +1336,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hashPtr =
-      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hash =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_hashPtr
@@ -1352,7 +1352,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_typePtr =
-      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_type =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_get_transaction_typePtr
@@ -1371,8 +1371,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_feePtr =
       _lookup<
-              ffi.NativeFunction<
-                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.Uint64)>>(
+              ffi
+              .NativeFunction<WireSyncRust2DartDco Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_fee =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_feePtr
@@ -1392,8 +1392,8 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hashPtr =
       _lookup<
               ffi.NativeFunction<
-                  WireSyncRust2DartDco Function(ffi.UintPtr,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                  WireSyncRust2DartDco Function(
+                      ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hash =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_hashPtr
@@ -1414,8 +1414,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_typePtr =
       _lookup<
-              ffi.NativeFunction<
-                  WireSyncRust2DartDco Function(ffi.UintPtr, ffi.UintPtr)>>(
+              ffi
+              .NativeFunction<WireSyncRust2DartDco Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type');
   late final _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_type =
       _wire__crate__api__wallet__SummaryTransaction_auto_accessor_set_transaction_typePtr
@@ -1432,7 +1432,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_all_historyPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_all_history');
   late final _wire__crate__api__wallet__XelisWallet_all_history =
       _wire__crate__api__wallet__XelisWallet_all_historyPtr
@@ -1453,7 +1453,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_broadcast_transactionPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Void Function(ffi.Int, ffi.Int,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_broadcast_transaction');
   late final _wire__crate__api__wallet__XelisWallet_broadcast_transaction =
@@ -1479,8 +1479,8 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_change_passwordPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64,
-                  ffi.UintPtr,
+                  ffi.Int,
+                  ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_change_password');
@@ -1503,7 +1503,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_clear_transactionPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+              ffi.Void Function(ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_clear_transaction');
   late final _wire__crate__api__wallet__XelisWallet_clear_transaction =
@@ -1522,7 +1522,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_closePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_close');
   late final _wire__crate__api__wallet__XelisWallet_close =
       _wire__crate__api__wallet__XelisWallet_closePtr
@@ -1539,7 +1539,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csvPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv');
   late final _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csv =
       _wire__crate__api__wallet__XelisWallet_convert_transactions_to_csvPtr
@@ -1560,7 +1560,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_create_burn_all_transactionPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Void Function(ffi.Int, ffi.Int,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_all_transaction');
   late final _wire__crate__api__wallet__XelisWallet_create_burn_all_transaction =
@@ -1586,7 +1586,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_create_burn_transactionPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Double,
+                  ffi.Void Function(ffi.Int, ffi.Int, ffi.Double,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_transaction');
   late final _wire__crate__api__wallet__XelisWallet_create_burn_transaction =
@@ -1615,8 +1615,8 @@ class RustLibWire implements BaseWire {
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(
-                      ffi.Int64,
-                      ffi.UintPtr,
+                      ffi.Int,
+                      ffi.Int,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
@@ -1646,8 +1646,8 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_create_transfers_transactionPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
-                      ffi.Pointer<wire_cst_list_transfer>)>>(
+                  ffi.Void Function(
+                      ffi.Int, ffi.Int, ffi.Pointer<wire_cst_list_transfer>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers_transaction');
   late final _wire__crate__api__wallet__XelisWallet_create_transfers_transaction =
       _wire__crate__api__wallet__XelisWallet_create_transfers_transactionPtr
@@ -1668,8 +1668,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_estimate_feesPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
-                  ffi.Pointer<wire_cst_list_transfer>)>>(
+              ffi.Void Function(
+                  ffi.Int, ffi.Int, ffi.Pointer<wire_cst_list_transfer>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees');
   late final _wire__crate__api__wallet__XelisWallet_estimate_fees =
       _wire__crate__api__wallet__XelisWallet_estimate_feesPtr.asFunction<
@@ -1689,7 +1689,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_events_streamPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+              ffi.Void Function(ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_events_stream');
   late final _wire__crate__api__wallet__XelisWallet_events_stream =
@@ -1712,7 +1712,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_filePtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Void Function(ffi.Int, ffi.Int,
                       ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file');
   late final _wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file =
@@ -1737,7 +1737,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_format_coinPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Uint64,
+              ffi.Void Function(ffi.Int, ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_format_coin');
   late final _wire__crate__api__wallet__XelisWallet_format_coin =
@@ -1754,7 +1754,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_address_strPtr = _lookup<
-          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_address_str');
   late final _wire__crate__api__wallet__XelisWallet_get_address_str =
       _wire__crate__api__wallet__XelisWallet_get_address_strPtr
@@ -1771,7 +1771,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_asset_balancesPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances');
   late final _wire__crate__api__wallet__XelisWallet_get_asset_balances =
       _wire__crate__api__wallet__XelisWallet_get_asset_balancesPtr
@@ -1788,7 +1788,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_asset_balances_rawPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances_raw');
   late final _wire__crate__api__wallet__XelisWallet_get_asset_balances_raw =
       _wire__crate__api__wallet__XelisWallet_get_asset_balances_rawPtr
@@ -1808,7 +1808,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_get_asset_decimalsPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+              ffi.Void Function(ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_decimals');
   late final _wire__crate__api__wallet__XelisWallet_get_asset_decimals =
@@ -1827,7 +1827,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_daemon_infoPtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_daemon_info');
   late final _wire__crate__api__wallet__XelisWallet_get_daemon_info =
       _wire__crate__api__wallet__XelisWallet_get_daemon_infoPtr
@@ -1842,7 +1842,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_networkPtr = _lookup<
-          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_network');
   late final _wire__crate__api__wallet__XelisWallet_get_network =
       _wire__crate__api__wallet__XelisWallet_get_networkPtr
@@ -1859,7 +1859,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_noncePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_nonce');
   late final _wire__crate__api__wallet__XelisWallet_get_nonce =
       _wire__crate__api__wallet__XelisWallet_get_noncePtr
@@ -1868,7 +1868,7 @@ class RustLibWire implements BaseWire {
   void wire__crate__api__wallet__XelisWallet_get_seed(
     int port_,
     int that,
-    ffi.Pointer<ffi.UintPtr> language_index,
+    ffi.Pointer<ffi.Int> language_index,
   ) {
     return _wire__crate__api__wallet__XelisWallet_get_seed(
       port_,
@@ -1879,12 +1879,11 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_get_seedPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.UintPtr, ffi.Pointer<ffi.UintPtr>)>>(
+              ffi.Void Function(ffi.Int, ffi.Int, ffi.Pointer<ffi.Int>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_seed');
   late final _wire__crate__api__wallet__XelisWallet_get_seed =
       _wire__crate__api__wallet__XelisWallet_get_seedPtr
-          .asFunction<void Function(int, int, ffi.Pointer<ffi.UintPtr>)>();
+          .asFunction<void Function(int, int, ffi.Pointer<ffi.Int>)>();
 
   void wire__crate__api__wallet__XelisWallet_get_xelis_balance(
     int port_,
@@ -1897,7 +1896,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_xelis_balancePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance');
   late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance =
       _wire__crate__api__wallet__XelisWallet_get_xelis_balancePtr
@@ -1914,7 +1913,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance_rawPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw');
   late final _wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw =
       _wire__crate__api__wallet__XelisWallet_get_xelis_balance_rawPtr
@@ -1931,7 +1930,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_has_xelis_balancePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_has_xelis_balance');
   late final _wire__crate__api__wallet__XelisWallet_has_xelis_balance =
       _wire__crate__api__wallet__XelisWallet_has_xelis_balancePtr
@@ -1948,7 +1947,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_is_onlinePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_online');
   late final _wire__crate__api__wallet__XelisWallet_is_online =
       _wire__crate__api__wallet__XelisWallet_is_onlinePtr
@@ -1968,7 +1967,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_is_valid_passwordPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+              ffi.Void Function(ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_valid_password');
   late final _wire__crate__api__wallet__XelisWallet_is_valid_password =
@@ -1987,7 +1986,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__wallet__XelisWallet_offline_modePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_offline_mode');
   late final _wire__crate__api__wallet__XelisWallet_offline_mode =
       _wire__crate__api__wallet__XelisWallet_offline_modePtr
@@ -2007,7 +2006,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__XelisWallet_online_modePtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+              ffi.Void Function(ffi.Int, ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_online_mode');
   late final _wire__crate__api__wallet__XelisWallet_online_mode =
@@ -2027,10 +2026,9 @@ class RustLibWire implements BaseWire {
     );
   }
 
-  late final _wire__crate__api__wallet__XelisWallet_rescanPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.Uint64)>>(
-      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_rescan');
+  late final _wire__crate__api__wallet__XelisWallet_rescanPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int, ffi.Int)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_rescan');
   late final _wire__crate__api__wallet__XelisWallet_rescan =
       _wire__crate__api__wallet__XelisWallet_rescanPtr
           .asFunction<void Function(int, int, int)>();
@@ -2047,7 +2045,7 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__progress_report__add_progress_reportPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_report>)>>(
+              ffi.Void Function(ffi.Int, ffi.Pointer<wire_cst_report>)>>(
       'frbgen_xelis_flutter_wire__crate__api__progress_report__add_progress_report');
   late final _wire__crate__api__progress_report__add_progress_report =
       _wire__crate__api__progress_report__add_progress_reportPtr
@@ -2066,7 +2064,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__api__create_log_streamPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                  ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__api__create_log_stream');
   late final _wire__crate__api__api__create_log_stream =
       _wire__crate__api__api__create_log_streamPtr.asFunction<
@@ -2085,7 +2083,7 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__api__create_progress_report_streamPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                  ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_xelis_flutter_wire__crate__api__api__create_progress_report_stream');
   late final _wire__crate__api__api__create_progress_report_stream =
       _wire__crate__api__api__create_progress_report_streamPtr.asFunction<
@@ -2100,7 +2098,7 @@ class RustLibWire implements BaseWire {
     ffi.Pointer<wire_cst_list_prim_u_8_strict> seed,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> private_key,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
-    ffi.Pointer<ffi.Bool> l1_low,
+    ffi.Pointer<bool> l1_low,
   ) {
     return _wire__crate__api__wallet__create_xelis_wallet(
       port_,
@@ -2118,15 +2116,15 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__create_xelis_walletPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64,
+                  ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Int32,
+                  ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<ffi.Bool>)>>(
+                  ffi.Pointer<bool>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet');
   late final _wire__crate__api__wallet__create_xelis_wallet =
       _wire__crate__api__wallet__create_xelis_walletPtr.asFunction<
@@ -2139,7 +2137,7 @@ class RustLibWire implements BaseWire {
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<ffi.Bool>)>();
+              ffi.Pointer<bool>)>();
 
   void wire__crate__api__utils__format_coin(
     int port_,
@@ -2153,10 +2151,9 @@ class RustLibWire implements BaseWire {
     );
   }
 
-  late final _wire__crate__api__utils__format_coinPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint64, ffi.Uint8)>>(
-      'frbgen_xelis_flutter_wire__crate__api__utils__format_coin');
+  late final _wire__crate__api__utils__format_coinPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int, ffi.Int)>>(
+          'frbgen_xelis_flutter_wire__crate__api__utils__format_coin');
   late final _wire__crate__api__utils__format_coin =
       _wire__crate__api__utils__format_coinPtr
           .asFunction<void Function(int, int, int)>();
@@ -2172,7 +2169,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__utils__format_xelisPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint64)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int, ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__utils__format_xelis');
   late final _wire__crate__api__utils__format_xelis =
       _wire__crate__api__utils__format_xelisPtr
@@ -2198,7 +2195,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__logger__init_loggerPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__logger__init_logger');
   late final _wire__crate__api__logger__init_logger =
       _wire__crate__api__logger__init_loggerPtr
@@ -2229,7 +2226,7 @@ class RustLibWire implements BaseWire {
     ffi.Pointer<wire_cst_list_prim_u_8_strict> password,
     int network,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
-    ffi.Pointer<ffi.Bool> l1_low,
+    ffi.Pointer<bool> l1_low,
   ) {
     return _wire__crate__api__wallet__open_xelis_wallet(
       port_,
@@ -2245,13 +2242,13 @@ class RustLibWire implements BaseWire {
   late final _wire__crate__api__wallet__open_xelis_walletPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64,
+                  ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Int32,
+                  ffi.Int,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<ffi.Bool>)>>(
+                  ffi.Pointer<bool>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__open_xelis_wallet');
   late final _wire__crate__api__wallet__open_xelis_wallet =
       _wire__crate__api__wallet__open_xelis_walletPtr.asFunction<
@@ -2262,7 +2259,7 @@ class RustLibWire implements BaseWire {
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<ffi.Bool>)>();
+              ffi.Pointer<bool>)>();
 
   void wire__crate__api__table_generation__precomputed_tables_exist(
     int port_,
@@ -2278,7 +2275,7 @@ class RustLibWire implements BaseWire {
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                      ffi.Int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
           'frbgen_xelis_flutter_wire__crate__api__table_generation__precomputed_tables_exist');
   late final _wire__crate__api__table_generation__precomputed_tables_exist =
       _wire__crate__api__table_generation__precomputed_tables_existPtr
@@ -2294,7 +2291,7 @@ class RustLibWire implements BaseWire {
   }
 
   late final _wire__crate__api__api__set_up_rust_loggerPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
           'frbgen_xelis_flutter_wire__crate__api__api__set_up_rust_logger');
   late final _wire__crate__api__api__set_up_rust_logger =
       _wire__crate__api__api__set_up_rust_loggerPtr
@@ -2321,7 +2318,7 @@ class RustLibWire implements BaseWire {
   void wire__crate__api__wallet__update_tables(
     int port_,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> precomputed_tables_path,
-    bool l1_low,
+    ffi.Pointer<bool> l1_low,
   ) {
     return _wire__crate__api__wallet__update_tables(
       port_,
@@ -2332,13 +2329,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__wallet__update_tablesPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Bool)>>(
+              ffi.Void Function(
+                  ffi.Int,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<bool>)>>(
       'frbgen_xelis_flutter_wire__crate__api__wallet__update_tables');
   late final _wire__crate__api__wallet__update_tables =
       _wire__crate__api__wallet__update_tablesPtr.asFunction<
-          void Function(
-              int, ffi.Pointer<wire_cst_list_prim_u_8_strict>, bool)>();
+          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<bool>)>();
 
   void
       rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
@@ -2628,7 +2627,7 @@ class RustLibWire implements BaseWire {
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWalletPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
-  ffi.Pointer<ffi.UintPtr>
+  ffi.Pointer<ffi.Int>
       cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared(
     int value,
   ) {
@@ -2638,27 +2637,25 @@ class RustLibWire implements BaseWire {
   }
 
   late final _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesSharedPtr =
-      _lookup<
-              ffi
-              .NativeFunction<ffi.Pointer<ffi.UintPtr> Function(ffi.UintPtr)>>(
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(ffi.Int)>>(
           'frbgen_xelis_flutter_cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared');
   late final _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared =
       _cst_new_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesSharedPtr
-          .asFunction<ffi.Pointer<ffi.UintPtr> Function(int)>();
+          .asFunction<ffi.Pointer<ffi.Int> Function(int)>();
 
-  ffi.Pointer<ffi.Bool> cst_new_box_autoadd_bool(
-    bool value,
+  ffi.Pointer<bool> cst_new_box_autoadd_bool(
+    ffi.Pointer<bool> value,
   ) {
     return _cst_new_box_autoadd_bool(
       value,
     );
   }
 
-  late final _cst_new_box_autoadd_boolPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Bool> Function(ffi.Bool)>>(
-          'frbgen_xelis_flutter_cst_new_box_autoadd_bool');
+  late final _cst_new_box_autoadd_boolPtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<bool> Function(ffi.Pointer<bool>)>>(
+      'frbgen_xelis_flutter_cst_new_box_autoadd_bool');
   late final _cst_new_box_autoadd_bool = _cst_new_box_autoadd_boolPtr
-      .asFunction<ffi.Pointer<ffi.Bool> Function(bool)>();
+      .asFunction<ffi.Pointer<bool> Function(ffi.Pointer<bool>)>();
 
   ffi.Pointer<wire_cst_report> cst_new_box_autoadd_report() {
     return _cst_new_box_autoadd_report();
@@ -2670,7 +2667,7 @@ class RustLibWire implements BaseWire {
   late final _cst_new_box_autoadd_report = _cst_new_box_autoadd_reportPtr
       .asFunction<ffi.Pointer<wire_cst_report> Function()>();
 
-  ffi.Pointer<ffi.UintPtr> cst_new_box_autoadd_usize(
+  ffi.Pointer<ffi.Int> cst_new_box_autoadd_usize(
     int value,
   ) {
     return _cst_new_box_autoadd_usize(
@@ -2678,11 +2675,11 @@ class RustLibWire implements BaseWire {
     );
   }
 
-  late final _cst_new_box_autoadd_usizePtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<ffi.UintPtr> Function(ffi.UintPtr)>>(
-      'frbgen_xelis_flutter_cst_new_box_autoadd_usize');
+  late final _cst_new_box_autoadd_usizePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(ffi.Int)>>(
+          'frbgen_xelis_flutter_cst_new_box_autoadd_usize');
   late final _cst_new_box_autoadd_usize = _cst_new_box_autoadd_usizePtr
-      .asFunction<ffi.Pointer<ffi.UintPtr> Function(int)>();
+      .asFunction<ffi.Pointer<ffi.Int> Function(int)>();
 
   ffi.Pointer<wire_cst_list_String> cst_new_list_String(
     int len,
@@ -2693,9 +2690,9 @@ class RustLibWire implements BaseWire {
   }
 
   late final _cst_new_list_StringPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<wire_cst_list_String> Function(
-              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_String');
+          ffi
+          .NativeFunction<ffi.Pointer<wire_cst_list_String> Function(ffi.Int)>>(
+      'frbgen_xelis_flutter_cst_new_list_String');
   late final _cst_new_list_String = _cst_new_list_StringPtr
       .asFunction<ffi.Pointer<wire_cst_list_String> Function(int)>();
 
@@ -2710,7 +2707,7 @@ class RustLibWire implements BaseWire {
   late final _cst_new_list_prim_u_8_strictPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_cst_list_prim_u_8_strict> Function(
-              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_prim_u_8_strict');
+              ffi.Int)>>('frbgen_xelis_flutter_cst_new_list_prim_u_8_strict');
   late final _cst_new_list_prim_u_8_strict = _cst_new_list_prim_u_8_strictPtr
       .asFunction<ffi.Pointer<wire_cst_list_prim_u_8_strict> Function(int)>();
 
@@ -2726,7 +2723,7 @@ class RustLibWire implements BaseWire {
   late final _cst_new_list_record_string_stringPtr = _lookup<
           ffi.NativeFunction<
               ffi.Pointer<wire_cst_list_record_string_string> Function(
-                  ffi.Int32)>>(
+                  ffi.Int)>>(
       'frbgen_xelis_flutter_cst_new_list_record_string_string');
   late final _cst_new_list_record_string_string =
       _cst_new_list_record_string_stringPtr.asFunction<
@@ -2742,8 +2739,7 @@ class RustLibWire implements BaseWire {
 
   late final _cst_new_list_record_string_u_64Ptr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<wire_cst_list_record_string_u_64> Function(
-                  ffi.Int32)>>(
+              ffi.Pointer<wire_cst_list_record_string_u_64> Function(ffi.Int)>>(
       'frbgen_xelis_flutter_cst_new_list_record_string_u_64');
   late final _cst_new_list_record_string_u_64 =
       _cst_new_list_record_string_u_64Ptr.asFunction<
@@ -2760,7 +2756,7 @@ class RustLibWire implements BaseWire {
   late final _cst_new_list_transferPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<wire_cst_list_transfer> Function(
-              ffi.Int32)>>('frbgen_xelis_flutter_cst_new_list_transfer');
+              ffi.Int)>>('frbgen_xelis_flutter_cst_new_list_transfer');
   late final _cst_new_list_transfer = _cst_new_list_transferPtr
       .asFunction<ffi.Pointer<wire_cst_list_transfer> Function(int)>();
 
@@ -2769,32 +2765,27 @@ class RustLibWire implements BaseWire {
   }
 
   late final _dummy_method_to_enforce_bundlingPtr =
-      _lookup<ffi.NativeFunction<ffi.Int64 Function()>>(
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>(
           'dummy_method_to_enforce_bundling');
   late final _dummy_method_to_enforce_bundling =
       _dummy_method_to_enforce_bundlingPtr.asFunction<int Function()>();
 }
 
-typedef DartPort = ffi.Int64;
+typedef DartPort = ffi.Int;
 typedef DartDartPort = int;
-typedef DartPostCObjectFnTypeFunction = ffi.Bool Function(
-    DartPort port_id, ffi.Pointer<ffi.Void> message);
-typedef DartDartPostCObjectFnTypeFunction = bool Function(
-    DartDartPort port_id, ffi.Pointer<ffi.Void> message);
-typedef DartPostCObjectFnType
-    = ffi.Pointer<ffi.NativeFunction<DartPostCObjectFnTypeFunction>>;
+typedef bool = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Int>)>;
 
 final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> ptr;
+  external ffi.Pointer<ffi.Int> ptr;
 
-  @ffi.Int32()
+  @ffi.Int()
   external int len;
 }
 
 final class wire_cst_list_String extends ffi.Struct {
   external ffi.Pointer<ffi.Pointer<wire_cst_list_prim_u_8_strict>> ptr;
 
-  @ffi.Int32()
+  @ffi.Int()
   external int len;
 }
 
@@ -2812,7 +2803,7 @@ final class wire_cst_transfer extends ffi.Struct {
 final class wire_cst_list_transfer extends ffi.Struct {
   external ffi.Pointer<wire_cst_transfer> ptr;
 
-  @ffi.Int32()
+  @ffi.Int()
   external int len;
 }
 
@@ -2836,7 +2827,7 @@ final class ReportKind extends ffi.Union {
 }
 
 final class wire_cst_report extends ffi.Struct {
-  @ffi.Int32()
+  @ffi.Int()
   external int tag;
 
   external ReportKind kind;
@@ -2851,26 +2842,26 @@ final class wire_cst_record_string_string extends ffi.Struct {
 final class wire_cst_list_record_string_string extends ffi.Struct {
   external ffi.Pointer<wire_cst_record_string_string> ptr;
 
-  @ffi.Int32()
+  @ffi.Int()
   external int len;
 }
 
 final class wire_cst_record_string_u_64 extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> field0;
 
-  @ffi.Uint64()
+  @ffi.Int()
   external int field1;
 }
 
 final class wire_cst_list_record_string_u_64 extends ffi.Struct {
   external ffi.Pointer<wire_cst_record_string_u_64> ptr;
 
-  @ffi.Int32()
+  @ffi.Int()
   external int len;
 }
 
 final class wire_cst_log_entry extends ffi.Struct {
-  @ffi.Int32()
+  @ffi.Int()
   external int level;
 
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> tag;
@@ -2880,9 +2871,9 @@ final class wire_cst_log_entry extends ffi.Struct {
 
 final class wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state
     extends ffi.Struct {
-  @ffi.UintPtr()
+  @ffi.Int()
   external int field0;
 
-  @ffi.UintPtr()
+  @ffi.Int()
   external int field1;
 }
