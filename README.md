@@ -11,29 +11,65 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Xelis Wallet FFI Bindings for Flutter
+This repo is setup to be a shoe-in library in flutter applications, allowing easy access to the native Rust wallet methods from `xelis-blockchain` without the need for any rewrites. This is enabled by the `flutter_rust_bridge_codegen` tool, as well as the automated build & dependency conventions used within this repository. 
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+The continued adoption of GenesisX features and dev QOL needs for apps are the primary points of focus for this library, helping to facilitate Xelis integration and adoption for the community.
 
 ## Getting started
+To make use of `xelis-flutter-ffi`, simply add a git dependency to your flutter app's `pubspec.yaml`, like this:
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+xelis_flutter:
+  git:
+    url: https://github.com/xelis-project/xelis-flutter-ffi.git
+    ref: v0.1.0 # release tags will be attributed to specific xelis-blockchain releases going forward
+```
 
+When either `flutter run` or `flutter build` are called, this library will handle all dependency building and/or Podspec operations for you, without the need for any extra setup.
+
+The FFI bindings are updated and included in the repo; there is no need to regenerate them on your end unless you modify the files in `rust/`.
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+In your app's `main` entry point, be sure to initialize the RustLib. This will enable the use of imported bindings anywhere in your app.
 ```dart
-const like = 'sample';
+import 'package:xelis_flutter/xelis_flutter.dart' as xelis_flutter; // name required if the app uses multiple FFI libraries
+
+Future<void> main() async {
+  await xelis_flutter.RustLib.init();
+  // ... Rest of your main() code
+}
+```
+
+Here is an example of using the api crate through FFI to create a Xelis Wallet instance.
+```dart
+import 'package:xelis_flutter/src/api/wallet.dart' as x_wallet;
+import 'package:xelis_flutter/src/api/network.dart' as x_network;
+
+Future<void> createXelisWallet() async {
+  final String name = "example-wallet";
+  final String directory = "<local app path for xelis files>";
+  final String password = "password";
+
+  final wallet = await x_wallet.createXelisWallet(
+    name: name,
+    directory: directory, // local wallet data on the Rust side will be stored under directory/name/
+    password: password,
+    network: x_network.Network.mainnet,
+    precomputedTablesPath: directory, // precomputed tables will be written to this location
+    l1Low: true, // will generate lightweight precomputed tables, use false for full-sized tables
+  );
+
+  final mnemonic = await wallet.getSeed();
+
+  // ... use wallet and mnemonic as required
+}
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+The [Xelis Dart SDK](https://github.com/xelis-project/xelis-dart-sdk) is a dependency of this but is also a great tool to use alongside this library (as a direct dependency in your flutter app). It can be used for more direct RPC queries, health checks, data serialization, and more.
+
+## TODO
+
+Update the `examples/` folder with real calls
