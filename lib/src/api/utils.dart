@@ -10,6 +10,12 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
 // These functions have error during generation (see debug logs or enable `stop_on_error: true` for more details): `from_xelis`
 
+BigInt getLanguageIndexFromStr({required String input}) =>
+    RustLib.instance.api.crateApiUtilsGetLanguageIndexFromStr(input: input);
+
+List<String> getMnemonicWords({required LanguageInput input}) =>
+    RustLib.instance.api.crateApiUtilsGetMnemonicWords(input: input);
+
 bool isAddressValid({required String strAddress}) =>
     RustLib.instance.api.crateApiUtilsIsAddressValid(strAddress: strAddress);
 
@@ -23,3 +29,6 @@ Future<String> formatCoin({required BigInt value, required int decimals}) =>
 
 Future<String> formatXelis({required BigInt value}) =>
     RustLib.instance.api.crateApiUtilsFormatXelis(value: value);
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
+abstract class LanguageInput implements RustOpaqueInterface {}

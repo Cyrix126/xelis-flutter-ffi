@@ -74,7 +74,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.9.0';
 
   @override
-  int get rustContentHash => 1806521397;
+  int get rustContentHash => 1158392146;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -241,6 +241,10 @@ abstract class RustLibApi extends BaseApi {
 
   PrecomputedTablesShared? crateApiWalletGetCachedTable();
 
+  BigInt crateApiUtilsGetLanguageIndexFromStr({required String input});
+
+  List<String> crateApiUtilsGetMnemonicWords({required LanguageInput input});
+
   Future<void> crateApiLoggerInitLogger();
 
   bool crateApiUtilsIsAddressValid({required String strAddress});
@@ -263,6 +267,15 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiWalletUpdateTables(
       {required String precomputedTablesPath, required bool l1Low});
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_LanguageInput;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_LanguageInput;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_LanguageInputPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_LevelFilter;
@@ -1758,6 +1771,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  BigInt crateApiUtilsGetLanguageIndexFromStr({required String input}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_String(input);
+        return wire.wire__crate__api__utils__get_language_index_from_str(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_usize,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiUtilsGetLanguageIndexFromStrConstMeta,
+      argValues: [input],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUtilsGetLanguageIndexFromStrConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_language_index_from_str",
+        argNames: ["input"],
+      );
+
+  @override
+  List<String> crateApiUtilsGetMnemonicWords({required LanguageInput input}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+                input);
+        return wire.wire__crate__api__utils__get_mnemonic_words(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiUtilsGetMnemonicWordsConstMeta,
+      argValues: [input],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUtilsGetMnemonicWordsConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_mnemonic_words",
+        argNames: ["input"],
+      );
+
+  @override
   Future<void> crateApiLoggerInitLogger() {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -1948,6 +2009,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_LanguageInput => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_LanguageInput => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput;
+
+  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_LevelFilter => wire
           .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter;
 
@@ -2023,6 +2092,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   AnyhowException dco_decode_AnyhowException(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return AnyhowException(raw as String);
+  }
+
+  @protected
+  LanguageInput
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return LanguageInputImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -2160,6 +2237,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(dco_decode_list_record_string_u_64(raw)
         .map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  LanguageInput
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return LanguageInputImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -2500,6 +2585,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  LanguageInput
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return LanguageInputImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   LevelFilter
       sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
           SseDeserializer deserializer) {
@@ -2648,6 +2742,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_record_string_u_64(deserializer);
     return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
+  }
+
+  @protected
+  LanguageInput
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return LanguageInputImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
@@ -3022,6 +3125,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+      LanguageInput raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as LanguageInputImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
   int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
       LevelFilter raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -3144,6 +3255,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+      LanguageInput raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as LanguageInputImpl).frbInternalCstEncode();
+  }
+
+  @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(
       LevelFilter raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -3262,6 +3381,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       AnyhowException self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.message, serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          LanguageInput self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as LanguageInputImpl).frbInternalSseEncode(move: true),
+        serializer);
   }
 
   @protected
@@ -3425,6 +3554,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_record_string_u_64(
         self.entries.map((e) => (e.key, e.value)).toList(), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
+          LanguageInput self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as LanguageInputImpl).frbInternalSseEncode(move: null),
+        serializer);
   }
 
   @protected
@@ -3792,6 +3931,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putBigUint64(self);
   }
+}
+
+@sealed
+class LanguageInputImpl extends RustOpaque implements LanguageInput {
+  // Not to be used by end users
+  LanguageInputImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  LanguageInputImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_LanguageInput,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_LanguageInput,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_LanguageInputPtr,
+  );
 }
 
 @sealed
