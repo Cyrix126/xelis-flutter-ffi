@@ -256,7 +256,7 @@ WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__get_cached_t
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__utils__get_language_index_from_str(struct wire_cst_list_prim_u_8_strict *input);
 
-WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__utils__get_mnemonic_words(uintptr_t input);
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__utils__get_mnemonic_words(uintptr_t language_index);
 
 void frbgen_xelis_flutter_wire__crate__api__logger__init_logger(int64_t port_);
 
@@ -280,10 +280,6 @@ WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__utils__split_integra
 void frbgen_xelis_flutter_wire__crate__api__wallet__update_tables(int64_t port_,
                                                                   struct wire_cst_list_prim_u_8_strict *precomputed_tables_path,
                                                                   bool l1_low);
-
-void frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(const void *ptr);
-
-void frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(const void *ptr);
 
 void frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(const void *ptr);
 
@@ -349,7 +345,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_string);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_u_64);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_transfer);
-    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine);
@@ -359,7 +354,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionBuilderState);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTransactionTypeBuilder);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet);
-    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine);

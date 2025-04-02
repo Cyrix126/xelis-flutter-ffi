@@ -13,8 +13,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 BigInt getLanguageIndexFromStr({required String input}) =>
     RustLib.instance.api.crateApiUtilsGetLanguageIndexFromStr(input: input);
 
-List<String> getMnemonicWords({required LanguageInput input}) =>
-    RustLib.instance.api.crateApiUtilsGetMnemonicWords(input: input);
+List<String> getMnemonicWords({required BigInt languageIndex}) =>
+    RustLib.instance.api
+        .crateApiUtilsGetMnemonicWords(languageIndex: languageIndex);
 
 bool isAddressValid({required String strAddress}) =>
     RustLib.instance.api.crateApiUtilsIsAddressValid(strAddress: strAddress);
@@ -29,6 +30,3 @@ Future<String> formatCoin({required BigInt value, required int decimals}) =>
 
 Future<String> formatXelis({required BigInt value}) =>
     RustLib.instance.api.crateApiUtilsFormatXelis(value: value);
-
-// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
-abstract class LanguageInput implements RustOpaqueInterface {}

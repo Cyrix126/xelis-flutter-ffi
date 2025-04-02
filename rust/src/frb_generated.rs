@@ -27,7 +27,6 @@
 
 use crate::api::logger::*;
 use crate::api::seed_search_engine::*;
-use crate::api::utils::*;
 use crate::api::wallet::*;
 use crate::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
@@ -2097,7 +2096,7 @@ fn wire__crate__api__utils__get_language_index_from_str_impl(
     )
 }
 fn wire__crate__api__utils__get_mnemonic_words_impl(
-    input: impl CstDecode<LanguageInput>,
+    language_index: impl CstDecode<usize>,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -2106,10 +2105,10 @@ fn wire__crate__api__utils__get_mnemonic_words_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
-            let api_input = input.cst_decode();
+            let api_language_index = language_index.cst_decode();
             transform_result_dco::<_, _, ()>((move || {
                 let output_ok =
-                    Result::<_, ()>::Ok(crate::api::utils::get_mnemonic_words(api_input))?;
+                    Result::<_, ()>::Ok(crate::api::utils::get_mnemonic_words(api_language_index))?;
                 Ok(output_ok)
             })())
         },
@@ -2369,16 +2368,6 @@ impl SseDecode for flutter_rust_bridge::for_generated::anyhow::Error {
     }
 }
 
-impl SseDecode for LanguageInput {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <RustOpaqueNom<
-            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>,
-        >>::sse_decode(deserializer);
-        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
-    }
-}
-
 impl SseDecode for LevelFilter {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2482,16 +2471,6 @@ impl SseDecode for std::collections::HashMap<String, u64> {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<(String, u64)>>::sse_decode(deserializer);
         return inner.into_iter().collect();
-    }
-}
-
-impl SseDecode
-    for RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <usize>::sse_decode(deserializer);
-        return unsafe { decode_rust_opaque_nom(inner) };
     }
 }
 
@@ -2922,21 +2901,6 @@ fn pde_ffi_dispatcher_sync_impl(
 // Section: rust2dart
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for FrbWrapper<LanguageInput> {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, StdArc<_>>(self.0)
-            .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<LanguageInput> {}
-
-impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<LanguageInput>> for LanguageInput {
-    fn into_into_dart(self) -> FrbWrapper<LanguageInput> {
-        self.into()
-    }
-}
-
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<LevelFilter> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, StdArc<_>>(self.0)
@@ -3217,13 +3181,6 @@ impl SseEncode for flutter_rust_bridge::for_generated::anyhow::Error {
     }
 }
 
-impl SseEncode for LanguageInput {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, StdArc<_>>(self), serializer);
-    }
-}
-
 impl SseEncode for LevelFilter {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3313,17 +3270,6 @@ impl SseEncode for std::collections::HashMap<String, u64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<(String, u64)>>::sse_encode(self.into_iter().collect(), serializer);
-    }
-}
-
-impl SseEncode
-    for RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        let (ptr, size) = self.sse_encode_raw();
-        <usize>::sse_encode(ptr, serializer);
-        <i32>::sse_encode(size, serializer);
     }
 }
 
@@ -3721,7 +3667,6 @@ mod io {
     use super::*;
     use crate::api::logger::*;
     use crate::api::seed_search_engine::*;
-    use crate::api::utils::*;
     use crate::api::wallet::*;
     use crate::*;
     use flutter_rust_bridge::for_generated::byteorder::{
@@ -3742,18 +3687,6 @@ mod io {
         // Codec=Cst (C-struct based), see doc to use other codecs
         fn cst_decode(self) -> flutter_rust_bridge::for_generated::anyhow::Error {
             unimplemented!()
-        }
-    }
-    impl CstDecode<LanguageInput> for usize {
-        // Codec=Cst (C-struct based), see doc to use other codecs
-        fn cst_decode(self) -> LanguageInput {
-            flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
-                RustOpaqueNom<
-                    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>,
-                >,
-            >::cst_decode(
-                self
-            ))
         }
     }
     impl CstDecode<LevelFilter> for usize {
@@ -3876,19 +3809,6 @@ mod io {
         fn cst_decode(self) -> std::collections::HashMap<String, u64> {
             let vec: Vec<(String, u64)> = self.cst_decode();
             vec.into_iter().collect()
-        }
-    }
-    impl
-        CstDecode<
-            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>,
-        > for usize
-    {
-        // Codec=Cst (C-struct based), see doc to use other codecs
-        fn cst_decode(
-            self,
-        ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
-        {
-            unsafe { decode_rust_opaque_nom(self as _) }
         }
     }
     impl
@@ -4748,9 +4668,9 @@ field1: Default::default(), }
 
     #[unsafe(no_mangle)]
     pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__utils__get_mnemonic_words(
-        input: usize,
+        language_index: usize,
     ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__utils__get_mnemonic_words_impl(input)
+        wire__crate__api__utils__get_mnemonic_words_impl(language_index)
     }
 
     #[unsafe(no_mangle)]
@@ -4816,24 +4736,6 @@ field1: Default::default(), }
         l1_low: bool,
     ) {
         wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_low)
-    }
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
-        ptr: *const std::ffi::c_void,
-    ) {
-        unsafe {
-            StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>::increment_strong_count(ptr as _);
-        }
-    }
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
-        ptr: *const std::ffi::c_void,
-    ) {
-        unsafe {
-            StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>::decrement_strong_count(ptr as _);
-        }
     }
 
     #[unsafe(no_mangle)]
@@ -5199,7 +5101,6 @@ mod web {
     use super::*;
     use crate::api::logger::*;
     use crate::api::seed_search_engine::*;
-    use crate::api::utils::*;
     use crate::api::wallet::*;
     use crate::*;
     use flutter_rust_bridge::for_generated::byteorder::{
@@ -5438,18 +5339,6 @@ mod web {
             unimplemented!()
         }
     }
-    impl CstDecode<LanguageInput> for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue {
-        // Codec=Cst (C-struct based), see doc to use other codecs
-        fn cst_decode(self) -> LanguageInput {
-            flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
-                RustOpaqueNom<
-                    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>,
-                >,
-            >::cst_decode(
-                self
-            ))
-        }
-    }
     impl CstDecode<LevelFilter> for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue {
         // Codec=Cst (C-struct based), see doc to use other codecs
         fn cst_decode(self) -> LevelFilter {
@@ -5578,23 +5467,6 @@ mod web {
         fn cst_decode(self) -> std::collections::HashMap<String, u64> {
             let vec: Vec<(String, u64)> = self.cst_decode();
             vec.into_iter().collect()
-        }
-    }
-    impl
-        CstDecode<
-            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>,
-        > for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
-    {
-        // Codec=Cst (C-struct based), see doc to use other codecs
-        fn cst_decode(
-            self,
-        ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>
-        {
-            #[cfg(target_pointer_width = "64")]
-            {
-                compile_error!("64-bit pointers are not supported.");
-            }
-            unsafe { decode_rust_opaque_nom((self.as_f64().unwrap() as usize) as _) }
         }
     }
     impl
@@ -6331,9 +6203,9 @@ mod web {
 
     #[wasm_bindgen]
     pub fn wire__crate__api__utils__get_mnemonic_words(
-        input: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+        language_index: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__utils__get_mnemonic_words_impl(input)
+        wire__crate__api__utils__get_mnemonic_words_impl(language_index)
     }
 
     #[wasm_bindgen]
@@ -6403,24 +6275,6 @@ mod web {
         l1_low: bool,
     ) {
         wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_low)
-    }
-
-    #[wasm_bindgen]
-    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
-        ptr: *const std::ffi::c_void,
-    ) {
-        unsafe {
-            StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>::increment_strong_count(ptr as _);
-        }
-    }
-
-    #[wasm_bindgen]
-    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLanguageInput(
-        ptr: *const std::ffi::c_void,
-    ) {
-        unsafe {
-            StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<LanguageInput>>::decrement_strong_count(ptr as _);
-        }
     }
 
     #[wasm_bindgen]

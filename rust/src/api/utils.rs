@@ -12,12 +12,6 @@ use xelis_common::{
     },
 };
 
-#[frb(sync)]
-pub enum LanguageInput<'a> {
-    Name(&'a str),
-    Index(usize),
-}
-
 // convert a language name or ISO 639-1 code to the equivalent Xelis language index
 #[frb(sync)]
 pub fn get_language_index_from_str(input: &str) -> usize {
@@ -41,11 +35,8 @@ pub fn get_language_index_from_str(input: &str) -> usize {
 
 // return a list of all valid mnemonic words for a given language
 #[frb(sync)]
-pub fn get_mnemonic_words(input: LanguageInput) -> Vec<String> {
-    let language = match input {
-        LanguageInput::Index(i) => LANGUAGES.get(i).unwrap_or(&ENGLISH),
-        LanguageInput::Name(s) => LANGUAGES.get(get_language_index_from_str(s)).unwrap_or(&ENGLISH),
-    };
+pub fn get_mnemonic_words(language_index: usize) -> Vec<String> {
+    let language = LANGUAGES.get(language_index).unwrap_or(&ENGLISH);
 
     language.get_words().iter().map(|w| w.to_string()).collect()
 }
