@@ -104,6 +104,9 @@ abstract class XelisWallet implements RustOpaqueInterface {
   Future<String> createTransfersTransaction(
       {required List<Transfer> transfers});
 
+  static void dropWallet({required XelisWallet this_}) =>
+      RustLib.instance.api.crateApiWalletXelisWalletDropWallet(this_: this_);
+
   Future<String> estimateFees({required List<Transfer> transfers});
 
   Stream<String> eventsStream();

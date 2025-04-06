@@ -57,6 +57,11 @@ pub fn get_cached_table() -> Option<PrecomputedTablesShared> {
     guard.clone()
 }
 
+#[frb(sync)]
+pub fn drop_wallet(wallet: XelisWallet) {
+    drop(wallet);
+}
+
 pub async fn create_xelis_wallet(
     name: String,
     directory: String,

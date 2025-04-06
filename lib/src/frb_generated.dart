@@ -74,7 +74,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.9.0';
 
   @override
-  int get rustContentHash => 1158392146;
+  int get rustContentHash => 1311676756;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -158,6 +158,8 @@ abstract class RustLibApi extends BaseApi {
 
   Future<String> crateApiWalletXelisWalletCreateTransfersTransaction(
       {required XelisWallet that, required List<Transfer> transfers});
+
+  void crateApiWalletXelisWalletDropWallet({required XelisWallet this_});
 
   Future<String> crateApiWalletXelisWalletEstimateFees(
       {required XelisWallet that, required List<Transfer> transfers});
@@ -1006,6 +1008,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             debugName: "XelisWallet_create_transfers_transaction",
             argNames: ["that", "transfers"],
           );
+
+  @override
+  void crateApiWalletXelisWalletDropWallet({required XelisWallet this_}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
+                this_);
+        return wire.wire__crate__api__wallet__XelisWallet_drop_wallet(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiWalletXelisWalletDropWalletConstMeta,
+      argValues: [this_],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiWalletXelisWalletDropWalletConstMeta =>
+      const TaskConstMeta(
+        debugName: "XelisWallet_drop_wallet",
+        argNames: ["this_"],
+      );
 
   @override
   Future<String> crateApiWalletXelisWalletEstimateFees(

@@ -159,6 +159,8 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers
                                                                                              uintptr_t that,
                                                                                              struct wire_cst_list_transfer *transfers);
 
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet(uintptr_t this_);
+
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees(int64_t port_,
                                                                               uintptr_t that,
                                                                               struct wire_cst_list_transfer *transfers);
@@ -397,6 +399,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_transaction);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers_transaction);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_events_stream);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file);

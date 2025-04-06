@@ -1655,6 +1655,21 @@ class RustLibWire implements BaseWire {
           .asFunction<
               void Function(int, int, ffi.Pointer<wire_cst_list_transfer>)>();
 
+  WireSyncRust2DartDco wire__crate__api__wallet__XelisWallet_drop_wallet(
+    int this_,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_drop_wallet(
+      this_,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_drop_walletPtr = _lookup<
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet');
+  late final _wire__crate__api__wallet__XelisWallet_drop_wallet =
+      _wire__crate__api__wallet__XelisWallet_drop_walletPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
   void wire__crate__api__wallet__XelisWallet_estimate_fees(
     int port_,
     int that,
