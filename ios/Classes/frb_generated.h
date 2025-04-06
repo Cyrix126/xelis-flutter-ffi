@@ -159,8 +159,6 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers
                                                                                              uintptr_t that,
                                                                                              struct wire_cst_list_transfer *transfers);
 
-WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet(uintptr_t this_);
-
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees(int64_t port_,
                                                                               uintptr_t that,
                                                                               struct wire_cst_list_transfer *transfers);
@@ -247,6 +245,8 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet(int64_t 
                                                                         struct wire_cst_list_prim_u_8_strict *private_key,
                                                                         struct wire_cst_list_prim_u_8_strict *precomputed_tables_path,
                                                                         bool *l1_low);
+
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet(uintptr_t wallet);
 
 void frbgen_xelis_flutter_wire__crate__api__utils__format_coin(int64_t port_,
                                                                uint64_t value,
@@ -399,7 +399,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_burn_transaction);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfer_all_transaction);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_create_transfers_transaction);
-    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_events_stream);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_export_transactions_to_csv_file);
@@ -421,6 +420,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_online_mode);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_rescan);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__get_cached_table);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__open_xelis_wallet);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__update_tables);

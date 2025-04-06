@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.9.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1311676756;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 2126154034;
 
 // Section: executor
 
@@ -958,26 +958,6 @@ fn wire__crate__api__wallet__XelisWallet_create_transfers_transaction_impl(
                     .await,
                 )
             }
-        },
-    )
-}
-fn wire__crate__api__wallet__XelisWallet_drop_wallet_impl(
-    this: impl CstDecode<XelisWallet>,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_drop_wallet",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let api_this = this.cst_decode();
-            transform_result_dco::<_, _, ()>((move || {
-                let output_ok = Result::<_, ()>::Ok({
-                    crate::api::wallet::XelisWallet::drop_wallet(api_this);
-                })?;
-                Ok(output_ok)
-            })())
         },
     )
 }
@@ -2028,6 +2008,26 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
                     .await,
                 )
             }
+        },
+    )
+}
+fn wire__crate__api__wallet__drop_wallet_impl(
+    wallet: impl CstDecode<XelisWallet>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "drop_wallet",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_wallet = wallet.cst_decode();
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok({
+                    crate::api::wallet::drop_wallet(api_wallet);
+                })?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -4433,13 +4433,6 @@ field1: Default::default(), }
     }
 
     #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet(
-        this: usize,
-    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__wallet__XelisWallet_drop_wallet_impl(this)
-    }
-
-    #[unsafe(no_mangle)]
     pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_estimate_fees(
         port_: i64,
         that: usize,
@@ -4661,6 +4654,13 @@ field1: Default::default(), }
             precomputed_tables_path,
             l1_low,
         )
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet(
+        wallet: usize,
+    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+        wire__crate__api__wallet__drop_wallet_impl(wallet)
     }
 
     #[unsafe(no_mangle)]
@@ -5975,13 +5975,6 @@ mod web {
     }
 
     #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_drop_wallet(
-        this: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__wallet__XelisWallet_drop_wallet_impl(this)
-    }
-
-    #[wasm_bindgen]
     pub fn wire__crate__api__wallet__XelisWallet_estimate_fees(
         port_: flutter_rust_bridge::for_generated::MessagePort,
         that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -6203,6 +6196,13 @@ mod web {
             precomputed_tables_path,
             l1_low,
         )
+    }
+
+    #[wasm_bindgen]
+    pub fn wire__crate__api__wallet__drop_wallet(
+        wallet: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+        wire__crate__api__wallet__drop_wallet_impl(wallet)
     }
 
     #[wasm_bindgen]

@@ -1655,21 +1655,6 @@ class RustLibWire implements BaseWire {
           .asFunction<
               void Function(int, int, ffi.Pointer<wire_cst_list_transfer>)>();
 
-  WireSyncRust2DartDco wire__crate__api__wallet__XelisWallet_drop_wallet(
-    int this_,
-  ) {
-    return _wire__crate__api__wallet__XelisWallet_drop_wallet(
-      this_,
-    );
-  }
-
-  late final _wire__crate__api__wallet__XelisWallet_drop_walletPtr = _lookup<
-          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
-      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_drop_wallet');
-  late final _wire__crate__api__wallet__XelisWallet_drop_wallet =
-      _wire__crate__api__wallet__XelisWallet_drop_walletPtr
-          .asFunction<WireSyncRust2DartDco Function(int)>();
-
   void wire__crate__api__wallet__XelisWallet_estimate_fees(
     int port_,
     int that,
@@ -2156,6 +2141,21 @@ class RustLibWire implements BaseWire {
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<ffi.Bool>)>();
+
+  WireSyncRust2DartDco wire__crate__api__wallet__drop_wallet(
+    int wallet,
+  ) {
+    return _wire__crate__api__wallet__drop_wallet(
+      wallet,
+    );
+  }
+
+  late final _wire__crate__api__wallet__drop_walletPtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet');
+  late final _wire__crate__api__wallet__drop_wallet =
+      _wire__crate__api__wallet__drop_walletPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
 
   void wire__crate__api__utils__format_coin(
     int port_,

@@ -14,6 +14,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 PrecomputedTablesShared? getCachedTable() =>
     RustLib.instance.api.crateApiWalletGetCachedTable();
 
+void dropWallet({required XelisWallet wallet}) =>
+    RustLib.instance.api.crateApiWalletDropWallet(wallet: wallet);
+
 Future<XelisWallet> createXelisWallet(
         {required String name,
         required String directory,
@@ -103,9 +106,6 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   Future<String> createTransfersTransaction(
       {required List<Transfer> transfers});
-
-  static void dropWallet({required XelisWallet this_}) =>
-      RustLib.instance.api.crateApiWalletXelisWalletDropWallet(this_: this_);
 
   Future<String> estimateFees({required List<Transfer> transfers});
 
