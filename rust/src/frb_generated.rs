@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.9.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 2126154034;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1606222960;
 
 // Section: executor
 
@@ -1199,6 +1199,105 @@ fn wire__crate__api__wallet__XelisWallet_get_address_str_impl(
         },
     )
 }
+fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<
+        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
+    >,
+    asset: impl CstDecode<String>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "XelisWallet_get_asset_balance_by_id",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            let api_asset = asset.cst_decode();
+            move |context| async move {
+                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::api::wallet::XelisWallet::get_asset_balance_by_id(
+                            &*api_that_guard,
+                            api_asset,
+                        )
+                        .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<
+        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
+    >,
+    asset: impl CstDecode<String>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "XelisWallet_get_asset_balance_by_id_raw",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            let api_asset = asset.cst_decode();
+            move |context| async move {
+                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::api::wallet::XelisWallet::get_asset_balance_by_id_raw(
+                                &*api_that_guard,
+                                api_asset,
+                            )
+                            .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__wallet__XelisWallet_get_asset_balances_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<
@@ -1327,6 +1426,104 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_decimals_impl(
                         }
                         let api_that_guard = api_that_guard.unwrap();
                         let output_ok = crate::api::wallet::XelisWallet::get_asset_decimals(
+                            &*api_that_guard,
+                            api_asset,
+                        )
+                        .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__wallet__XelisWallet_get_asset_metadata_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<
+        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
+    >,
+    asset: impl CstDecode<String>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "XelisWallet_get_asset_metadata",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            let api_asset = asset.cst_decode();
+            move |context| async move {
+                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::api::wallet::XelisWallet::get_asset_metadata(
+                            &*api_that_guard,
+                            api_asset,
+                        )
+                        .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__wallet__XelisWallet_get_asset_ticker_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<
+        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
+    >,
+    asset: impl CstDecode<String>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "XelisWallet_get_asset_ticker",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            let api_asset = asset.cst_decode();
+            move |context| async move {
+                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::api::wallet::XelisWallet::get_asset_ticker(
                             &*api_that_guard,
                             api_asset,
                         )
@@ -2893,6 +3090,22 @@ impl SseDecode for usize {
     }
 }
 
+impl SseDecode for crate::api::wallet::XelisAssetMetadata {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_ticker = <String>::sse_decode(deserializer);
+        let mut var_decimals = <u8>::sse_decode(deserializer);
+        let mut var_maxSupply = <u64>::sse_decode(deserializer);
+        return crate::api::wallet::XelisAssetMetadata {
+            name: var_name,
+            ticker: var_ticker,
+            decimals: var_decimals,
+            max_supply: var_maxSupply,
+        };
+    }
+}
+
 fn pde_ffi_dispatcher_primary_impl(
     func_id: i32,
     port: flutter_rust_bridge::for_generated::MessagePort,
@@ -3190,6 +3403,29 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::wallet::Transfer>
     for crate::api::wallet::Transfer
 {
     fn into_into_dart(self) -> crate::api::wallet::Transfer {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::wallet::XelisAssetMetadata {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.name.into_into_dart().into_dart(),
+            self.ticker.into_into_dart().into_dart(),
+            self.decimals.into_into_dart().into_dart(),
+            self.max_supply.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::wallet::XelisAssetMetadata
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::wallet::XelisAssetMetadata>
+    for crate::api::wallet::XelisAssetMetadata
+{
+    fn into_into_dart(self) -> crate::api::wallet::XelisAssetMetadata {
         self
     }
 }
@@ -3677,6 +3913,16 @@ impl SseEncode for usize {
     }
 }
 
+impl SseEncode for crate::api::wallet::XelisAssetMetadata {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.name, serializer);
+        <String>::sse_encode(self.ticker, serializer);
+        <u8>::sse_encode(self.decimals, serializer);
+        <u64>::sse_encode(self.max_supply, serializer);
+    }
+}
+
 #[cfg(not(target_family = "wasm"))]
 mod io {
     // This file is automatically generated, so please do not edit it.
@@ -4147,6 +4393,17 @@ mod io {
             }
         }
     }
+    impl CstDecode<crate::api::wallet::XelisAssetMetadata> for wire_cst_xelis_asset_metadata {
+        // Codec=Cst (C-struct based), see doc to use other codecs
+        fn cst_decode(self) -> crate::api::wallet::XelisAssetMetadata {
+            crate::api::wallet::XelisAssetMetadata {
+                name: self.name.cst_decode(),
+                ticker: self.ticker.cst_decode(),
+                decimals: self.decimals.cst_decode(),
+                max_supply: self.max_supply.cst_decode(),
+            }
+        }
+    }
     impl NewWithNullPtr for wire_cst_log_entry {
         fn new_with_null_ptr() -> Self {
             Self {
@@ -4222,6 +4479,21 @@ field1: Default::default(), }
         }
     }
     impl Default for wire_cst_transfer {
+        fn default() -> Self {
+            Self::new_with_null_ptr()
+        }
+    }
+    impl NewWithNullPtr for wire_cst_xelis_asset_metadata {
+        fn new_with_null_ptr() -> Self {
+            Self {
+                name: core::ptr::null_mut(),
+                ticker: core::ptr::null_mut(),
+                decimals: Default::default(),
+                max_supply: Default::default(),
+            }
+        }
+    }
+    impl Default for wire_cst_xelis_asset_metadata {
         fn default() -> Self {
             Self::new_with_null_ptr()
         }
@@ -4484,6 +4756,24 @@ field1: Default::default(), }
     }
 
     #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+        port_: i64,
+        that: usize,
+        asset: *mut wire_cst_list_prim_u_8_strict,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(port_, that, asset)
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+        port_: i64,
+        that: usize,
+        asset: *mut wire_cst_list_prim_u_8_strict,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(port_, that, asset)
+    }
+
+    #[unsafe(no_mangle)]
     pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances(
         port_: i64,
         that: usize,
@@ -4506,6 +4796,24 @@ field1: Default::default(), }
         asset: *mut wire_cst_list_prim_u_8_strict,
     ) {
         wire__crate__api__wallet__XelisWallet_get_asset_decimals_impl(port_, that, asset)
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+        port_: i64,
+        that: usize,
+        asset: *mut wire_cst_list_prim_u_8_strict,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_metadata_impl(port_, that, asset)
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_ticker(
+        port_: i64,
+        that: usize,
+        asset: *mut wire_cst_list_prim_u_8_strict,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_ticker_impl(port_, that, asset)
     }
 
     #[unsafe(no_mangle)]
@@ -5113,6 +5421,14 @@ field1: Default::default(), }
         asset_hash: *mut wire_cst_list_prim_u_8_strict,
         extra_data: *mut wire_cst_list_prim_u_8_strict,
     }
+    #[repr(C)]
+    #[derive(Clone, Copy)]
+    pub struct wire_cst_xelis_asset_metadata {
+        name: *mut wire_cst_list_prim_u_8_strict,
+        ticker: *mut wire_cst_list_prim_u_8_strict,
+        decimals: u8,
+        max_supply: u64,
+    }
 }
 #[cfg(not(target_family = "wasm"))]
 pub use io::*;
@@ -5355,6 +5671,28 @@ mod web {
                 str_address: self_.get(1).cst_decode(),
                 asset_hash: self_.get(2).cst_decode(),
                 extra_data: self_.get(3).cst_decode(),
+            }
+        }
+    }
+    impl CstDecode<crate::api::wallet::XelisAssetMetadata>
+        for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
+    {
+        // Codec=Cst (C-struct based), see doc to use other codecs
+        fn cst_decode(self) -> crate::api::wallet::XelisAssetMetadata {
+            let self_ = self
+                .dyn_into::<flutter_rust_bridge::for_generated::js_sys::Array>()
+                .unwrap();
+            assert_eq!(
+                self_.length(),
+                4,
+                "Expected 4 elements, got {}",
+                self_.length()
+            );
+            crate::api::wallet::XelisAssetMetadata {
+                name: self_.get(0).cst_decode(),
+                ticker: self_.get(1).cst_decode(),
+                decimals: self_.get(2).cst_decode(),
+                max_supply: self_.get(3).cst_decode(),
             }
         }
     }
@@ -6026,6 +6364,24 @@ mod web {
     }
 
     #[wasm_bindgen]
+    pub fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+        port_: flutter_rust_bridge::for_generated::MessagePort,
+        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+        asset: String,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(port_, that, asset)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+        port_: flutter_rust_bridge::for_generated::MessagePort,
+        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+        asset: String,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(port_, that, asset)
+    }
+
+    #[wasm_bindgen]
     pub fn wire__crate__api__wallet__XelisWallet_get_asset_balances(
         port_: flutter_rust_bridge::for_generated::MessagePort,
         that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -6048,6 +6404,24 @@ mod web {
         asset: String,
     ) {
         wire__crate__api__wallet__XelisWallet_get_asset_decimals_impl(port_, that, asset)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+        port_: flutter_rust_bridge::for_generated::MessagePort,
+        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+        asset: String,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_metadata_impl(port_, that, asset)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire__crate__api__wallet__XelisWallet_get_asset_ticker(
+        port_: flutter_rust_bridge::for_generated::MessagePort,
+        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+        asset: String,
+    ) {
+        wire__crate__api__wallet__XelisWallet_get_asset_ticker_impl(port_, that, asset)
     }
 
     #[wasm_bindgen]

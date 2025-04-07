@@ -296,6 +296,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt dco_decode_usize(dynamic raw);
 
   @protected
+  XelisAssetMetadata dco_decode_xelis_asset_metadata(dynamic raw);
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
@@ -535,6 +538,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
+  XelisAssetMetadata sse_decode_xelis_asset_metadata(
+      SseDeserializer deserializer);
 
   @protected
   ffi.Pointer<wire_cst_list_prim_u_8_strict> cst_encode_AnyhowException(
@@ -791,6 +798,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     wireObj.str_address = cst_encode_String(apiObj.strAddress);
     wireObj.asset_hash = cst_encode_String(apiObj.assetHash);
     wireObj.extra_data = cst_encode_opt_String(apiObj.extraData);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_xelis_asset_metadata(
+      XelisAssetMetadata apiObj, wire_cst_xelis_asset_metadata wireObj) {
+    wireObj.name = cst_encode_String(apiObj.name);
+    wireObj.ticker = cst_encode_String(apiObj.ticker);
+    wireObj.decimals = cst_encode_u_8(apiObj.decimals);
+    wireObj.max_supply = cst_encode_u_64(apiObj.maxSupply);
   }
 
   @protected
@@ -1152,6 +1168,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_xelis_asset_metadata(
+      XelisAssetMetadata self, SseSerializer serializer);
 }
 
 // Section: wire_class
@@ -1761,6 +1781,54 @@ class RustLibWire implements BaseWire {
       _wire__crate__api__wallet__XelisWallet_get_address_strPtr
           .asFunction<WireSyncRust2DartDco Function(int)>();
 
+  void wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+      port_,
+      that,
+      asset,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_idPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id =
+      _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_idPtr
+          .asFunction<
+              void Function(
+                  int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+      port_,
+      that,
+      asset,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_rawPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                      ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+          'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw =
+      _wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_rawPtr
+          .asFunction<
+              void Function(
+                  int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
   void wire__crate__api__wallet__XelisWallet_get_asset_balances(
     int port_,
     int that,
@@ -1814,6 +1882,50 @@ class RustLibWire implements BaseWire {
       'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_decimals');
   late final _wire__crate__api__wallet__XelisWallet_get_asset_decimals =
       _wire__crate__api__wallet__XelisWallet_get_asset_decimalsPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+      port_,
+      that,
+      asset,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_metadataPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_metadata');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_metadata =
+      _wire__crate__api__wallet__XelisWallet_get_asset_metadataPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_ticker(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> asset,
+  ) {
+    return _wire__crate__api__wallet__XelisWallet_get_asset_ticker(
+      port_,
+      that,
+      asset,
+    );
+  }
+
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_tickerPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_ticker');
+  late final _wire__crate__api__wallet__XelisWallet_get_asset_ticker =
+      _wire__crate__api__wallet__XelisWallet_get_asset_tickerPtr.asFunction<
           void Function(
               int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
@@ -2934,4 +3046,16 @@ final class wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_genera
 
   @ffi.UintPtr()
   external int field1;
+}
+
+final class wire_cst_xelis_asset_metadata extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> name;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> ticker;
+
+  @ffi.Uint8()
+  external int decimals;
+
+  @ffi.Uint64()
+  external int max_supply;
 }

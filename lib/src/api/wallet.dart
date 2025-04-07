@@ -7,9 +7,11 @@ import '../frb_generated.dart';
 import '../lib.dart';
 import 'network.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'wallet.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `convert_float_amount`, `create_transfers`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `fmt`, `fmt`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`
 
 PrecomputedTablesShared? getCachedTable() =>
     RustLib.instance.api.crateApiWalletGetCachedTable();
@@ -117,11 +119,19 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   String getAddressStr();
 
+  Future<String> getAssetBalanceById({required String asset});
+
+  Future<BigInt> getAssetBalanceByIdRaw({required String asset});
+
   Future<Map<String, String>> getAssetBalances();
 
   Future<Map<String, BigInt>> getAssetBalancesRaw();
 
   Future<int> getAssetDecimals({required String asset});
+
+  Future<XelisAssetMetadata> getAssetMetadata({required String asset});
+
+  Future<String> getAssetTicker({required String asset});
 
   Future<String> getDaemonInfo();
 
@@ -177,4 +187,14 @@ class Transfer {
           strAddress == other.strAddress &&
           assetHash == other.assetHash &&
           extraData == other.extraData;
+}
+
+@freezed
+class XelisAssetMetadata with _$XelisAssetMetadata {
+  const factory XelisAssetMetadata({
+    required String name,
+    required String ticker,
+    required int decimals,
+    required BigInt maxSupply,
+  }) = _XelisAssetMetadata;
 }

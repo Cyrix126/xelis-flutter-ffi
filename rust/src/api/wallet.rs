@@ -35,6 +35,16 @@ pub struct SummaryTransaction {
     pub transaction_type: TransactionTypeBuilder,
 }
 
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[frb(dart_metadata=("freezed"))]
+pub struct XelisAssetMetadata {
+    pub name: String,
+    pub ticker: String,
+    pub decimals: u8,
+    pub max_supply: u64,
+}
+
+
 #[derive(Clone, Debug)]
 pub struct Transfer {
     pub float_amount: f64,
@@ -247,7 +257,7 @@ impl XelisWallet {
         Ok(balance)
     }
 
-    // get all the assets balances (atomic units) in a HashMap
+    // get all the assets balances in a HashMap
     pub async fn get_asset_balances(&self) -> Result<HashMap<String, String>> {
         let storage = self.wallet.get_storage().read().await;
         let mut balances = HashMap::new();
@@ -279,6 +289,29 @@ impl XelisWallet {
         Ok(balances)
     }
 
+    // get a single asset balance
+    pub async fn get_asset_balance_by_id(&self, asset: String) -> Result<String> {
+        let storage = self.wallet.get_storage().read().await;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let Some(asset) = storage.get_asset(&asset_hash).await.ok() else {
+            return Ok("0.0".to_string());
+        };
+
+        let balance = storage.get_balance_for(&asset_hash).await?;
+
+        Ok(format_coin(balance.amount, asset.get_decimals()))
+    }
+
+    // get a single asset balance (atomic units)
+    pub async fn get_asset_balance_by_id_raw(&self, asset: String) -> Result<u64> {
+        let storage = self.wallet.get_storage().read().await;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+
+        let balance = storage.get_balance_for(&asset_hash).await?;
+
+        Ok(balance.amount)
+    }
+
     // get the number of decimals of an asset
     pub async fn get_asset_decimals(&self, asset: String) -> Result<u8> {
         let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
@@ -288,6 +321,35 @@ impl XelisWallet {
             .await
             .context("Asset not found in storage")?;
         Ok(asset.get_decimals())
+    }
+
+    // get the general information about an asset, using its id/hash
+    pub async fn get_asset_metadata(&self, asset: String) -> Result<XelisAssetMetadata> {
+        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let storage = self.wallet.get_storage().read().await;
+        let asset = storage
+            .get_asset(&asset_hash)
+            .await
+            .context("Asset not found in storage")?;
+        
+        let result = XelisAssetMetadata {
+            name: asset.get_name().to_string(),
+            ticker: asset.get_ticker().to_string(),
+            decimals: asset.get_decimals(),
+            max_supply: asset.get_max_supply().unwrap_or(u64::MAX),
+        };
+        Ok(result)
+    }
+
+    // get the ticker of an asset
+    pub async fn get_asset_ticker(&self, asset: String) -> Result<String> {
+        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let storage = self.wallet.get_storage().read().await;
+        let asset = storage
+            .get_asset(&asset_hash)
+            .await
+            .context("Asset not found in storage")?;
+        Ok(asset.get_ticker().to_string())
     }
 
     // rescan the wallet history from a specific height

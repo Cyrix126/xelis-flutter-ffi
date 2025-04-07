@@ -298,6 +298,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt dco_decode_usize(dynamic raw);
 
   @protected
+  XelisAssetMetadata dco_decode_xelis_asset_metadata(dynamic raw);
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
@@ -539,6 +542,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt sse_decode_usize(SseDeserializer deserializer);
 
   @protected
+  XelisAssetMetadata sse_decode_xelis_asset_metadata(
+      SseDeserializer deserializer);
+
+  @protected
   String cst_encode_AnyhowException(AnyhowException raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     throw UnimplementedError();
@@ -753,6 +760,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   JSAny cst_encode_usize(BigInt raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return castNativeBigInt(raw);
+  }
+
+  @protected
+  JSAny cst_encode_xelis_asset_metadata(XelisAssetMetadata raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_String(raw.name),
+      cst_encode_String(raw.ticker),
+      cst_encode_u_8(raw.decimals),
+      cst_encode_u_64(raw.maxSupply)
+    ].jsify()!;
   }
 
   @protected
@@ -1114,6 +1132,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_xelis_asset_metadata(
+      XelisAssetMetadata self, SseSerializer serializer);
 }
 
 // Section: wire_class
@@ -1289,6 +1311,17 @@ class RustLibWire implements BaseWire {
           wasmModule
               .wire__crate__api__wallet__XelisWallet_get_address_str(that);
 
+  void wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+          NativePortType port_, int that, String asset) =>
+      wasmModule.wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+          port_, that, asset);
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+          NativePortType port_, int that, String asset) =>
+      wasmModule
+          .wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+              port_, that, asset);
+
   void wire__crate__api__wallet__XelisWallet_get_asset_balances(
           NativePortType port_, int that) =>
       wasmModule.wire__crate__api__wallet__XelisWallet_get_asset_balances(
@@ -1302,6 +1335,16 @@ class RustLibWire implements BaseWire {
   void wire__crate__api__wallet__XelisWallet_get_asset_decimals(
           NativePortType port_, int that, String asset) =>
       wasmModule.wire__crate__api__wallet__XelisWallet_get_asset_decimals(
+          port_, that, asset);
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+          NativePortType port_, int that, String asset) =>
+      wasmModule.wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+          port_, that, asset);
+
+  void wire__crate__api__wallet__XelisWallet_get_asset_ticker(
+          NativePortType port_, int that, String asset) =>
+      wasmModule.wire__crate__api__wallet__XelisWallet_get_asset_ticker(
           port_, that, asset);
 
   void wire__crate__api__wallet__XelisWallet_get_daemon_info(
@@ -1675,6 +1718,13 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
   external JSAny? /* flutter_rust_bridge::for_generated::WireSyncRust2DartDco */
       wire__crate__api__wallet__XelisWallet_get_address_str(int that);
 
+  external void wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
+      NativePortType port_, int that, String asset);
+
+  external void
+      wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw(
+          NativePortType port_, int that, String asset);
+
   external void wire__crate__api__wallet__XelisWallet_get_asset_balances(
       NativePortType port_, int that);
 
@@ -1682,6 +1732,12 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
       NativePortType port_, int that);
 
   external void wire__crate__api__wallet__XelisWallet_get_asset_decimals(
+      NativePortType port_, int that, String asset);
+
+  external void wire__crate__api__wallet__XelisWallet_get_asset_metadata(
+      NativePortType port_, int that, String asset);
+
+  external void wire__crate__api__wallet__XelisWallet_get_asset_ticker(
       NativePortType port_, int that, String asset);
 
   external void wire__crate__api__wallet__XelisWallet_get_daemon_info(
