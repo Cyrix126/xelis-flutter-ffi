@@ -3478,7 +3478,6 @@ name = "xelis_flutter"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bytemuck_derive",
  "flutter_rust_bridge",
  "lazy_static",
  "log",
