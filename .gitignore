@@ -37,6 +37,7 @@ macos/libs/
 lib/git_versions.dart
 lib/src/*
 rust/src/frb_generated.rs
+temp/
 
 scripts/windows/vcpkg/
 scripts/linux/xelis_flutter_bins/
