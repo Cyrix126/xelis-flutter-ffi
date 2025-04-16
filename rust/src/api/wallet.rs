@@ -11,6 +11,7 @@ use parking_lot::{Mutex, RwLock};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use xelis_common::api::{DataElement, DataValue};
+use xelis_common::asset::{AssetData};
 use xelis_common::config::{COIN_DECIMALS, XELIS_ASSET};
 use xelis_common::crypto::{Address, Hash, Hashable};
 use xelis_common::network::Network;
@@ -37,13 +38,20 @@ pub struct SummaryTransaction {
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[frb(dart_metadata=("freezed"))]
+pub struct XelisAssetOwner {
+    pub contract: String,
+    pub id: u64,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+#[frb(dart_metadata=("freezed"))]
 pub struct XelisAssetMetadata {
     pub name: String,
     pub ticker: String,
     pub decimals: u8,
     pub max_supply: u64,
+    pub owner: Option<XelisAssetOwner>,
 }
-
 
 #[derive(Clone, Debug)]
 pub struct Transfer {
@@ -312,31 +320,56 @@ impl XelisWallet {
         Ok(balance.amount)
     }
 
+    // Helper method to get asset data either from storage or daemon
+    async fn get_asset_data(&self, asset_hash: &Hash) -> Result<AssetData> {
+        let storage = self.wallet.get_storage().read().await;
+        
+        // First try to get from wallet storage
+        if let Ok(asset) = storage.get_asset(asset_hash).await {
+            return Ok(asset);
+        }
+        drop(storage);
+        
+        if !self.wallet.is_online().await {
+            return Err(anyhow!("Asset not found in wallet storage and wallet is offline"));
+        }
+        
+        // Get from daemon
+        let network_handler = self.wallet.get_network_handler().lock().await;
+        let handler = network_handler.as_ref()
+            .ok_or_else(|| anyhow!("Network handler not available"))?;
+        
+        let api = handler.get_api();
+        
+        let asset_data = api.get_asset(asset_hash).await
+            .context(format!("Failed to get asset {} from daemon", asset_hash))?;
+        
+        Ok(asset_data.inner)
+    }
+
     // get the number of decimals of an asset
     pub async fn get_asset_decimals(&self, asset: String) -> Result<u8> {
         let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
-        let storage = self.wallet.get_storage().read().await;
-        let asset = storage
-            .get_asset(&asset_hash)
-            .await
-            .context("Asset not found in storage")?;
+        let asset = self.get_asset_data(&asset_hash).await?;
         Ok(asset.get_decimals())
     }
 
     // get the general information about an asset, using its id/hash
     pub async fn get_asset_metadata(&self, asset: String) -> Result<XelisAssetMetadata> {
         let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
-        let storage = self.wallet.get_storage().read().await;
-        let asset = storage
-            .get_asset(&asset_hash)
-            .await
-            .context("Asset not found in storage")?;
+        let asset = self.get_asset_data(&asset_hash).await?;
         
+        let owner_wrapper = asset.get_owner().clone().map(|owner| XelisAssetOwner {
+            contract: owner.get_contract().to_hex(),
+            id: owner.get_id(),
+        });
+
         let result = XelisAssetMetadata {
             name: asset.get_name().to_string(),
             ticker: asset.get_ticker().to_string(),
             decimals: asset.get_decimals(),
             max_supply: asset.get_max_supply().unwrap_or(u64::MAX),
+            owner: owner_wrapper,
         };
         Ok(result)
     }
@@ -344,11 +377,7 @@ impl XelisWallet {
     // get the ticker of an asset
     pub async fn get_asset_ticker(&self, asset: String) -> Result<String> {
         let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
-        let storage = self.wallet.get_storage().read().await;
-        let asset = storage
-            .get_asset(&asset_hash)
-            .await
-            .context("Asset not found in storage")?;
+        let asset = self.get_asset_data(&asset_hash).await?;
         Ok(asset.get_ticker().to_string())
     }
 

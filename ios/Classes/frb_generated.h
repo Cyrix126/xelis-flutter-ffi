@@ -56,6 +56,11 @@ typedef struct wire_cst_report {
   union ReportKind kind;
 } wire_cst_report;
 
+typedef struct wire_cst_xelis_asset_owner {
+  struct wire_cst_list_prim_u_8_strict *contract;
+  uint64_t id;
+} wire_cst_xelis_asset_owner;
+
 typedef struct wire_cst_record_string_string {
   struct wire_cst_list_prim_u_8_strict *field0;
   struct wire_cst_list_prim_u_8_strict *field1;
@@ -92,6 +97,7 @@ typedef struct wire_cst_xelis_asset_metadata {
   struct wire_cst_list_prim_u_8_strict *ticker;
   uint8_t decimals;
   uint64_t max_supply;
+  struct wire_cst_xelis_asset_owner *owner;
 } wire_cst_xelis_asset_metadata;
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_check_seed(uintptr_t that,
@@ -350,6 +356,8 @@ struct wire_cst_report *frbgen_xelis_flutter_cst_new_box_autoadd_report(void);
 
 uintptr_t *frbgen_xelis_flutter_cst_new_box_autoadd_usize(uintptr_t value);
 
+struct wire_cst_xelis_asset_owner *frbgen_xelis_flutter_cst_new_box_autoadd_xelis_asset_owner(void);
+
 struct wire_cst_list_String *frbgen_xelis_flutter_cst_new_list_String(int32_t len);
 
 struct wire_cst_list_prim_u_8_strict *frbgen_xelis_flutter_cst_new_list_prim_u_8_strict(int32_t len);
@@ -365,6 +373,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_box_autoadd_bool);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_box_autoadd_report);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_box_autoadd_usize);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_box_autoadd_xelis_asset_owner);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_String);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_prim_u_8_strict);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_string);
