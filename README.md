@@ -69,7 +69,3 @@ Future<void> createXelisWallet() async {
 ## Additional information
 
 The [Xelis Dart SDK](https://github.com/xelis-project/xelis-dart-sdk) is a dependency of this but is also a great tool to use alongside this library (as a direct dependency in your flutter app). It can be used for more direct RPC queries, health checks, data serialization, and more.
-
-## TODO
-
-Update the `examples/` folder with real calls
