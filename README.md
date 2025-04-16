@@ -14,7 +14,7 @@ and the Flutter guide for
 # Xelis Wallet FFI Bindings for Flutter
 This repo is setup to be a shoe-in library in flutter applications, allowing easy access to the native Rust wallet methods from `xelis-blockchain` without the need for any rewrites. This is enabled by the `flutter_rust_bridge_codegen` tool, as well as the automated build & dependency conventions used within this repository. 
 
-The continued adoption of GenesisX features and dev QOL needs for apps are the primary points of focus for this library, helping to facilitate Xelis integration and adoption for the community.
+The continued adoption of Genesix features and dev QOL needs for apps are the primary points of focus for this library, helping to facilitate Xelis integration and adoption for the community.
 
 ## Getting started
 To make use of `xelis-flutter-ffi`, simply add a git dependency to your flutter app's `pubspec.yaml`, like this:
