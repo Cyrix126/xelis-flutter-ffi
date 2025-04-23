@@ -341,10 +341,20 @@ impl XelisWallet {
         
         let api = handler.get_api();
         
-        let asset_data = api.get_asset(asset_hash).await
-            .context(format!("Failed to get asset {} from daemon", asset_hash))?;
-        
-        Ok(asset_data.inner)
+        if let Some(handler) = network_handler.as_ref() {
+            let api = handler.get_api();
+
+            let data = match api.get_asset(asset_hash).await {
+                Ok(data) => data,
+                Err(e) => {
+                    return Err(e);
+                }
+            };
+
+            Ok(data.inner)
+        } else {
+            Err(anyhow!("network handler not available"))
+        }
     }
 
     // get the number of decimals of an asset
