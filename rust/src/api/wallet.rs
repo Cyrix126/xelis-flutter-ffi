@@ -323,37 +323,32 @@ impl XelisWallet {
     // Helper method to get asset data either from storage or daemon
     async fn get_asset_data(&self, asset_hash: &Hash) -> Result<AssetData> {
         let storage = self.wallet.get_storage().read().await;
-        
-        // First try to get from wallet storage
-        if let Ok(asset) = storage.get_asset(asset_hash).await {
-            return Ok(asset);
-        }
-        drop(storage);
-        
-        if !self.wallet.is_online().await {
-            return Err(anyhow!("Asset not found in wallet storage and wallet is offline"));
-        }
-        
-        // Get from daemon
-        let network_handler = self.wallet.get_network_handler().lock().await;
-        let handler = network_handler.as_ref()
-            .ok_or_else(|| anyhow!("Network handler not available"))?;
-        
-        let api = handler.get_api();
-        
-        if let Some(handler) = network_handler.as_ref() {
-            let api = handler.get_api();
+        {
+            if let Ok(asset) = storage.get_asset(asset_hash).await {
+                return Ok(asset);
+            }
+            
+            if !self.wallet.is_online().await {
+                return Err(anyhow!("Asset not found in wallet storage and wallet is offline"));
+            }
+            
+            // Get from daemon
+            let network_handler = self.wallet.get_network_handler().lock().await;
 
-            let data = match api.get_asset(asset_hash).await {
-                Ok(data) => data,
-                Err(e) => {
-                    return Err(e);
-                }
-            };
+            if let Some(handler) = network_handler.as_ref() {
+                let api = handler.get_api();
 
-            Ok(data.inner)
-        } else {
-            Err(anyhow!("network handler not available"))
+                let data = match api.get_asset(asset_hash).await {
+                    Ok(data) => data,
+                    Err(e) => {
+                        return Err(e);
+                    }
+                };
+
+                Ok(data.inner)
+            } else {
+                Err(anyhow!("network handler not available"))
+            }
         }
     }
 
