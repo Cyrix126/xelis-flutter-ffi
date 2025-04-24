@@ -34,6 +34,8 @@ example_data/
 .pub/
 /build/
 
+lib/src/
+
 # Symbolication related
 app.*.symbols
 
