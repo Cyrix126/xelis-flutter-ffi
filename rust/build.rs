@@ -2,6 +2,7 @@ use lib_flutter_rust_bridge_codegen::codegen;
 use lib_flutter_rust_bridge_codegen::codegen::Config;
 use lib_flutter_rust_bridge_codegen::utils::logs::configure_opinionated_logging;
 use std::fs;
+use std::path::Path;
 
 fn main() -> anyhow::Result<()> {
     // Uncomment the line below, if you only want to generate bindings on api directory change.
