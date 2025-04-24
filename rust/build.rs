@@ -11,6 +11,12 @@ fn main() -> anyhow::Result<()> {
     //
     // println!("cargo:rerun-if-changed=src/api");
 
+    let dart_output_path = Path::new("../lib/src");
+    if !dart_output_path.exists() {
+        fs::create_dir_all(dart_output_path)?;
+        println!("Created Dart output directory: {:?}", dart_output_path);
+    }
+
     // If you want to see logs
     // Alternatively, use `cargo build -vvv` (instead of `cargo build`) to see logs on screen
     configure_opinionated_logging("./logs/", true)?;
