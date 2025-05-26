@@ -3,6 +3,7 @@ use std::fmt::Debug;
 use std::fs::File;
 use std::path::Path;
 use std::sync::Arc;
+use std::thread;
 
 use anyhow::{anyhow, bail, Context, Result};
 use flutter_rust_bridge::frb;
@@ -69,6 +70,9 @@ pub struct XelisWallet {
 // Precomputed tables for the wallet
 static CACHED_TABLES: Mutex<Option<PrecomputedTablesShared>> = Mutex::new(None);
 
+// Static cache for thread/concurrency parameters
+static MT_PARAMS: Mutex<Option<(usize, usize)>> = Mutex::new(None);
+
 #[frb(sync)]
 pub fn get_cached_table() -> Option<PrecomputedTablesShared> {
     let guard = CACHED_TABLES.lock();
@@ -80,6 +84,34 @@ pub fn drop_wallet(wallet: XelisWallet) {
     drop(wallet);
 }
 
+
+fn get_mt_params() -> (usize, usize) {
+    let mut guard = MT_PARAMS.lock();
+    
+    if let Some(params) = *guard {
+        return params;
+    }
+    
+    let cpu_cores = thread::available_parallelism().map(|p| p.get()).unwrap_or(1);
+    let thread_count = (cpu_cores - 2).max(1).min(32);
+    let concurrency = thread_count * 4;
+    
+    *guard = Some((thread_count, concurrency));
+    
+    (thread_count, concurrency)
+}
+
+#[frb(sync)]
+pub fn refresh_mt_params() {
+    *MT_PARAMS.lock() = None;
+    let _ = get_mt_params();
+}
+
+#[frb(sync)]
+pub fn set_mt_params(thread_count: usize, concurrency: usize) {
+    *MT_PARAMS.lock() = Some((thread_count, concurrency));
+}
+
 pub async fn create_xelis_wallet(
     name: String,
     directory: String,
@@ -88,20 +120,17 @@ pub async fn create_xelis_wallet(
     seed: Option<String>,
     private_key: Option<String>,
     precomputed_tables_path: Option<String>,
-    l1_low: Option<bool>,
+    l1_size: Option<usize>
 ) -> Result<XelisWallet> {
     let full_path = Path::new(&directory).join(&name).to_string_lossy().to_string();
+    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
+        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
 
     let precomputed_tables = {
         let tables = CACHED_TABLES.lock().clone();
         match tables {
             Some(tables) => tables,
             None => {
-                let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
-                    precomputed_tables::L1_LOW
-                } else {
-                    precomputed_tables::L1_FULL
-                };
                 let tables = precomputed_tables::read_or_generate_precomputed_tables(
                     precomputed_tables_path.as_deref(),
                     precomputed_tables_size,
@@ -125,7 +154,8 @@ pub async fn create_xelis_wallet(
         None
     };
 
-    let xelis_wallet = Wallet::create(&full_path, &password, recover, network, precomputed_tables)?;
+    let (thread_count, concurrency) = get_mt_params();
+    let xelis_wallet = Wallet::create(&full_path, &password, recover, network, precomputed_tables, thread_count, concurrency).await?;
     Ok(XelisWallet {
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),
@@ -135,13 +165,11 @@ pub async fn create_xelis_wallet(
 // for overwriting tables to update the memory footprint/decryption speed tradeoff
 pub async fn update_tables(
     precomputed_tables_path: String,
-    l1_low: bool
+    l1_size: Option<usize>
 ) -> Result<()> {
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low {
-        precomputed_tables::L1_LOW
-    } else {
-        precomputed_tables::L1_FULL
-    };
+    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
+        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
+
     let tables = precomputed_tables::read_or_generate_precomputed_tables(
         Some(&precomputed_tables_path),
         precomputed_tables_size,
@@ -161,15 +189,13 @@ pub async fn open_xelis_wallet(
     password: String,
     network: Network,
     precomputed_tables_path: Option<String>,
-    l1_low: Option<bool>,
+    l1_size: Option<usize>
 ) -> Result<XelisWallet> {
     let full_path = Path::new(&directory).join(&name).to_string_lossy().to_string();
 
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_low.unwrap_or(false) {
-        precomputed_tables::L1_LOW
-    } else {
-        precomputed_tables::L1_FULL
-    };
+    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
+        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
+
     let precomputed_tables = precomputed_tables::read_or_generate_precomputed_tables(
         precomputed_tables_path.as_deref(),
         precomputed_tables_size,
@@ -177,7 +203,9 @@ pub async fn open_xelis_wallet(
         true,
     )
     .await?;
-    let xelis_wallet = Wallet::open(&full_path, &password, network, precomputed_tables)?;
+
+    let (thread_count, concurrency) = get_mt_params();
+    let xelis_wallet = Wallet::open(&full_path, &password, network, precomputed_tables, thread_count, concurrency)?;
     Ok(XelisWallet {
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),
@@ -238,6 +266,30 @@ impl XelisWallet {
         self.wallet.is_valid_password(&password).await
     }
 
+    // Check if the asset is tracked
+    pub async fn is_asset_tracked(&self, asset: String) -> Result<bool> {
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
+
+        let storage = self.wallet.get_storage().read().await;
+        storage.is_asset_tracked(&asset_hash)
+    }
+
+    // Mark the requested asset as tracked
+    pub async fn track_asset(&mut self, asset: String) -> Result<bool> {
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
+
+        self.wallet.track_asset(asset_hash).await
+            .map_err(|e| anyhow::anyhow!("Failed to track asset: {}", e))
+    }
+
+    // Unmark the requested asset from being tracked
+    pub async fn untrack_asset(&mut self, asset: String) -> Result<bool> {
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
+
+        self.wallet.untrack_asset(asset_hash).await
+            .map_err(|e| anyhow::anyhow!("Failed to untrack asset: {}", e))
+    }
+
     // check if the wallet has a Xelis balance
     pub async fn has_xelis_balance(&self) -> Result<bool> {
         let storage = self.wallet.get_storage().read().await;
@@ -265,33 +317,77 @@ impl XelisWallet {
         Ok(balance)
     }
 
-    // get all the assets balances in a HashMap
+    // get all asset IDs present in wallet, independent from storage+balance information
+    pub async fn get_all_assets(&self) -> Result<Vec<String>> {
+        let storage = self.wallet.get_storage().read().await;
+        let mut asset_ids = Vec::new();
+
+        for asset in storage.get_assets().await? {
+            asset_ids.push(asset.to_string());
+        }
+
+        Ok(asset_ids)
+    }
+
+    // get all the asset balances in a HashMap
     pub async fn get_asset_balances(&self) -> Result<HashMap<String, String>> {
         let storage = self.wallet.get_storage().read().await;
         let mut balances = HashMap::new();
 
-        for (asset, data) in storage.get_assets_with_data().await? {
-            let balance = storage.get_balance_for(&asset).await?;
-            balances.insert(
-                asset.to_string(),
-                format_coin(balance.amount, data.get_decimals()),
-            );
+        for res in storage.get_assets_with_data().await? {
+            match res {
+                Ok((asset, data)) => {
+                    if !storage.is_asset_tracked(&asset)? {
+                        continue;
+                    }
+                    match storage.get_balance_for(&asset).await {
+                        Ok(balance) => {
+                            balances.insert(
+                                asset.to_string(),
+                                format_coin(balance.amount, data.get_decimals()),
+                            );
+                        }
+                        Err(err) => {
+                            debug!("Error with asset balance data entry for asset {}: {}", asset, err);
+                            balances.insert(
+                                asset.to_string(),
+                                format_xelis(0),
+                            );
+                        }
+                    }
+                },
+                Err(err) => {
+                    debug!("Error in get_asset_balances: {}", err);
+                }
+            }
         }
-
         Ok(balances)
     }
 
-    // get all the assets balances (atomic units) in a HashMap, unformatted
-    pub async fn get_asset_balances_raw(&self) -> Result<HashMap<String, u64>> {
+    // get all the tracked asset balances (atomic units) in a HashMap, unformatted
+    pub async fn get_tracked_asset_balances_raw(&self) -> Result<HashMap<String, u64>> {
         let storage = self.wallet.get_storage().read().await;
         let mut balances = HashMap::new();
 
-        for (asset, _data) in storage.get_assets_with_data().await? {
-            let balance = storage.get_balance_for(&asset).await?;
-            balances.insert(
-                asset.to_string(),
-                balance.amount,
-            );
+        let tracked_assets = storage.get_tracked_assets()?;
+        
+        for asset_result in tracked_assets {
+            let asset = asset_result?;
+            match storage.get_balance_for(&asset).await {
+                Ok(balance) => {
+                    balances.insert(
+                        asset.to_string(),
+                        balance.amount,
+                    );
+                }
+                Err(err) => {
+                    debug!("Error fetching raw balance for asset {}: {}", asset, err);
+                    balances.insert(
+                        asset.to_string(),
+                        0_u64,
+                    );
+                }
+            }
         }
 
         Ok(balances)
@@ -300,7 +396,8 @@ impl XelisWallet {
     // get a single asset balance
     pub async fn get_asset_balance_by_id(&self, asset: String) -> Result<String> {
         let storage = self.wallet.get_storage().read().await;
-        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
+
         let Some(asset) = storage.get_asset(&asset_hash).await.ok() else {
             return Ok("0.0".to_string());
         };
@@ -313,7 +410,10 @@ impl XelisWallet {
     // get a single asset balance (atomic units)
     pub async fn get_asset_balance_by_id_raw(&self, asset: String) -> Result<u64> {
         let storage = self.wallet.get_storage().read().await;
-        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
+        let Some(_) = storage.get_asset(&asset_hash).await.ok() else {
+            return Ok(0);
+        };
 
         let balance = storage.get_balance_for(&asset_hash).await?;
 
@@ -354,14 +454,14 @@ impl XelisWallet {
 
     // get the number of decimals of an asset
     pub async fn get_asset_decimals(&self, asset: String) -> Result<u8> {
-        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
         let asset = self.get_asset_data(&asset_hash).await?;
         Ok(asset.get_decimals())
     }
 
     // get the general information about an asset, using its id/hash
     pub async fn get_asset_metadata(&self, asset: String) -> Result<XelisAssetMetadata> {
-        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
         let asset = self.get_asset_data(&asset_hash).await?;
         
         let owner_wrapper = asset.get_owner().clone().map(|owner| XelisAssetOwner {
@@ -381,7 +481,7 @@ impl XelisWallet {
 
     // get the ticker of an asset
     pub async fn get_asset_ticker(&self, asset: String) -> Result<String> {
-        let asset_hash = Hash::from_hex(&asset).context("Invalid asset")?;
+        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
         let asset = self.get_asset_data(&asset_hash).await?;
         Ok(asset.get_ticker().to_string())
     }
@@ -459,7 +559,7 @@ impl XelisWallet {
 
         let asset = match asset_hash {
             None => XELIS_ASSET,
-            Some(value) => Hash::from_hex(&value).context("Invalid asset")?,
+            Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
         };
 
         let mut amount = {
@@ -542,7 +642,7 @@ impl XelisWallet {
 
         info!("Building burn transaction...");
 
-        let asset = Hash::from_hex(&asset_hash).context("Invalid asset")?;
+        let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
 
         let (amount, decimals) = {
             let storage = self.wallet.get_storage().read().await;
@@ -598,7 +698,7 @@ impl XelisWallet {
 
         info!("Building burn all transaction...");
 
-        let asset = Hash::from_hex(&asset_hash).context("Invalid asset")?;
+        let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
 
         let mut amount = {
             let storage = self.wallet.get_storage().read().await;
@@ -774,7 +874,7 @@ impl XelisWallet {
     ) -> Result<String> {
         let asset = match asset_hash {
             None => XELIS_ASSET,
-            Some(value) => Hash::from_hex(&value).context("Invalid asset")?,
+            Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
         };
 
         let decimals = {
@@ -824,7 +924,7 @@ impl XelisWallet {
         let mut vec = Vec::new();
 
         for transfer in transfers {
-            let asset = Hash::from_hex(&transfer.asset_hash).context("Invalid asset")?;
+            let asset = Hash::from_hex(&transfer.asset_hash).context("Invalid assetID")?;
 
             let amount = self
                 .convert_float_amount(transfer.float_amount, &asset)

@@ -10,7 +10,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'wallet.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `convert_float_amount`, `create_transfers`, `get_asset_data`
+// These functions are ignored because they are not marked as `pub`: `convert_float_amount`, `create_transfers`, `get_asset_data`, `get_mt_params`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `fmt`
 
 PrecomputedTablesShared? getCachedTable() =>
@@ -18,6 +18,12 @@ PrecomputedTablesShared? getCachedTable() =>
 
 void dropWallet({required XelisWallet wallet}) =>
     RustLib.instance.api.crateApiWalletDropWallet(wallet: wallet);
+
+void refreshMtParams() => RustLib.instance.api.crateApiWalletRefreshMtParams();
+
+void setMtParams({required BigInt threadCount, required BigInt concurrency}) =>
+    RustLib.instance.api.crateApiWalletSetMtParams(
+        threadCount: threadCount, concurrency: concurrency);
 
 Future<XelisWallet> createXelisWallet(
         {required String name,
@@ -27,7 +33,7 @@ Future<XelisWallet> createXelisWallet(
         String? seed,
         String? privateKey,
         String? precomputedTablesPath,
-        bool? l1Low}) =>
+        BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletCreateXelisWallet(
         name: name,
         directory: directory,
@@ -36,12 +42,12 @@ Future<XelisWallet> createXelisWallet(
         seed: seed,
         privateKey: privateKey,
         precomputedTablesPath: precomputedTablesPath,
-        l1Low: l1Low);
+        l1Size: l1Size);
 
 Future<void> updateTables(
-        {required String precomputedTablesPath, required bool l1Low}) =>
+        {required String precomputedTablesPath, BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletUpdateTables(
-        precomputedTablesPath: precomputedTablesPath, l1Low: l1Low);
+        precomputedTablesPath: precomputedTablesPath, l1Size: l1Size);
 
 Future<XelisWallet> openXelisWallet(
         {required String name,
@@ -49,14 +55,14 @@ Future<XelisWallet> openXelisWallet(
         required String password,
         required Network network,
         String? precomputedTablesPath,
-        bool? l1Low}) =>
+        BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletOpenXelisWallet(
         name: name,
         directory: directory,
         password: password,
         network: network,
         precomputedTablesPath: precomputedTablesPath,
-        l1Low: l1Low);
+        l1Size: l1Size);
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
 abstract class PrecomputedTablesShared implements RustOpaqueInterface {}
@@ -119,13 +125,13 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   String getAddressStr();
 
+  Future<List<String>> getAllAssets();
+
   Future<String> getAssetBalanceById({required String asset});
 
   Future<BigInt> getAssetBalanceByIdRaw({required String asset});
 
   Future<Map<String, String>> getAssetBalances();
-
-  Future<Map<String, BigInt>> getAssetBalancesRaw();
 
   Future<int> getAssetDecimals({required String asset});
 
@@ -141,11 +147,15 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   Future<String> getSeed({BigInt? languageIndex});
 
+  Future<Map<String, BigInt>> getTrackedAssetBalancesRaw();
+
   Future<String> getXelisBalance();
 
   Future<BigInt> getXelisBalanceRaw();
 
   Future<bool> hasXelisBalance();
+
+  Future<bool> isAssetTracked({required String asset});
 
   Future<bool> isOnline();
 
@@ -156,6 +166,10 @@ abstract class XelisWallet implements RustOpaqueInterface {
   Future<void> onlineMode({required String daemonAddress});
 
   Future<void> rescan({required BigInt topoheight});
+
+  Future<bool> trackAsset({required String asset});
+
+  Future<bool> untrackAsset({required String asset});
 }
 
 class Transfer {
