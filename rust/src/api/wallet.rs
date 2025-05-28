@@ -38,7 +38,6 @@ macro_rules! ffi_entry {
         let start_time = std::time::Instant::now();
         let thread_id = std::thread::current().id();
         trace!("FFI_ENTRY: {} on thread {:?}", $func_name, thread_id);
-        log::error!("FFI_ENTRY: {} on thread {:?}", $func_name, thread_id);
         (start_time, thread_id)
     }};
 }
@@ -47,7 +46,6 @@ macro_rules! ffi_exit {
     ($func_name:expr, $start_time:expr, $thread_id:expr) => {{
         let duration = $start_time.elapsed();
         trace!("FFI_EXIT: {} on thread {:?} - took {:?}", $func_name, $thread_id, duration);
-        log::error!("FFI_EXIT: {} on thread {:?} - took {:?}", $func_name, $thread_id, duration);
     }};
 }
 
