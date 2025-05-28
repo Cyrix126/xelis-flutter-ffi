@@ -81,6 +81,24 @@ typedef struct wire_cst_list_record_string_u_64 {
   int32_t len;
 } wire_cst_list_record_string_u_64;
 
+typedef struct wire_cst_xelis_asset_metadata {
+  struct wire_cst_list_prim_u_8_strict *name;
+  struct wire_cst_list_prim_u_8_strict *ticker;
+  uint8_t decimals;
+  uint64_t max_supply;
+  struct wire_cst_xelis_asset_owner *owner;
+} wire_cst_xelis_asset_metadata;
+
+typedef struct wire_cst_record_string_xelis_asset_metadata {
+  struct wire_cst_list_prim_u_8_strict *field0;
+  struct wire_cst_xelis_asset_metadata field1;
+} wire_cst_record_string_xelis_asset_metadata;
+
+typedef struct wire_cst_list_record_string_xelis_asset_metadata {
+  struct wire_cst_record_string_xelis_asset_metadata *ptr;
+  int32_t len;
+} wire_cst_list_record_string_xelis_asset_metadata;
+
 typedef struct wire_cst_log_entry {
   int32_t level;
   struct wire_cst_list_prim_u_8_strict *tag;
@@ -91,14 +109,6 @@ typedef struct wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_gen
   uintptr_t field0;
   uintptr_t field1;
 } wire_cst_record_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_transaction_builder_state;
-
-typedef struct wire_cst_xelis_asset_metadata {
-  struct wire_cst_list_prim_u_8_strict *name;
-  struct wire_cst_list_prim_u_8_strict *ticker;
-  uint8_t decimals;
-  uint64_t max_supply;
-  struct wire_cst_xelis_asset_owner *owner;
-} wire_cst_xelis_asset_metadata;
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__seed_search_engine__SearchEngine_check_seed(uintptr_t that,
                                                                                                         struct wire_cst_list_String *seed);
@@ -143,9 +153,8 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_change_password(
                                                                                 struct wire_cst_list_prim_u_8_strict *old_password,
                                                                                 struct wire_cst_list_prim_u_8_strict *new_password);
 
-void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_clear_transaction(int64_t port_,
-                                                                                  uintptr_t that,
-                                                                                  struct wire_cst_list_prim_u_8_strict *tx_hash);
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_clear_transaction(uintptr_t that,
+                                                                                                  struct wire_cst_list_prim_u_8_strict *tx_hash);
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_close(int64_t port_,
                                                                       uintptr_t that);
@@ -194,6 +203,9 @@ WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_all_assets(int64_t port_,
                                                                                uintptr_t that);
 
+void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_all_assets(int64_t port_,
+                                                                               uintptr_t that);
+
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(int64_t port_,
                                                                                         uintptr_t that,
                                                                                         struct wire_cst_list_prim_u_8_strict *asset);
@@ -203,6 +215,7 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balanc
                                                                                             struct wire_cst_list_prim_u_8_strict *asset);
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances(int64_t port_,
+                                                                                   uintptr_t that);
                                                                                    uintptr_t that);
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_decimals(int64_t port_,
@@ -232,6 +245,9 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_seed(int64_t
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw(int64_t port_,
                                                                                                uintptr_t that);
 
+void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw(int64_t port_,
+                                                                                               uintptr_t that);
+
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance(int64_t port_,
                                                                                   uintptr_t that);
 
@@ -240,6 +256,10 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balanc
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_has_xelis_balance(int64_t port_,
                                                                                   uintptr_t that);
+
+void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_asset_tracked(int64_t port_,
+                                                                                 uintptr_t that,
+                                                                                 struct wire_cst_list_prim_u_8_strict *asset);
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_asset_tracked(int64_t port_,
                                                                                  uintptr_t that,
@@ -271,8 +291,18 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_untrack_asset(in
                                                                               uintptr_t that,
                                                                               struct wire_cst_list_prim_u_8_strict *asset);
 
+void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_track_asset(int64_t port_,
+                                                                            uintptr_t that,
+                                                                            struct wire_cst_list_prim_u_8_strict *asset);
+
+void frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_untrack_asset(int64_t port_,
+                                                                              uintptr_t that,
+                                                                              struct wire_cst_list_prim_u_8_strict *asset);
+
 void frbgen_xelis_flutter_wire__crate__api__progress_report__add_progress_report(int64_t port_,
                                                                                  struct wire_cst_report *report);
+
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__clear_asset_cache(void);
 
 void frbgen_xelis_flutter_wire__crate__api__api__create_log_stream(int64_t port_,
                                                                    struct wire_cst_list_prim_u_8_strict *s);
@@ -289,6 +319,7 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet(int64_t 
                                                                         struct wire_cst_list_prim_u_8_strict *private_key,
                                                                         struct wire_cst_list_prim_u_8_strict *precomputed_tables_path,
                                                                         uintptr_t *l1_size);
+                                                                        uintptr_t *l1_size);
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet(uintptr_t wallet);
 
@@ -297,6 +328,8 @@ void frbgen_xelis_flutter_wire__crate__api__utils__format_coin(int64_t port_,
                                                                uint8_t decimals);
 
 void frbgen_xelis_flutter_wire__crate__api__utils__format_xelis(int64_t port_, uint64_t value);
+
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__get_asset_cache_size(void);
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__get_cached_table(void);
 
@@ -315,9 +348,15 @@ void frbgen_xelis_flutter_wire__crate__api__wallet__open_xelis_wallet(int64_t po
                                                                       int32_t network,
                                                                       struct wire_cst_list_prim_u_8_strict *precomputed_tables_path,
                                                                       uintptr_t *l1_size);
+                                                                      uintptr_t *l1_size);
 
 void frbgen_xelis_flutter_wire__crate__api__table_generation__precomputed_tables_exist(int64_t port_,
                                                                                        struct wire_cst_list_prim_u_8_strict *precomputed_tables_path);
+
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__refresh_mt_params(void);
+
+WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__set_mt_params(uintptr_t thread_count,
+                                                                                  uintptr_t concurrency);
 
 WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__wallet__refresh_mt_params(void);
 
@@ -330,6 +369,7 @@ WireSyncRust2DartDco frbgen_xelis_flutter_wire__crate__api__utils__split_integra
 
 void frbgen_xelis_flutter_wire__crate__api__wallet__update_tables(int64_t port_,
                                                                   struct wire_cst_list_prim_u_8_strict *precomputed_tables_path,
+                                                                  uintptr_t *l1_size);
                                                                   uintptr_t *l1_size);
 
 void frbgen_xelis_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter(const void *ptr);
@@ -384,6 +424,8 @@ struct wire_cst_list_record_string_string *frbgen_xelis_flutter_cst_new_list_rec
 
 struct wire_cst_list_record_string_u_64 *frbgen_xelis_flutter_cst_new_list_record_string_u_64(int32_t len);
 
+struct wire_cst_list_record_string_xelis_asset_metadata *frbgen_xelis_flutter_cst_new_list_record_string_xelis_asset_metadata(int32_t len);
+
 struct wire_cst_list_transfer *frbgen_xelis_flutter_cst_new_list_transfer(int32_t len);
 static int64_t dummy_method_to_enforce_bundling(void) {
     int64_t dummy_var = 0;
@@ -395,6 +437,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_prim_u_8_strict);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_string);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_u_64);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_record_string_xelis_asset_metadata);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_cst_new_list_transfer);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLevelFilter);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPrecomputedTablesShared);
@@ -454,6 +497,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_format_coin);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_address_str);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_all_assets);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_all_assets);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_asset_balances);
@@ -465,9 +509,11 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_nonce);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_seed);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_get_xelis_balance_raw);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_has_xelis_balance);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_asset_tracked);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_asset_tracked);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_online);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_is_valid_password);
@@ -476,10 +522,14 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_rescan);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_track_asset);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__XelisWallet_untrack_asset);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__clear_asset_cache);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__create_xelis_wallet);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__drop_wallet);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__get_asset_cache_size);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__get_cached_table);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__open_xelis_wallet);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__refresh_mt_params);
+    dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__set_mt_params);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__refresh_mt_params);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__set_mt_params);
     dummy_var ^= ((int64_t) (void*) frbgen_xelis_flutter_wire__crate__api__wallet__update_tables);

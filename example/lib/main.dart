@@ -40,7 +40,6 @@ class _MyAppState extends State<MyApp> {
         password: "password",
         network: Network.mainnet,
         precomputedTablesPath: tableDir!,
-        l1Low: true,
       );
 
       final mnemonic = await wallet.getSeed();
