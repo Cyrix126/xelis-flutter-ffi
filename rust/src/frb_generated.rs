@@ -1197,7 +1197,6 @@ fn wire__crate__api__wallet__XelisWallet_get_address_str_impl(
     )
 }
 fn wire__crate__api__wallet__XelisWallet_get_all_assets_impl(
-fn wire__crate__api__wallet__XelisWallet_get_all_assets_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<
         RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
@@ -1205,7 +1204,6 @@ fn wire__crate__api__wallet__XelisWallet_get_all_assets_impl(
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_get_all_assets",
             debug_name: "XelisWallet_get_all_assets",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
@@ -1235,9 +1233,6 @@ fn wire__crate__api__wallet__XelisWallet_get_all_assets_impl(
                         let output_ok =
                             crate::api::wallet::XelisWallet::get_all_assets(&*api_that_guard)
                                 .await?;
-                        let output_ok =
-                            crate::api::wallet::XelisWallet::get_all_assets(&*api_that_guard)
-                                .await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1247,7 +1242,6 @@ fn wire__crate__api__wallet__XelisWallet_get_all_assets_impl(
     )
 }
 fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
-fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<
         RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
@@ -1256,7 +1250,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_get_asset_balance_by_id",
             debug_name: "XelisWallet_get_asset_balance_by_id",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
@@ -1289,11 +1282,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
                             api_asset,
                         )
                         .await?;
-                        let output_ok = crate::api::wallet::XelisWallet::get_asset_balance_by_id(
-                            &*api_that_guard,
-                            api_asset,
-                        )
-                        .await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1303,24 +1291,20 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_impl(
     )
 }
 fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(
-fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<
         RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
     >,
     asset: impl CstDecode<String>,
-    asset: impl CstDecode<String>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_get_asset_balance_by_id_raw",
             debug_name: "XelisWallet_get_asset_balance_by_id_raw",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
             let api_that = that.cst_decode();
-            let api_asset = asset.cst_decode();
             let api_asset = asset.cst_decode();
             move |context| async move {
                 transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
@@ -1348,11 +1332,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(
                                 api_asset,
                             )
                             .await?;
-                            crate::api::wallet::XelisWallet::get_asset_balance_by_id_raw(
-                                &*api_that_guard,
-                                api_asset,
-                            )
-                            .await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1362,7 +1341,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id_raw_impl(
     )
 }
 fn wire__crate__api__wallet__XelisWallet_get_asset_balances_impl(
-fn wire__crate__api__wallet__XelisWallet_get_asset_balances_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<
         RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
@@ -1370,7 +1348,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balances_impl(
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_get_asset_balances",
             debug_name: "XelisWallet_get_asset_balances",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
@@ -1397,9 +1374,6 @@ fn wire__crate__api__wallet__XelisWallet_get_asset_balances_impl(
                             }
                         }
                         let api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::wallet::XelisWallet::get_asset_balances(&*api_that_guard)
-                                .await?;
                         let output_ok =
                             crate::api::wallet::XelisWallet::get_asset_balances(&*api_that_guard)
                                 .await?;
@@ -1772,55 +1746,6 @@ fn wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw_impl(
                                 &*api_that_guard,
                             )
                             .await?;
-                        )
-                        .await?;
-                        Ok(output_ok)
-                    })()
-                    .await,
-                )
-            }
-        },
-    )
-}
-fn wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<
-        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
-    >,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_get_tracked_asset_balances_raw",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            move |context| async move {
-                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
-                    (move || async move {
-                        let mut api_that_guard = None;
-                        let decode_indices_ =
-                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
-                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                    &api_that, 0, false,
-                                )],
-                            );
-                        for i in decode_indices_ {
-                            match i {
-                                0 => {
-                                    api_that_guard =
-                                        Some(api_that.lockable_decode_async_ref().await)
-                                }
-                                _ => unreachable!(),
-                            }
-                        }
-                        let api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::wallet::XelisWallet::get_tracked_asset_balances_raw(
-                                &*api_that_guard,
-                            )
-                            .await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1956,56 +1881,6 @@ fn wire__crate__api__wallet__XelisWallet_has_xelis_balance_impl(
                         let api_that_guard = api_that_guard.unwrap();
                         let output_ok =
                             crate::api::wallet::XelisWallet::has_xelis_balance(&*api_that_guard)
-                                .await?;
-                        Ok(output_ok)
-                    })()
-                    .await,
-                )
-            }
-        },
-    )
-}
-fn wire__crate__api__wallet__XelisWallet_is_asset_tracked_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<
-        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<XelisWallet>>,
-    >,
-    asset: impl CstDecode<String>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "XelisWallet_is_asset_tracked",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            let api_asset = asset.cst_decode();
-            move |context| async move {
-                transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
-                    (move || async move {
-                        let mut api_that_guard = None;
-                        let decode_indices_ =
-                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
-                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                    &api_that, 0, false,
-                                )],
-                            );
-                        for i in decode_indices_ {
-                            match i {
-                                0 => {
-                                    api_that_guard =
-                                        Some(api_that.lockable_decode_async_ref().await)
-                                }
-                                _ => unreachable!(),
-                            }
-                        }
-                        let api_that_guard = api_that_guard.unwrap();
-                        let output_ok = crate::api::wallet::XelisWallet::is_asset_tracked(
-                            &*api_that_guard,
-                            api_asset,
-                        )
-                        .await?;
                                 .await?;
                         Ok(output_ok)
                     })()
@@ -2503,7 +2378,6 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
     private_key: impl CstDecode<Option<String>>,
     precomputed_tables_path: impl CstDecode<Option<String>>,
     l1_size: impl CstDecode<Option<usize>>,
-    l1_size: impl CstDecode<Option<usize>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -2520,7 +2394,6 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
             let api_private_key = private_key.cst_decode();
             let api_precomputed_tables_path = precomputed_tables_path.cst_decode();
             let api_l1_size = l1_size.cst_decode();
-            let api_l1_size = l1_size.cst_decode();
             move |context| async move {
                 transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
                     (move || async move {
@@ -2532,7 +2405,6 @@ fn wire__crate__api__wallet__create_xelis_wallet_impl(
                             api_seed,
                             api_private_key,
                             api_precomputed_tables_path,
-                            api_l1_size,
                             api_l1_size,
                         )
                         .await?;
@@ -2731,7 +2603,6 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
     network: impl CstDecode<crate::api::network::Network>,
     precomputed_tables_path: impl CstDecode<Option<String>>,
     l1_size: impl CstDecode<Option<usize>>,
-    l1_size: impl CstDecode<Option<usize>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -2746,7 +2617,6 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
             let api_network = network.cst_decode();
             let api_precomputed_tables_path = precomputed_tables_path.cst_decode();
             let api_l1_size = l1_size.cst_decode();
-            let api_l1_size = l1_size.cst_decode();
             move |context| async move {
                 transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
                     (move || async move {
@@ -2756,7 +2626,6 @@ fn wire__crate__api__wallet__open_xelis_wallet_impl(
                             api_password,
                             api_network,
                             api_precomputed_tables_path,
-                            api_l1_size,
                             api_l1_size,
                         )
                         .await?;
@@ -2794,46 +2663,6 @@ fn wire__crate__api__table_generation__precomputed_tables_exist_impl(
                     .await,
                 )
             }
-        },
-    )
-}
-fn wire__crate__api__wallet__refresh_mt_params_impl(
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "refresh_mt_params",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            transform_result_dco::<_, _, ()>((move || {
-                let output_ok = Result::<_, ()>::Ok({
-                    crate::api::wallet::refresh_mt_params();
-                })?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__api__wallet__set_mt_params_impl(
-    thread_count: impl CstDecode<usize>,
-    concurrency: impl CstDecode<usize>,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "set_mt_params",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let api_thread_count = thread_count.cst_decode();
-            let api_concurrency = concurrency.cst_decode();
-            transform_result_dco::<_, _, ()>((move || {
-                let output_ok = Result::<_, ()>::Ok({
-                    crate::api::wallet::set_mt_params(api_thread_count, api_concurrency);
-                })?;
-                Ok(output_ok)
-            })())
         },
     )
 }
@@ -2923,7 +2752,6 @@ fn wire__crate__api__wallet__update_tables_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     precomputed_tables_path: impl CstDecode<String>,
     l1_size: impl CstDecode<Option<usize>>,
-    l1_size: impl CstDecode<Option<usize>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -2934,13 +2762,11 @@ fn wire__crate__api__wallet__update_tables_impl(
         move || {
             let api_precomputed_tables_path = precomputed_tables_path.cst_decode();
             let api_l1_size = l1_size.cst_decode();
-            let api_l1_size = l1_size.cst_decode();
             move |context| async move {
                 transform_result_dco::<_, _, flutter_rust_bridge::for_generated::anyhow::Error>(
                     (move || async move {
                         let output_ok = crate::api::wallet::update_tables(
                             api_precomputed_tables_path,
-                            api_l1_size,
                             api_l1_size,
                         )
                         .await?;
@@ -5572,7 +5398,6 @@ field1: Default::default(), }
         private_key: *mut wire_cst_list_prim_u_8_strict,
         precomputed_tables_path: *mut wire_cst_list_prim_u_8_strict,
         l1_size: *mut usize,
-        l1_size: *mut usize,
     ) {
         wire__crate__api__wallet__create_xelis_wallet_impl(
             port_,
@@ -5583,7 +5408,6 @@ field1: Default::default(), }
             seed,
             private_key,
             precomputed_tables_path,
-            l1_size,
             l1_size,
         )
     }
@@ -5659,7 +5483,6 @@ field1: Default::default(), }
         network: i32,
         precomputed_tables_path: *mut wire_cst_list_prim_u_8_strict,
         l1_size: *mut usize,
-        l1_size: *mut usize,
     ) {
         wire__crate__api__wallet__open_xelis_wallet_impl(
             port_,
@@ -5668,7 +5491,6 @@ field1: Default::default(), }
             password,
             network,
             precomputed_tables_path,
-            l1_size,
             l1_size,
         )
     }
@@ -5715,9 +5537,7 @@ field1: Default::default(), }
         port_: i64,
         precomputed_tables_path: *mut wire_cst_list_prim_u_8_strict,
         l1_size: *mut usize,
-        l1_size: *mut usize,
     ) {
-        wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_size)
         wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_size)
     }
 
@@ -7105,14 +6925,6 @@ mod web {
     }
 
     #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_get_all_assets(
-        port_: flutter_rust_bridge::for_generated::MessagePort,
-        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    ) {
-        wire__crate__api__wallet__XelisWallet_get_all_assets_impl(port_, that)
-    }
-
-    #[wasm_bindgen]
     pub fn wire__crate__api__wallet__XelisWallet_get_asset_balance_by_id(
         port_: flutter_rust_bridge::for_generated::MessagePort,
         that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -7206,14 +7018,6 @@ mod web {
     }
 
     #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw(
-        port_: flutter_rust_bridge::for_generated::MessagePort,
-        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    ) {
-        wire__crate__api__wallet__XelisWallet_get_tracked_asset_balances_raw_impl(port_, that)
-    }
-
-    #[wasm_bindgen]
     pub fn wire__crate__api__wallet__XelisWallet_get_xelis_balance(
         port_: flutter_rust_bridge::for_generated::MessagePort,
         that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -7235,15 +7039,6 @@ mod web {
         that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ) {
         wire__crate__api__wallet__XelisWallet_has_xelis_balance_impl(port_, that)
-    }
-
-    #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_is_asset_tracked(
-        port_: flutter_rust_bridge::for_generated::MessagePort,
-        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        asset: String,
-    ) {
-        wire__crate__api__wallet__XelisWallet_is_asset_tracked_impl(port_, that, asset)
     }
 
     #[wasm_bindgen]
@@ -7317,24 +7112,6 @@ mod web {
     }
 
     #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_track_asset(
-        port_: flutter_rust_bridge::for_generated::MessagePort,
-        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        asset: String,
-    ) {
-        wire__crate__api__wallet__XelisWallet_track_asset_impl(port_, that, asset)
-    }
-
-    #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__XelisWallet_untrack_asset(
-        port_: flutter_rust_bridge::for_generated::MessagePort,
-        that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        asset: String,
-    ) {
-        wire__crate__api__wallet__XelisWallet_untrack_asset_impl(port_, that, asset)
-    }
-
-    #[wasm_bindgen]
     pub fn wire__crate__api__progress_report__add_progress_report(
         port_: flutter_rust_bridge::for_generated::MessagePort,
         report: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -7375,7 +7152,6 @@ mod web {
         private_key: Option<String>,
         precomputed_tables_path: Option<String>,
         l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ) {
         wire__crate__api__wallet__create_xelis_wallet_impl(
             port_,
@@ -7386,7 +7162,6 @@ mod web {
             seed,
             private_key,
             precomputed_tables_path,
-            l1_size,
             l1_size,
         )
     }
@@ -7464,7 +7239,6 @@ mod web {
         network: i32,
         precomputed_tables_path: Option<String>,
         l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ) {
         wire__crate__api__wallet__open_xelis_wallet_impl(
             port_,
@@ -7473,7 +7247,6 @@ mod web {
             password,
             network,
             precomputed_tables_path,
-            l1_size,
             l1_size,
         )
     }
@@ -7487,20 +7260,6 @@ mod web {
             port_,
             precomputed_tables_path,
         )
-    }
-
-    #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__refresh_mt_params(
-    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__wallet__refresh_mt_params_impl()
-    }
-
-    #[wasm_bindgen]
-    pub fn wire__crate__api__wallet__set_mt_params(
-        thread_count: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        concurrency: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-        wire__crate__api__wallet__set_mt_params_impl(thread_count, concurrency)
     }
 
     #[wasm_bindgen]
@@ -7536,9 +7295,7 @@ mod web {
         port_: flutter_rust_bridge::for_generated::MessagePort,
         precomputed_tables_path: String,
         l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-        l1_size: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ) {
-        wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_size)
         wire__crate__api__wallet__update_tables_impl(port_, precomputed_tables_path, l1_size)
     }
 

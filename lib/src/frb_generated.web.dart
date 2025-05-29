@@ -123,11 +123,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
           dynamic raw);
 
   @protected
-  XelisWallet
-      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-          dynamic raw);
-
-  @protected
   SearchEngine
       dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
           dynamic raw);
@@ -372,11 +367,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   SummaryTransaction
       sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
-          SseDeserializer deserializer);
-
-  @protected
-  XelisWallet
-      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
           SseDeserializer deserializer);
 
   @protected
@@ -878,10 +868,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       SummaryTransaction raw);
 
   @protected
-  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-      XelisWallet raw);
-
-  @protected
   int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
       SearchEngine raw);
 
@@ -1012,11 +998,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
       sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSummaryTransaction(
           SummaryTransaction self, SseSerializer serializer);
-
-  @protected
-  void
-      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-          XelisWallet self, SseSerializer serializer);
 
   @protected
   void

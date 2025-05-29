@@ -39,7 +39,6 @@ Future<XelisWallet> createXelisWallet(
         String? privateKey,
         String? precomputedTablesPath,
         BigInt? l1Size}) =>
-        BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletCreateXelisWallet(
         name: name,
         directory: directory,
@@ -49,13 +48,10 @@ Future<XelisWallet> createXelisWallet(
         privateKey: privateKey,
         precomputedTablesPath: precomputedTablesPath,
         l1Size: l1Size);
-        l1Size: l1Size);
 
 Future<void> updateTables(
         {required String precomputedTablesPath, BigInt? l1Size}) =>
-        {required String precomputedTablesPath, BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletUpdateTables(
-        precomputedTablesPath: precomputedTablesPath, l1Size: l1Size);
         precomputedTablesPath: precomputedTablesPath, l1Size: l1Size);
 
 Future<XelisWallet> openXelisWallet(
@@ -65,14 +61,12 @@ Future<XelisWallet> openXelisWallet(
         required Network network,
         String? precomputedTablesPath,
         BigInt? l1Size}) =>
-        BigInt? l1Size}) =>
     RustLib.instance.api.crateApiWalletOpenXelisWallet(
         name: name,
         directory: directory,
         password: password,
         network: network,
         precomputedTablesPath: precomputedTablesPath,
-        l1Size: l1Size);
         l1Size: l1Size);
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PrecomputedTablesShared>>
@@ -160,15 +154,11 @@ abstract class XelisWallet implements RustOpaqueInterface {
 
   Future<Map<String, BigInt>> getTrackedAssetBalancesRaw();
 
-  Future<Map<String, BigInt>> getTrackedAssetBalancesRaw();
-
   Future<String> getXelisBalance();
 
   Future<BigInt> getXelisBalanceRaw();
 
   Future<bool> hasXelisBalance();
-
-  Future<bool> isAssetTracked({required String asset});
 
   Future<bool> isAssetTracked({required String asset});
 
@@ -181,10 +171,6 @@ abstract class XelisWallet implements RustOpaqueInterface {
   Future<void> onlineMode({required String daemonAddress});
 
   Future<void> rescan({required BigInt topoheight});
-
-  Future<bool> trackAsset({required String asset});
-
-  Future<bool> untrackAsset({required String asset});
 
   Future<bool> trackAsset({required String asset});
 

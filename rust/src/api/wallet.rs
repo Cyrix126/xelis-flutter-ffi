@@ -4,7 +4,6 @@ use std::fs::File;
 use std::path::Path;
 use std::sync::Arc;
 use std::thread;
-use std::thread;
 
 use anyhow::{anyhow, bail, Context, Result};
 use flutter_rust_bridge::frb;
@@ -171,11 +170,8 @@ pub async fn create_xelis_wallet(
     private_key: Option<String>,
     precomputed_tables_path: Option<String>,
     l1_size: Option<usize>
-    l1_size: Option<usize>
 ) -> Result<XelisWallet> {
     let full_path = Path::new(&directory).join(&name).to_string_lossy().to_string();
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
-        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
         { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
 
@@ -209,8 +205,6 @@ pub async fn create_xelis_wallet(
 
     let (thread_count, concurrency) = get_mt_params();
     let xelis_wallet = Wallet::create(&full_path, &password, recover, network, precomputed_tables, thread_count, concurrency).await?;
-    let (thread_count, concurrency) = get_mt_params();
-    let xelis_wallet = Wallet::create(&full_path, &password, recover, network, precomputed_tables, thread_count, concurrency).await?;
     Ok(XelisWallet {
         wallet: xelis_wallet,
         pending_transactions: RwLock::new(HashMap::new()),
@@ -221,11 +215,7 @@ pub async fn create_xelis_wallet(
 pub async fn update_tables(
     precomputed_tables_path: String,
     l1_size: Option<usize>
-    l1_size: Option<usize>
 ) -> Result<()> {
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
-        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
-
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
         { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
 
@@ -249,12 +239,8 @@ pub async fn open_xelis_wallet(
     network: Network,
     precomputed_tables_path: Option<String>,
     l1_size: Option<usize>
-    l1_size: Option<usize>
 ) -> Result<XelisWallet> {
     let full_path = Path::new(&directory).join(&name).to_string_lossy().to_string();
-
-    let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
-        { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
 
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
         { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
@@ -266,9 +252,6 @@ pub async fn open_xelis_wallet(
         true,
     )
     .await?;
-
-    let (thread_count, concurrency) = get_mt_params();
-    let xelis_wallet = Wallet::open(&full_path, &password, network, precomputed_tables, thread_count, concurrency)?;
 
     let (thread_count, concurrency) = get_mt_params();
     let xelis_wallet = Wallet::open(&full_path, &password, network, precomputed_tables, thread_count, concurrency)?;
@@ -531,25 +514,6 @@ impl XelisWallet {
                     );
                 }
             }
-        let tracked_assets = storage.get_tracked_assets()?;
-        
-        for asset_result in tracked_assets {
-            let asset = asset_result?;
-            match storage.get_balance_for(&asset).await {
-                Ok(balance) => {
-                    balances.insert(
-                        asset.to_string(),
-                        balance.amount,
-                    );
-                }
-                Err(err) => {
-                    debug!("Error fetching raw balance for asset {}: {}", asset, err);
-                    balances.insert(
-                        asset.to_string(),
-                        0_u64,
-                    );
-                }
-            }
         }
 
         let result = Ok(balances);
@@ -561,8 +525,6 @@ impl XelisWallet {
     pub async fn get_asset_balance_by_id(&self, asset: String) -> Result<String> {
         let (start_time, thread_id) = ffi_entry!("get_asset_balance_by_id");
         let storage = self.wallet.get_storage().read().await;
-        let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
-
         let asset_hash = Hash::from_hex(&asset).context("Invalid assetID")?;
 
         let Some(asset) = storage.get_asset(&asset_hash).await.ok() else {
@@ -778,7 +740,6 @@ impl XelisWallet {
         let asset = match asset_hash {
             None => XELIS_ASSET,
             Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
-            Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
         };
 
         let mut amount = {
@@ -865,7 +826,6 @@ impl XelisWallet {
         info!("Building burn transaction...");
 
         let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
-        let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
 
         let (amount, decimals) = {
             let storage = self.wallet.get_storage().read().await;
@@ -924,7 +884,6 @@ impl XelisWallet {
 
         info!("Building burn all transaction...");
 
-        let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
         let asset = Hash::from_hex(&asset_hash).context("Invalid assetID")?;
 
         let mut amount = {
@@ -1125,7 +1084,6 @@ impl XelisWallet {
         let asset = match asset_hash {
             None => XELIS_ASSET,
             Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
-            Some(value) => Hash::from_hex(&value).context("Invalid assetID")?,
         };
 
         let decimals = {
@@ -1184,7 +1142,6 @@ impl XelisWallet {
         let mut vec = Vec::new();
 
         for transfer in transfers {
-            let asset = Hash::from_hex(&transfer.asset_hash).context("Invalid assetID")?;
             let asset = Hash::from_hex(&transfer.asset_hash).context("Invalid assetID")?;
 
             let amount = self

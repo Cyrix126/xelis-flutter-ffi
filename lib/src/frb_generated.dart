@@ -210,10 +210,6 @@ abstract class RustLibApi extends BaseApi {
       crateApiWalletXelisWalletGetTrackedAssetBalancesRaw(
           {required XelisWallet that});
 
-  Future<Map<String, BigInt>>
-      crateApiWalletXelisWalletGetTrackedAssetBalancesRaw(
-          {required XelisWallet that});
-
   Future<String> crateApiWalletXelisWalletGetXelisBalance(
       {required XelisWallet that});
 
@@ -222,9 +218,6 @@ abstract class RustLibApi extends BaseApi {
 
   Future<bool> crateApiWalletXelisWalletHasXelisBalance(
       {required XelisWallet that});
-
-  Future<bool> crateApiWalletXelisWalletIsAssetTracked(
-      {required XelisWallet that, required String asset});
 
   Future<bool> crateApiWalletXelisWalletIsAssetTracked(
       {required XelisWallet that, required String asset});
@@ -249,12 +242,6 @@ abstract class RustLibApi extends BaseApi {
   Future<bool> crateApiWalletXelisWalletUntrackAsset(
       {required XelisWallet that, required String asset});
 
-  Future<bool> crateApiWalletXelisWalletTrackAsset(
-      {required XelisWallet that, required String asset});
-
-  Future<bool> crateApiWalletXelisWalletUntrackAsset(
-      {required XelisWallet that, required String asset});
-
   Future<void> crateApiProgressReportAddProgressReport(
       {required Report report});
 
@@ -272,7 +259,6 @@ abstract class RustLibApi extends BaseApi {
       String? seed,
       String? privateKey,
       String? precomputedTablesPath,
-      BigInt? l1Size});
       BigInt? l1Size});
 
   void crateApiWalletDropWallet({required XelisWallet wallet});
@@ -301,15 +287,9 @@ abstract class RustLibApi extends BaseApi {
       required Network network,
       String? precomputedTablesPath,
       BigInt? l1Size});
-      BigInt? l1Size});
 
   Future<bool> crateApiTableGenerationPrecomputedTablesExist(
       {required String precomputedTablesPath});
-
-  void crateApiWalletRefreshMtParams();
-
-  void crateApiWalletSetMtParams(
-      {required BigInt threadCount, required BigInt concurrency});
 
   void crateApiWalletRefreshMtParams();
 
@@ -322,7 +302,6 @@ abstract class RustLibApi extends BaseApi {
       {required String integratedAddress});
 
   Future<void> crateApiWalletUpdateTables(
-      {required String precomputedTablesPath, BigInt? l1Size});
       {required String precomputedTablesPath, BigInt? l1Size});
 
   RustArcIncrementStrongCountFnType
@@ -1651,34 +1630,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<bool> crateApiWalletXelisWalletIsAssetTracked(
-      {required XelisWallet that, required String asset}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 =
-            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-                that);
-        var arg1 = cst_encode_String(asset);
-        return wire.wire__crate__api__wallet__XelisWallet_is_asset_tracked(
-            port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_bool,
-        decodeErrorData: dco_decode_AnyhowException,
-      ),
-      constMeta: kCrateApiWalletXelisWalletIsAssetTrackedConstMeta,
-      argValues: [that, asset],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiWalletXelisWalletIsAssetTrackedConstMeta =>
-      const TaskConstMeta(
-        debugName: "XelisWallet_is_asset_tracked",
-        argNames: ["that", "asset"],
-      );
-
-  @override
   Future<bool> crateApiWalletXelisWalletIsOnline({required XelisWallet that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -1978,7 +1929,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       String? privateKey,
       String? precomputedTablesPath,
       BigInt? l1Size}) {
-      BigInt? l1Size}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_String(name);
@@ -1988,7 +1938,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var arg4 = cst_encode_opt_String(seed);
         var arg5 = cst_encode_opt_String(privateKey);
         var arg6 = cst_encode_opt_String(precomputedTablesPath);
-        var arg7 = cst_encode_opt_box_autoadd_usize(l1Size);
         var arg7 = cst_encode_opt_box_autoadd_usize(l1Size);
         return wire.wire__crate__api__wallet__create_xelis_wallet(
             port_, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
@@ -2008,7 +1957,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         privateKey,
         precomputedTablesPath,
         l1Size
-        l1Size
       ],
       apiImpl: this,
     ));
@@ -2025,7 +1973,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           "seed",
           "privateKey",
           "precomputedTablesPath",
-          "l1Size"
           "l1Size"
         ],
       );
@@ -2243,7 +2190,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       required Network network,
       String? precomputedTablesPath,
       BigInt? l1Size}) {
-      BigInt? l1Size}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_String(name);
@@ -2251,7 +2197,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var arg2 = cst_encode_String(password);
         var arg3 = cst_encode_network(network);
         var arg4 = cst_encode_opt_String(precomputedTablesPath);
-        var arg5 = cst_encode_opt_box_autoadd_usize(l1Size);
         var arg5 = cst_encode_opt_box_autoadd_usize(l1Size);
         return wire.wire__crate__api__wallet__open_xelis_wallet(
             port_, arg0, arg1, arg2, arg3, arg4, arg5);
@@ -2269,7 +2214,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         network,
         precomputedTablesPath,
         l1Size
-        l1Size
       ],
       apiImpl: this,
     ));
@@ -2284,7 +2228,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           "password",
           "network",
           "precomputedTablesPath",
-          "l1Size"
           "l1Size"
         ],
       );
@@ -2313,52 +2256,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "precomputed_tables_exist",
         argNames: ["precomputedTablesPath"],
-      );
-
-  @override
-  void crateApiWalletRefreshMtParams() {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        return wire.wire__crate__api__wallet__refresh_mt_params();
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiWalletRefreshMtParamsConstMeta,
-      argValues: [],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiWalletRefreshMtParamsConstMeta =>
-      const TaskConstMeta(
-        debugName: "refresh_mt_params",
-        argNames: [],
-      );
-
-  @override
-  void crateApiWalletSetMtParams(
-      {required BigInt threadCount, required BigInt concurrency}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_usize(threadCount);
-        var arg1 = cst_encode_usize(concurrency);
-        return wire.wire__crate__api__wallet__set_mt_params(arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiWalletSetMtParamsConstMeta,
-      argValues: [threadCount, concurrency],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiWalletSetMtParamsConstMeta => const TaskConstMeta(
-        debugName: "set_mt_params",
-        argNames: ["threadCount", "concurrency"],
       );
 
   @override
@@ -2456,11 +2353,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiWalletUpdateTables(
       {required String precomputedTablesPath, BigInt? l1Size}) {
-      {required String precomputedTablesPath, BigInt? l1Size}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_String(precomputedTablesPath);
-        var arg1 = cst_encode_opt_box_autoadd_usize(l1Size);
         var arg1 = cst_encode_opt_box_autoadd_usize(l1Size);
         return wire.wire__crate__api__wallet__update_tables(port_, arg0, arg1);
       },
@@ -2470,14 +2365,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ),
       constMeta: kCrateApiWalletUpdateTablesConstMeta,
       argValues: [precomputedTablesPath, l1Size],
-      argValues: [precomputedTablesPath, l1Size],
       apiImpl: this,
     ));
   }
 
   TaskConstMeta get kCrateApiWalletUpdateTablesConstMeta => const TaskConstMeta(
         debugName: "update_tables",
-        argNames: ["precomputedTablesPath", "l1Size"],
         argNames: ["precomputedTablesPath", "l1Size"],
       );
 
@@ -2648,14 +2541,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return SummaryTransactionImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  XelisWallet
-      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return XelisWalletImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3187,15 +3072,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return SummaryTransactionImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  XelisWallet
-      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return XelisWalletImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -3763,14 +3639,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-      XelisWallet raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as XelisWalletImpl).frbInternalCstEncode(move: false);
-  }
-
-  @protected
   int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSearchEngine(
       SearchEngine raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -4027,16 +3895,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
         (self as SummaryTransactionImpl).frbInternalSseEncode(move: false),
-        serializer);
-  }
-
-  @protected
-  void
-      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerXelisWallet(
-          XelisWallet self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as XelisWalletImpl).frbInternalSseEncode(move: false),
         serializer);
   }
 
@@ -4857,11 +4715,6 @@ class XelisWalletImpl extends RustOpaque implements XelisWallet {
         that: this,
       );
 
-  Future<Map<String, BigInt>> getTrackedAssetBalancesRaw() =>
-      RustLib.instance.api.crateApiWalletXelisWalletGetTrackedAssetBalancesRaw(
-        that: this,
-      );
-
   Future<String> getXelisBalance() =>
       RustLib.instance.api.crateApiWalletXelisWalletGetXelisBalance(
         that: this,
@@ -4876,9 +4729,6 @@ class XelisWalletImpl extends RustOpaque implements XelisWallet {
       RustLib.instance.api.crateApiWalletXelisWalletHasXelisBalance(
         that: this,
       );
-
-  Future<bool> isAssetTracked({required String asset}) => RustLib.instance.api
-      .crateApiWalletXelisWalletIsAssetTracked(that: this, asset: asset);
 
   Future<bool> isAssetTracked({required String asset}) => RustLib.instance.api
       .crateApiWalletXelisWalletIsAssetTracked(that: this, asset: asset);
@@ -4903,12 +4753,6 @@ class XelisWalletImpl extends RustOpaque implements XelisWallet {
 
   Future<void> rescan({required BigInt topoheight}) => RustLib.instance.api
       .crateApiWalletXelisWalletRescan(that: this, topoheight: topoheight);
-
-  Future<bool> trackAsset({required String asset}) => RustLib.instance.api
-      .crateApiWalletXelisWalletTrackAsset(that: this, asset: asset);
-
-  Future<bool> untrackAsset({required String asset}) => RustLib.instance.api
-      .crateApiWalletXelisWalletUntrackAsset(that: this, asset: asset);
 
   Future<bool> trackAsset({required String asset}) => RustLib.instance.api
       .crateApiWalletXelisWalletTrackAsset(that: this, asset: asset);
