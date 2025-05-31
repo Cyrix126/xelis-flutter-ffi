@@ -107,7 +107,6 @@ pub fn drop_wallet(wallet: XelisWallet) {
     drop(wallet);
 }
 
-
 fn get_mt_params() -> (usize, usize) {
     let mut guard = MT_PARAMS.lock();
     
@@ -228,7 +227,21 @@ pub async fn update_tables(
     .await?;
 
     // It is done in two steps to avoid the "Future is not Send" error
-    CACHED_TABLES.lock().replace(tables.clone());
+    let cached_tables = CACHED_TABLES.lock();
+    match cached_tables.as_ref() {
+        Some(existing_tables) => {
+            // Hot-swap contents inside the existing shared Arc
+            let mut guard = existing_tables.write()?;
+            let new_inner = new_tables.read()?;
+            *guard = new_inner.clone();
+        }
+        None => {
+            // First time - put the new tables in cache
+            drop(cached_tables);
+            CACHED_TABLES.lock().replace(new_tables);
+        }
+    }
+    
     Ok(())
 }
 
