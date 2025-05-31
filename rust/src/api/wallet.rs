@@ -218,28 +218,24 @@ pub async fn update_tables(
     let precomputed_tables_size = if cfg!(target_arch = "wasm32") || l1_size.is_none()
         { precomputed_tables::L1_LOW } else { l1_size.unwrap() };
 
-    let tables = precomputed_tables::read_or_generate_precomputed_tables(
+    let new_tables = precomputed_tables::read_or_generate_precomputed_tables(
         Some(&precomputed_tables_path),
         precomputed_tables_size,
         LogProgressTableGenerationReportFunction,
         true,
-    )
-    .await?;
+    ).await?;
 
-    // It is done in two steps to avoid the "Future is not Send" error
     let cached_tables = CACHED_TABLES.lock();
-    match cached_tables.as_ref() {
-        Some(existing_tables) => {
-            // Hot-swap contents inside the existing shared Arc
-            let mut guard = existing_tables.write()?;
-            let new_inner = new_tables.read()?;
-            *guard = new_inner.clone();
-        }
-        None => {
-            // First time - put the new tables in cache
-            drop(cached_tables);
-            CACHED_TABLES.lock().replace(new_tables);
-        }
+    if let Some(existing_tables) = cached_tables.as_ref() {
+        let mut existing_guard = existing_tables.write()
+            .map_err(|_| anyhow!("Failed to acquire write lock on existing tables"))?;
+        let mut new_guard = new_tables.write()
+            .map_err(|_| anyhow!("Failed to acquire write lock on new tables"))?;
+        
+        std::mem::swap(&mut *existing_guard, &mut *new_guard);
+    } else {
+        drop(cached_tables);
+        CACHED_TABLES.lock().replace(new_tables);
     }
     
     Ok(())
