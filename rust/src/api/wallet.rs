@@ -57,14 +57,12 @@ pub struct SummaryTransaction {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
-#[frb(dart_metadata=("freezed"))]
 pub struct XelisAssetOwner {
     pub contract: String,
     pub id: u64,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
-#[frb(dart_metadata=("freezed"))]
 pub struct XelisAssetMetadata {
     pub name: String,
     pub ticker: String,
@@ -286,6 +284,7 @@ impl XelisWallet {
     }
 
     // Check if the wallet is online
+    #[frb]
     pub async fn is_online(&self) -> bool {
         let (start_time, thread_id) = ffi_entry!("is_online");
         let result = self.wallet.is_online().await;
